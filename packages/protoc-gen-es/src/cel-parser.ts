@@ -129,7 +129,7 @@ export function parseCELExpression(celExpression: string): CELParseResult {
     result.errors.push(
       `Failed to parse CEL expression "${celExpression}": ${
         error instanceof Error ? error.message : String(error)
-      }`,
+      }`
     );
   }
 
@@ -358,9 +358,10 @@ function addFieldToResult(fieldPath: string, result: CELParseResult): void {
 
     if (parts.length >= 2) {
       // Nested field: parent.child or parent.child.grandchild
-      // For 2+ levels, we omit the immediate child of the parent
-      // For 3+ levels (e.g., parent.child.grandchild), we omit 'child' from parent
-      // This is a pragmatic simplification due to TypeScript type system limitations
+      // Only the first two levels are handled: for any path with 2+ levels,
+      // we omit the immediate child of the parent (e.g., for "parent.child.grandchild",
+      // only "parent.child" is considered, and "grandchild" is ignored).
+      // This is an intentional simplification due to TypeScript type system limitations.
       const [parentField, childField] = parts;
       if (!result.nestedConstraints[parentField]) {
         result.nestedConstraints[parentField] = [];

@@ -38,11 +38,11 @@ export function messageNeedsCustomValidType(
   options: {
     legacyRequired: boolean;
     protovalidateRequired: boolean;
-  },
+  }
 ): boolean {
   function usesProtovalidateRequired(
     message: DescMessage,
-    seen = new Set<string>(),
+    seen = new Set<string>()
   ): boolean {
     seen.add(message.typeName);
     for (const field of message.fields) {
@@ -62,7 +62,7 @@ export function messageNeedsCustomValidType(
   }
   function usesLegacyRequired(
     message: DescMessage,
-    seen = new Set<string>(),
+    seen = new Set<string>()
   ): boolean {
     seen.add(message.typeName);
     for (const field of message.fields) {
@@ -101,8 +101,8 @@ export function isProtovalidateDisabled(descField: DescField): boolean {
     descField.fieldKind == "list" && fieldRules.type.case == "repeated"
       ? fieldRules.type.value.items
       : descField.fieldKind == "map" && fieldRules.type.case == "map"
-        ? fieldRules.type.value.values
-        : undefined;
+      ? fieldRules.type.value.values
+      : undefined;
   if (childRules) {
     return childRules.ignore == Ignore.ALWAYS;
   }
@@ -123,7 +123,7 @@ export function isProtovalidateRequired(descField: DescField): boolean {
   if (fieldRules.ignore === Ignore.ALWAYS) {
     return false;
   }
-  return Boolean(fieldRules.required);
+  return fieldRules.required;
 }
 
 /**
