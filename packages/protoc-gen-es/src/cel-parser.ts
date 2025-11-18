@@ -129,7 +129,7 @@ export function parseCELExpression(celExpression: string): CELParseResult {
     result.errors.push(
       `Failed to parse CEL expression "${celExpression}": ${
         error instanceof Error ? error.message : String(error)
-      }`
+      }`,
     );
   }
 
