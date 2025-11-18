@@ -26,12 +26,15 @@
     "build": "../../node_modules/typescript/bin/tsc --project tsconfig.json --outDir ./dist/cjs",
     "bootstrap": "protoc --es_out=src/gen --es_opt=target=ts,import_extension=js --proto_path proto proto/minimal-validate.proto",
     "postbootstrap": "license-header src/gen",
+    "test": "tsx --test $(find src -type f -path '*.test.ts')",
     "format": "biome format --write",
     "license-header": "license-header",
     "lint": "biome lint --error-on-warnings"
   },
   "preferUnplugged": true,
   "dependencies": {
+    "@bufbuild/cel": "0.3.0",
+    "@bufbuild/cel-spec": "0.3.0",
     "@bufbuild/protobuf": "2.10.1",
     "@bufbuild/protoplugin": "2.10.1"
   },
