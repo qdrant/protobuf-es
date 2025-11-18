@@ -1,0 +1,220 @@
+// Copyright 2021-2025 Buf Technologies, Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+edition="2023";
+package spec;
+
+import "extra/minimal-validate.proto";
+
+// Test message for buf_validate with simple read-only field constraints
+message CelValidationSimple {
+  option (buf.validate.message).cel = {
+    id: "readonly_name",
+    message: "name must be empty",
+    expression: "this.name == ''"
+  };
+
+  string name = 1;
+  string description = 2;
+  int32 age = 3;
+}
+
+// Test message for buf_validate with multiple read-only fields
+message CelValidationMultiple {
+  option (buf.validate.message).cel = {
+    id: "readonly_id",
+    message: "id must be empty",
+    expression: "this.id == ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "readonly_code",
+    message: "code must be zero",
+    expression: "this.code == 0"
+  };
+
+  string id = 1;
+  int32 code = 2;
+  string title = 3;
+  bool active = 4;
+}
+
+// Test message for buf_validate with !has() pattern
+message CelValidationNotHas {
+  option (buf.validate.message).cel = {
+    id: "readonly_optional_field",
+    message: "optional_field must not be set",
+    expression: "!has(this.optional_field)"
+  };
+
+  string optional_field = 1;
+  string other_field = 2;
+}
+
+// Nested message for testing nested constraints
+message NestedChild {
+  string child_name = 1;
+  string child_value = 2;
+  int32 child_count = 3;
+}
+
+// Test message for buf_validate with nested field constraints
+message CelValidationNested {
+  option (buf.validate.message).cel = {
+    id: "readonly_nested_child_name",
+    message: "nested.child_name must be empty",
+    expression: "this.nested.child_name == ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "readonly_nested_child_count",
+    message: "nested.child_count must be zero",
+    expression: "this.nested.child_count == 0"
+  };
+
+  NestedChild nested = 1;
+  string parent_field = 2;
+}
+
+// Test message combining multiple CEL patterns with logical operators
+message CelValidationCombined {
+  option (buf.validate.message).cel = {
+    id: "readonly_combined",
+    message: "field1 and field2 must be empty",
+    expression: "this.field1 == '' && this.field2 == ''"
+  };
+
+  string field1 = 1;
+  string field2 = 2;
+  string field3 = 3;
+}
+
+// Test message with snake_case fields that should be converted to camelCase
+message CelValidationSnakeCase {
+  option (buf.validate.message).cel = {
+    id: "readonly_snake",
+    message: "user_name must be empty",
+    expression: "this.user_name == ''"
+  };
+
+  string user_name = 1;
+  string first_name = 2;
+  string last_name = 3;
+}
+
+// Test message without CEL constraints (should not apply Omit)
+message CelValidationNoCel {
+  string name = 1;
+  string description = 2;
+}
+
+// Test message with multiple nested constraints on different fields
+message CelValidationMultipleNested {
+  option (buf.validate.message).cel = {
+    id: "readonly_child1_name",
+    message: "child1.child_name must be empty",
+    expression: "this.child1.child_name == ''"
+  };
+  option (buf.validate.message).cel = {
+    id: "readonly_child2_value",
+    message: "child2.child_value must be empty",
+    expression: "this.child2.child_value == ''"
+  };
+
+  NestedChild child1 = 1;
+  NestedChild child2 = 2;
+  string parent_name = 3;
+}
+
+// Test message with required field and buf_validate
+message CelValidationWithRequired {
+  option (buf.validate.message).cel = {
+    id: "readonly_readonly_field",
+    message: "readonly_field must be empty",
+    expression: "this.readonly_field == ''"
+  };
+
+  string readonly_field = 1;
+  string required_field = 2 [(buf.validate.field).required = true];
+  string normal_field = 3;
+}
+
+// Test message for OR logical operator
+message CelValidationOr {
+  option (buf.validate.message).cel = {
+    id: "readonly_or",
+    message: "field1 or field2 must be empty",
+    expression: "this.field1 == '' || this.field2 == ''"
+  };
+
+  string field1 = 1;
+  string field2 = 2;
+  string field3 = 3;
+}
+
+// Test message with repeated fields
+message CelValidationWithRepeated {
+  option (buf.validate.message).cel = {
+    id: "readonly_single",
+    message: "single_field must be empty",
+    expression: "this.single_field == ''"
+  };
+
+  string single_field = 1;
+  repeated string list_field = 2;
+  repeated NestedChild nested_list = 3;
+}
+
+// Test message with OR constraints that should generate union types
+message CelValidationUnion {
+  option (buf.validate.message).cel = {
+    id: "union_email_or_phone",
+    message: "either email or phone must be empty",
+    expression: "this.email == '' || this.phone == ''"
+  };
+
+  string email = 1;
+  string phone = 2;
+  string name = 3; // This should always be present
+}
+
+// Test message with nested OR constraints
+message CelValidationNestedUnion {
+  option (buf.validate.message).cel = {
+    id: "union_nested_fields",
+    message: "either street or city must be empty",
+    expression: "this.address.street == '' || this.address.city == ''"
+  };
+
+  Address address = 1;
+  string name = 2;
+}
+
+// Test message with mixed AND/OR constraints
+message CelValidationMixedUnion {
+  option (buf.validate.message).cel = {
+    id: "mixed_and_or",
+    message: "name must be empty, and either email or phone must be empty",
+    expression: "this.name == '' && (this.email == '' || this.phone == '')"
+  };
+
+  string name = 1; // Always omitted
+  string email = 2; // Omitted in one union branch
+  string phone = 3; // Omitted in the other union branch
+}
+
+// Address message for nested tests
+message Address {
+  string street = 1;
+  string city = 2;
+  string country = 3;
+}
