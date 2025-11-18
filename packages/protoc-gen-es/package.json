@@ -1,6 +1,6 @@
 {
   "name": "@qdrant/protoc-gen-es",
-  "version": "0.0.1",
+  "version": "2.10.1",
   "license": "Apache-2.0",
   "description": "Protocol Buffers code generator for ECMAScript",
   "keywords": [
