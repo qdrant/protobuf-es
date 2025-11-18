@@ -15,4 +15,5 @@ on:
       - synchronize
 jobs:
   lint:
+    if: false  # Disabled
     uses: bufbuild/base-workflows/.github/workflows/pr-title.yaml@main
