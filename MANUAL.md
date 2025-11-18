@@ -207,6 +207,12 @@ You can combine both options with `+`—for example, `valid_types=legacy_require
 
 Learn more about [Valid types](#valid-types).
 
+### `cel_validation=true`
+
+Enables support for buf.validate options, generating types with union groups for complex constraints using CEL expressions.
+
+Learn more about [Buf.validate support](#bufvalidate-support).
+
 ## Generated code
 
 This section shows the code that Protobuf-ES generates for each Protobuf definition, based on [example.proto].
@@ -395,7 +401,7 @@ Protobuf-ES generates the following property:
 phoneType: PhoneType;
 ```
 
-Enum fields use the first value of the enum as the default. 
+Enum fields use the first value of the enum as the default.
 
 ### Repeated fields
 
@@ -548,9 +554,9 @@ proto2 `required` is unchanged between v1 and v2.
 
 ### Proto3 optional fields
 
-In proto3, zero values like `0`, `false`, or `""` aren't serialized by default. 
-When the `optional` keyword is added to a field, zero values are serialized. 
-The keyword enables presence tracking for a field, allowing you to distinguish between an absent value, and an explicitly set zero value. 
+In proto3, zero values like `0`, `false`, or `""` aren't serialized by default.
+When the `optional` keyword is added to a field, zero values are serialized.
+The keyword enables presence tracking for a field, allowing you to distinguish between an absent value, and an explicitly set zero value.
 
 ```protobuf
 optional bool active = 3;
@@ -897,7 +903,11 @@ let ms: number = timestampMs(ts);
 A `Duration` represents a fixed span of time with nanosecond precision. For convenience, we provide functions for conversion to milliseconds:
 
 ```typescript
-import { type Duration, durationFromMs, durationMs } from "@bufbuild/protobuf/wkt";
+import {
+  type Duration,
+  durationFromMs,
+  durationMs,
+} from "@bufbuild/protobuf/wkt";
 
 // Create a Duration from milliseconds.
 let duration: Duration = durationFromMs(1012);
@@ -1387,8 +1397,8 @@ if (isEnumJson(FormatSchema, someString)) {
 >
 > JSON cannot represent a Protobuf message as well as the generated message types.
 > For example, a 64-bit integer must be represented as a String in JSON, while it
-> can be represented as a BigInt in the message type. 
-> 
+> can be represented as a BigInt in the message type.
+>
 > Prefer the generated message type over JSON types if you can. Use JSON types in
 > situations where you need the message to be represented by plain JSON, for example
 > for a 3rd party library that only supports JSON.
@@ -1398,7 +1408,6 @@ if (isEnumJson(FormatSchema, someString)) {
 > - `MessageJsonType` extracts the JSON type from a message descriptor.
 > - `EnumJsonType` extracts the JSON type from an enum descriptor.
 > - When [writing a plugin](#writing-plugins), the method `importJson` of `GeneratedFile` imports a JSON type.
-
 
 ## Valid types
 
@@ -1438,11 +1447,11 @@ export type ExampleValid = Message<"Example"> & {
   /**
    * A proto required field.
    * A field with the Edition feature field_presence=LEGACY_REQUIRED works as well.
-   * 
+   *
    * @generated from field: required User = 1;
    */
   user: UserValid;
-}
+};
 ```
 
 With `valid_types=protovalidate_required`, message fields with protovalidate's [`required` rule](https://buf.build/docs/reference/protovalidate/rules/field_rules/#required)
@@ -1454,13 +1463,13 @@ syntax = "proto3";
 import "buf/validate/validate.proto";
 
 message Example {
-  // Enabling this rule has the same effect on the 
+  // Enabling this rule has the same effect on the
   // generated property as the proto2 `required` label.
   User user = 2 [(buf.validate.field).required = true];
 }
 ```
 
-To see integration with protovalidate in action, see the [Valid types example][protovalidate-es-example] 
+To see integration with protovalidate in action, see the [Valid types example][protovalidate-es-example]
 in the protovalidate-es repository.
 
 > [!TIP]
@@ -1468,6 +1477,41 @@ in the protovalidate-es repository.
 > - `MessageValidType` extracts the Valid type from a message descriptor.
 > - When [writing a plugin](#writing-plugins), the method `importValid` of `GeneratedFile` imports a Valid type.
 
+## Buf.validate support
+
+This feature enables support for [buf.validate](https://buf.build/docs/reference/protovalidate/rules) options, which allow you to define validation rules for your Protobuf messages using Common Expression Language (CEL) expressions.
+
+When the `cel_validation=true` plugin option is enabled, [@bufbuild/protoc-gen-es] generates types with union groups for complex constraints. This allows for more precise type checking based on the validation rules defined in your Protobuf files.
+
+For example, consider the following Protobuf message with buf.validate options:
+
+```protobuf
+syntax = "proto3";
+
+import "buf/validate/validate.proto";
+
+message User {
+  option (buf.validate.message).cel = {
+    expression: "this.email == '' || this.age == 0"
+  };
+
+  string email = 1 [(buf.validate.field).string.email = true];
+  int32 age = 2 [(buf.validate.field).int32 = { gte: 0, lte: 120 }];
+  repeated string tags = 3 [(buf.validate.field).repeated = { min_items: 1, max_items: 10 }];
+}
+```
+
+With `cel_validation=true`, the generated TypeScript type will reflect the validation constraints, creating union types for fields with complex rules. In this example, the CEL expression `this.email == '' || this.age == 0` generates a union type where either the `email` field is omitted (indicating it should be empty) or the `age` field is omitted (indicating it should be zero), but not both.
+
+CEL expressions support accessing nested fields using dot notation (e.g., `this.address.city`), allowing for complex validation rules on message hierarchies.
+
+The implementation includes:
+
+- Parsing of CEL expressions from buf.validate message options
+- Generation of union groups for constraints that cannot be represented as simple type unions
+- Support for read-only fields in generated types where appropriate
+
+This feature is particularly useful for ensuring type safety at compile time based on the validation rules defined in your Protobuf schemas.
 
 ## Reflection
 
@@ -1618,16 +1662,15 @@ UserService.method.createUser.name; // "CreateUser"
 
 > [!TIP]
 >
-> The function `usedTypes()` from `@bufbuild/protobuf/reflect` returns 
-> messages and enumerations referenced by fields of a given message. 
-> 
+> The function `usedTypes()` from `@bufbuild/protobuf/reflect` returns
+> messages and enumerations referenced by fields of a given message.
+>
 > The function `parentTypes()` returns the ancestors of a given Protobuf
 > element, up to the file.
-> 
+>
 > The type `Path` represents a path to a (nested) member of a Protobuf
 > message, such as a field, oneof, extension, list element, or map entry.
-> See the utilities `buildPath()`, `parsePath()`, and `pathToString()`. 
-
+> See the utilities `buildPath()`, `parsePath()`, and `pathToString()`.
 
 ### Walking through message fields
 
@@ -1795,7 +1838,7 @@ import { UserSchema, file_example } from "./gen/example_pb";
 const registry = createRegistry(
   UserSchema, // Initialize with a message, enum, extension, or service descriptor
   file_example, // add all types from the file descriptor
-  otherRegistry, // Adds all types from the other registry
+  otherRegistry // Adds all types from the other registry
 );
 ```
 
@@ -1836,7 +1879,7 @@ import { FileDescriptorSetSchema } from "@bufbuild/protobuf/wkt";
 // The set can be compiled with `buf build --output set.binpb`
 const fileDescriptorSet = fromBinary(
   FileDescriptorSetSchema,
-  readFileSync("set.binpb"),
+  readFileSync("set.binpb")
 );
 
 // Create a FileRegistry from the google.protobuf.FileDescriptorSet message:
@@ -1964,7 +2007,7 @@ import type { DescMessage, MessageShape } from "@bufbuild/protobuf";
 
 export function redact<Desc extends DescMessage>(
   schema: Desc,
-  message: MessageShape<Desc>,
+  message: MessageShape<Desc>
 ) {
   // ...
 }
