@@ -1,4 +1,4 @@
-# @bufbuild/protoc-gen-es
+# @qdrant/protoc-gen-es
 
 The code generator plugin for Protocol Buffers for ECMAScript. Learn more about the project at
 [github.com/bufbuild/protobuf-es](https://github.com/bufbuild/protobuf-es).
@@ -13,7 +13,7 @@ To install the runtime library and the plugin, run:
 
 ```shell
 npm install @bufbuild/protobuf
-npm install --save-dev @bufbuild/protoc-gen-es
+npm install --save-dev @qdrant/protoc-gen-es
 ```
 
 ## Generating code
@@ -123,9 +123,9 @@ if available. Learn more about [JSON types](https://github.com/bufbuild/protobuf
 
 Generates a Valid type for every Protobuf message. Possible values:
 
-- `valid_types=legacy_required`: Message fields with the `required` label, or the Edition feature 
-  `features.field_presence=LEGACY_REQUIRED`, are generated as non-optional properties. 
-- `valid_types=protovalidate_required`: Message fields with protovalidate's [`required` rule](https://buf.build/docs/reference/protovalidate/rules/field_rules/#required) 
+- `valid_types=legacy_required`: Message fields with the `required` label, or the Edition feature
+  `features.field_presence=LEGACY_REQUIRED`, are generated as non-optional properties.
+- `valid_types=protovalidate_required`: Message fields with protovalidate's [`required` rule](https://buf.build/docs/reference/protovalidate/rules/field_rules/#required)
   rule are generated as non-optional properties.
 
 You can combine both options with `+`—for example, `valid_types=legacy_required+protovalidate_required`.
