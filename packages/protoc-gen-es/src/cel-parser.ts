@@ -352,11 +352,6 @@ function isEmptyValue(expr: Expr | undefined): boolean {
  * @param result - The result object to populate
  */
 function addFieldToResult(fieldPath: string, result: CELParseResult): void {
-  if (!isValidFieldName(fieldPath)) {
-    result.errors.push(`Invalid field name extracted: ${fieldPath}`);
-    return;
-  }
-
   // Check if this is a nested field (contains dots)
   if (fieldPath.includes(".")) {
     const parts = fieldPath.split(".").map(snakeToCamel);
@@ -376,21 +371,4 @@ function addFieldToResult(fieldPath: string, result: CELParseResult): void {
     // Top-level field
     result.readOnlyFields.push(snakeToCamel(fieldPath));
   }
-}
-
-// Maximum allowed length for a field name, chosen to prevent excessively long or potentially malicious field names.
-// 100 characters is a pragmatic upper bound for protobuf field names in most real-world schemas.
-const MAX_FIELD_NAME_LENGTH = 100;
-
-/**
- * Validate that a field name is reasonable
- */
-function isValidFieldName(fieldName: string): boolean {
-  // Allow alphanumeric characters, dots (for nested fields), and underscores
-  // Must start with a letter or underscore
-  const fieldNamePattern = /^[a-zA-Z_][a-zA-Z0-9_.]*$/;
-  return (
-    fieldNamePattern.test(fieldName) &&
-    fieldName.length <= MAX_FIELD_NAME_LENGTH
-  );
 }

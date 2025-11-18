@@ -291,12 +291,5 @@ describe("CEL Parser", () => {
       assert(result.errors[0].includes("Failed to parse"));
       assert.deepStrictEqual(result.readOnlyFields, []);
     });
-
-    test("validates extremely long field names", () => {
-      const longField = "a".repeat(101); // Exceeds MAX_FIELD_NAME_LENGTH (100)
-      const result = parseCELExpression(`this.${longField} == ''`);
-      assert(result.errors.length > 0);
-      assert(result.errors[0].includes("Invalid field name"));
-    });
   });
 });
