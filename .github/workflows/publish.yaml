@@ -17,7 +17,11 @@ jobs:
         with:
           node-version: 22
           registry-url: 'https://registry.npmjs.org'
-      - uses: ./.github/actions/setup-cache
+      - uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: protobuf-es/publish/${{ github.sha }}
+          restore-keys: protobuf-es/publish
       - name: Extract version from tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/releases/}" >> $GITHUB_ENV
       - run: npm ci
