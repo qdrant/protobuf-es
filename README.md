@@ -2,7 +2,7 @@
 
 # Protobuf-ES
 
-[![License](https://img.shields.io/github/license/bufbuild/protobuf-es?color=blue)](./LICENSE) [![NPM Version](https://img.shields.io/npm/v/@bufbuild/protobuf/latest?color=green&label=%40bufbuild%2Fprotobuf)](https://www.npmjs.com/package/@bufbuild/protobuf) [![NPM Version](https://img.shields.io/npm/v/@bufbuild/protoplugin/latest?color=green&label=%40bufbuild%2Fprotoplugin)](https://www.npmjs.com/package/@bufbuild/protoplugin) [![NPM Version](https://img.shields.io/npm/v/@bufbuild/protoc-gen-es/latest?color=green&label=%40bufbuild%2Fprotoc-gen-es)](https://www.npmjs.com/package/@bufbuild/protoc-gen-es)
+[![License](https://img.shields.io/github/license/bufbuild/protobuf-es?color=blue)](./LICENSE) [![NPM Version](https://img.shields.io/npm/v/@bufbuild/protobuf/latest?color=green&label=%40bufbuild%2Fprotobuf)](https://www.npmjs.com/package/@bufbuild/protobuf) [![NPM Version](https://img.shields.io/npm/v/@bufbuild/protoplugin/latest?color=green&label=%40bufbuild%2Fprotoplugin)](https://www.npmjs.com/package/@bufbuild/protoplugin) [![NPM Version](https://img.shields.io/npm/v/@qdrant/protoc-gen-es/latest?color=green&label=%40qdrant%2Fprotoc-gen-es)](https://www.npmjs.com/package/@qdrant/protoc-gen-es)
 
 A complete implementation of [Protocol Buffers](https://protobuf.dev/) in TypeScript,
 suitable for web browsers, Node.js, and Deno, created by [Buf](https://buf.build).
@@ -61,7 +61,7 @@ const json = toJson(UserSchema, user);
 
 The benefits of using Protobuf extend to any application that interacts with yours, because the Protobuf file above
 can be used to generate types in many languages. The added bonus is that no one has to write any boilerplate code to
-make this happen. [Code generators](https://www.npmjs.com/package/@bufbuild/protoc-gen-es) handle all of this for you.
+make this happen. [Code generators](https://www.npmjs.com/package/@qdrant/protoc-gen-es) handle all of this for you.
 
 Protobuf also allows you to serialize this structured data. Your application running in the browser can send
 a `User` object to a backend running an entirely different language, but using the exact same definition. Using an RPC
@@ -74,7 +74,7 @@ and then deserialized at its destination using the defined schema.
 
    ```shellsession
    npm install @bufbuild/protobuf
-   npm install --save-dev @bufbuild/protoc-gen-es @bufbuild/buf
+   npm install --save-dev @qdrant/protoc-gen-es @bufbuild/buf
    ```
 
 2. Create a `buf.gen.yaml` file that looks like this:
@@ -117,7 +117,7 @@ From here, you can begin to work with your schema.
 
 - [@bufbuild/protobuf](https://www.npmjs.com/package/@bufbuild/protobuf):
   Provides the runtime library, containing base types, generated well-known types, and core functionality.
-- [@bufbuild/protoc-gen-es](https://www.npmjs.com/package/@bufbuild/protoc-gen-es):
+- [@qdrant/protoc-gen-es](https://www.npmjs.com/package/@qdrant/protoc-gen-es):
   Provides the code generator plugin `protoc-gen-es`. The code it generates depends on `@bufbuild/protobuf`.
 - [@bufbuild/protoplugin](https://www.npmjs.com/package/@bufbuild/protoplugin):
   Helps to create your own code generator plugin. The code it generates depends on `@bufbuild/protobuf`.
