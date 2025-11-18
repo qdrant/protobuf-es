@@ -123,7 +123,7 @@ export function isProtovalidateRequired(descField: DescField): boolean {
   if (fieldRules.ignore === Ignore.ALWAYS) {
     return false;
   }
-  return fieldRules.required;
+  return Boolean(fieldRules.required);
 }
 
 /**

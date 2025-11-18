@@ -290,3 +290,13 @@ function commaSeparate(elements: Printable[]): Printable {
   }
   return r;
 }
+
+/**
+ * Convert protobuf field names from snake_case to camelCase
+ *
+ * @param snakeCase - Field name in snake_case
+ * @returns Field name in camelCase
+ */
+export function snakeToCamel(snakeCase: string): string {
+  return snakeCase.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+}
