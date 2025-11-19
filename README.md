@@ -1,6 +1,10 @@
 ![The Buf logo](./.github/buf-logo.svg)
+![The Qdrant logo](https://avatars.githubusercontent.com/u/73504361?s=85&v=4)
 
-# Protobuf-ES
+# Protobuf-ES (Qdrant Fork)
+
+> [!IMPORTANT]
+> This is a fork of [protobuf-es](https://github.com/bufbuild/protobuf-es) maintained by [Qdrant](https://github.com/qdrant), adding support for CEL validation in generated types.
 
 [![License](https://img.shields.io/github/license/bufbuild/protobuf-es?color=blue)](./LICENSE) [![NPM Version](https://img.shields.io/npm/v/@bufbuild/protobuf/latest?color=green&label=%40bufbuild%2Fprotobuf)](https://www.npmjs.com/package/@bufbuild/protobuf) [![NPM Version](https://img.shields.io/npm/v/@bufbuild/protoplugin/latest?color=green&label=%40bufbuild%2Fprotoplugin)](https://www.npmjs.com/package/@bufbuild/protoplugin) [![NPM Version](https://img.shields.io/npm/v/@qdrant/protoc-gen-es/latest?color=green&label=%40qdrant%2Fprotoc-gen-es)](https://www.npmjs.com/package/@qdrant/protoc-gen-es)
 
@@ -118,7 +122,7 @@ From here, you can begin to work with your schema.
 - [@bufbuild/protobuf](https://www.npmjs.com/package/@bufbuild/protobuf):
   Provides the runtime library, containing base types, generated well-known types, and core functionality.
 - [@qdrant/protoc-gen-es](https://www.npmjs.com/package/@qdrant/protoc-gen-es):
-  Provides the code generator plugin `protoc-gen-es`. The code it generates depends on `@bufbuild/protobuf`.
+  Provides the code generator plugin `protoc-gen-es`. It supports [CEL validation](packages/protobuf-test/extra/minimal-validate.proto) to generate precise types (see [examples](packages/protobuf-test/extra/cel-validation_types.proto)). The code it generates depends on `@bufbuild/protobuf`.
 - [@bufbuild/protoplugin](https://www.npmjs.com/package/@bufbuild/protoplugin):
   Helps to create your own code generator plugin. The code it generates depends on `@bufbuild/protobuf`.
 
