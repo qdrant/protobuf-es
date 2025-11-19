@@ -117,7 +117,12 @@ test("CelValidationNotHas type omits 'optionalField' due to !has()", () => {
   const typeBody = getTypeBody(content, "CelValidationNotHas");
 
   assertField(typeBody, "otherField", true);
-  assertField(typeBody, "optionalField", false, "optionalField should be omitted");
+  assertField(
+    typeBody,
+    "optionalField",
+    false,
+    "optionalField should be omitted",
+  );
 });
 
 test("CelValidationNested type uses Omit for nested field constraints", () => {
@@ -174,7 +179,7 @@ test("CelValidationOr includes ALL fields (OR doesn't create read-only)", () => 
   // However, checking the file content for specific fields is tricky with unions.
   // We'll check that the type definition exists and contains the fields.
   const unionBody = getUnionTypeBody(content, "CelValidationOr");
-  
+
   assert.ok(unionBody.includes("field1"), "Should include field1 in union");
   assert.ok(unionBody.includes("field2"), "Should include field2 in union");
   assert.ok(unionBody.includes("field3"), "Should include field3 in union");
@@ -194,7 +199,12 @@ test("CelValidationWithRequired keeps required field, omits readonly field", () 
   const typeBody = getTypeBody(content, "CelValidationWithRequired");
 
   assertField(typeBody, "requiredField", true);
-  assertField(typeBody, "readonlyField", false, "readonlyField should be omitted");
+  assertField(
+    typeBody,
+    "readonlyField",
+    false,
+    "readonlyField should be omitted",
+  );
 });
 
 test("Valid types also have correct field omissions", () => {
@@ -229,7 +239,7 @@ test("CelValidationUnion generates union type with OR constraints", () => {
   // The previous test might have been asserting something else or I misunderstood.
   // Let's check if the generated code actually uses Omit or if it just defines the type as a union of shapes.
   // If it's `Omit<Message<...>, "email"> | Omit<Message<...>, "phone">`, then it uses Omit.
-  
+
   assert.ok(
     unionBody.includes("email"),
     "Should reference email in union branches",
@@ -238,10 +248,7 @@ test("CelValidationUnion generates union type with OR constraints", () => {
     unionBody.includes("phone"),
     "Should reference phone in union branches",
   );
-  assert.ok(
-    unionBody.includes("name"),
-    "Should include name field",
-  );
+  assert.ok(unionBody.includes("name"), "Should include name field");
 });
 
 test("CelValidationNestedUnion generates union type with nested OR constraints", () => {
@@ -281,54 +288,54 @@ test("CelValidationMixedUnion generates complex union type with AND+OR", () => {
   // But we can check that 'name' is NOT present as a property key "name:"
   // However, "name" might appear in Omit<..., "name">.
   // So we check that "name:" (property definition) is NOT present.
-  
+
   const namePropRegex = /\bname\??\s*:/;
   assert.ok(
     !namePropRegex.test(unionBody),
     "Should NOT include name property definition (omitted from all branches)",
   );
 
-  assert.ok(
-    unionBody.includes("email"),
-    "Should reference email",
-  );
-  assert.ok(
-    unionBody.includes("phone"),
-    "Should reference phone",
-  );
+  assert.ok(unionBody.includes("email"), "Should reference email");
+  assert.ok(unionBody.includes("phone"), "Should reference phone");
 });
 
 test("CelValidationMultipleNested handles multiple nested constraints", () => {
   const content = readFileSync(generatedFilePath, "utf-8");
-  
+
   if (!content.includes("CelValidationMultipleNested")) {
-      return;
+    return;
   }
-  
+
   const typeBody = getTypeBody(content, "CelValidationMultipleNested");
-  
+
   assertField(typeBody, "parentName", true);
   assertField(typeBody, "child1", true);
   assertField(typeBody, "child2", true);
-  
+
   // Should use Omit for both child1 and child2
   // We expect something like:
   // child1?: Omit<NestedChild, "childName">;
   // child2?: Omit<NestedChild, "childValue">;
-  
-  assert.ok(typeBody.includes("childName"), "Should reference childName in Omit");
-  assert.ok(typeBody.includes("childValue"), "Should reference childValue in Omit");
+
+  assert.ok(
+    typeBody.includes("childName"),
+    "Should reference childName in Omit",
+  );
+  assert.ok(
+    typeBody.includes("childValue"),
+    "Should reference childValue in Omit",
+  );
 });
 
 test("CelValidationWithRepeated handles repeated fields correctly", () => {
   const content = readFileSync(generatedFilePath, "utf-8");
-  
+
   if (!content.includes("CelValidationWithRepeated")) {
-      return;
+    return;
   }
-  
+
   const typeBody = getTypeBody(content, "CelValidationWithRepeated");
-  
+
   assertField(typeBody, "singleField", false, "singleField should be omitted");
   assertField(typeBody, "listField", true);
   assertField(typeBody, "nestedList", true);
