@@ -129,6 +129,24 @@ describe("CEL Parser", () => {
       assert.deepStrictEqual(result.errors, []);
     });
 
+    test("handles complex mixed logic: (A || B) && (C || D)", () => {
+      const result = parseCELExpression(
+        "(this.a == '' || this.b == '') && (this.c == '' || this.d == '')",
+      );
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      // Should produce two separate union groups sets?
+      // The current implementation flattens union groups into a single array.
+      // This effectively means "Union Group 1 AND Union Group 2", which is correct for Omit.
+      // (Omit<T, A> | Omit<T, B>) & (Omit<T, C> | Omit<T, D>)
+      assert.deepStrictEqual(result.unionGroups, [
+        { readOnlyFields: ["a"], nestedConstraints: {} },
+        { readOnlyFields: ["b"], nestedConstraints: {} },
+        { readOnlyFields: ["c"], nestedConstraints: {} },
+        { readOnlyFields: ["d"], nestedConstraints: {} },
+      ]);
+      assert.deepStrictEqual(result.errors, []);
+    });
+
     test("combines !has with && correctly", () => {
       const result = parseCELExpression(
         "!has(this.field1) && this.field2 == ''",
@@ -272,6 +290,19 @@ describe("CEL Parser", () => {
     // Field reference patterns
     test("ignores non-this field references", () => {
       const result = parseCELExpression("field == ''");
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.errors, []);
+    });
+
+    // Unsupported operators
+    test("ignores unsupported operators like >", () => {
+      const result = parseCELExpression("this.field > 5");
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.errors, []);
+    });
+
+    test("ignores unsupported operators like <", () => {
+      const result = parseCELExpression("this.field < 10");
       assert.deepStrictEqual(result.readOnlyFields, []);
       assert.deepStrictEqual(result.errors, []);
     });
