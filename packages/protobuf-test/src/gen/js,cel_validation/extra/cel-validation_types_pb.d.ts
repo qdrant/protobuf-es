@@ -16,7 +16,7 @@
 // @generated from file extra/cel-validation_types.proto (package spec, edition 2023)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import type { Message } from "@bufbuild/protobuf";
 
 /**
@@ -30,6 +30,11 @@ export declare const file_extra_cel_validation_types: GenFile;
  * @generated from message spec.CelValidationSimple
  */
 export declare type CelValidationSimple = Message<"spec.CelValidationSimple"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
   /**
    * @generated from field: string description = 2;
    */
@@ -47,6 +52,11 @@ export declare type CelValidationSimple = Message<"spec.CelValidationSimple"> & 
  * @generated from message spec.CelValidationSimple
  */
 export declare type CelValidationSimpleValid = Message<"spec.CelValidationSimple"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
   /**
    * @generated from field: string description = 2;
    */
@@ -71,6 +81,16 @@ export declare const CelValidationSimpleSchema: GenMessage<CelValidationSimple, 
  */
 export declare type CelValidationMultiple = Message<"spec.CelValidationMultiple"> & {
   /**
+   * @generated from field: string id = 1;
+   */
+  id: "";
+
+  /**
+   * @generated from field: int32 code = 2;
+   */
+  code: 0;
+
+  /**
    * @generated from field: string title = 3;
    */
   title: string;
@@ -87,6 +107,16 @@ export declare type CelValidationMultiple = Message<"spec.CelValidationMultiple"
  * @generated from message spec.CelValidationMultiple
  */
 export declare type CelValidationMultipleValid = Message<"spec.CelValidationMultiple"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: "";
+
+  /**
+   * @generated from field: int32 code = 2;
+   */
+  code: 0;
+
   /**
    * @generated from field: string title = 3;
    */
@@ -231,6 +261,16 @@ export declare const CelValidationNestedSchema: GenMessage<CelValidationNested, 
  */
 export declare type CelValidationCombined = Message<"spec.CelValidationCombined"> & {
   /**
+   * @generated from field: string field1 = 1;
+   */
+  field1: "";
+
+  /**
+   * @generated from field: string field2 = 2;
+   */
+  field2: "";
+
+  /**
    * @generated from field: string field3 = 3;
    */
   field3: string;
@@ -242,6 +282,16 @@ export declare type CelValidationCombined = Message<"spec.CelValidationCombined"
  * @generated from message spec.CelValidationCombined
  */
 export declare type CelValidationCombinedValid = Message<"spec.CelValidationCombined"> & {
+  /**
+   * @generated from field: string field1 = 1;
+   */
+  field1: "";
+
+  /**
+   * @generated from field: string field2 = 2;
+   */
+  field2: "";
+
   /**
    * @generated from field: string field3 = 3;
    */
@@ -261,6 +311,11 @@ export declare const CelValidationCombinedSchema: GenMessage<CelValidationCombin
  */
 export declare type CelValidationSnakeCase = Message<"spec.CelValidationSnakeCase"> & {
   /**
+   * @generated from field: string user_name = 1;
+   */
+  userName: "";
+
+  /**
    * @generated from field: string first_name = 2;
    */
   firstName: string;
@@ -277,6 +332,11 @@ export declare type CelValidationSnakeCase = Message<"spec.CelValidationSnakeCas
  * @generated from message spec.CelValidationSnakeCase
  */
 export declare type CelValidationSnakeCaseValid = Message<"spec.CelValidationSnakeCase"> & {
+  /**
+   * @generated from field: string user_name = 1;
+   */
+  userName: "";
+
   /**
    * @generated from field: string first_name = 2;
    */
@@ -391,6 +451,11 @@ export declare const CelValidationMultipleNestedSchema: GenMessage<CelValidation
  */
 export declare type CelValidationWithRequired = Message<"spec.CelValidationWithRequired"> & {
   /**
+   * @generated from field: string readonly_field = 1;
+   */
+  readonlyField: "";
+
+  /**
    * @generated from field: string required_field = 2;
    */
   requiredField: string;
@@ -407,6 +472,11 @@ export declare type CelValidationWithRequired = Message<"spec.CelValidationWithR
  * @generated from message spec.CelValidationWithRequired
  */
 export declare type CelValidationWithRequiredValid = Message<"spec.CelValidationWithRequired"> & {
+  /**
+   * @generated from field: string readonly_field = 1;
+   */
+  readonlyField: "";
+
   /**
    * @generated from field: string required_field = 2;
    */
@@ -432,6 +502,11 @@ export declare const CelValidationWithRequiredSchema: GenMessage<CelValidationWi
 export declare type CelValidationOr = Message<"spec.CelValidationOr"> & (
 {
   /**
+   * @generated from field: string field1 = 1;
+   */
+  field1: "";
+
+  /**
    * @generated from field: string field2 = 2;
    */
   field2: string;
@@ -440,8 +515,6 @@ export declare type CelValidationOr = Message<"spec.CelValidationOr"> & (
    * @generated from field: string field3 = 3;
    */
   field3: string;
-
-  field1?: never;
 
 }
  | 
@@ -452,11 +525,14 @@ export declare type CelValidationOr = Message<"spec.CelValidationOr"> & (
   field1: string;
 
   /**
+   * @generated from field: string field2 = 2;
+   */
+  field2: "";
+
+  /**
    * @generated from field: string field3 = 3;
    */
   field3: string;
-
-  field2?: never;
 
 }
 );
@@ -469,6 +545,11 @@ export declare type CelValidationOr = Message<"spec.CelValidationOr"> & (
 export declare type CelValidationOrValid = Message<"spec.CelValidationOr"> & (
 {
   /**
+   * @generated from field: string field1 = 1;
+   */
+  field1: "";
+
+  /**
    * @generated from field: string field2 = 2;
    */
   field2: string;
@@ -477,8 +558,6 @@ export declare type CelValidationOrValid = Message<"spec.CelValidationOr"> & (
    * @generated from field: string field3 = 3;
    */
   field3: string;
-
-  field1?: never;
 
 }
  | 
@@ -489,11 +568,14 @@ export declare type CelValidationOrValid = Message<"spec.CelValidationOr"> & (
   field1: string;
 
   /**
+   * @generated from field: string field2 = 2;
+   */
+  field2: "";
+
+  /**
    * @generated from field: string field3 = 3;
    */
   field3: string;
-
-  field2?: never;
 
 }
 );
@@ -511,6 +593,11 @@ export declare const CelValidationOrSchema: GenMessage<CelValidationOr, {validTy
  */
 export declare type CelValidationWithRepeated = Message<"spec.CelValidationWithRepeated"> & {
   /**
+   * @generated from field: string single_field = 1;
+   */
+  singleField: "";
+
+  /**
    * @generated from field: repeated string list_field = 2;
    */
   listField: string[];
@@ -527,6 +614,11 @@ export declare type CelValidationWithRepeated = Message<"spec.CelValidationWithR
  * @generated from message spec.CelValidationWithRepeated
  */
 export declare type CelValidationWithRepeatedValid = Message<"spec.CelValidationWithRepeated"> & {
+  /**
+   * @generated from field: string single_field = 1;
+   */
+  singleField: "";
+
   /**
    * @generated from field: repeated string list_field = 2;
    */
@@ -552,6 +644,11 @@ export declare const CelValidationWithRepeatedSchema: GenMessage<CelValidationWi
 export declare type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
 {
   /**
+   * @generated from field: string email = 1;
+   */
+  email: "";
+
+  /**
    * @generated from field: string phone = 2;
    */
   phone: string;
@@ -563,8 +660,6 @@ export declare type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
    */
   name: string;
 
-  email?: never;
-
 }
  | 
 {
@@ -574,13 +669,16 @@ export declare type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
   email: string;
 
   /**
+   * @generated from field: string phone = 2;
+   */
+  phone: "";
+
+  /**
    * This should always be present
    *
    * @generated from field: string name = 3;
    */
   name: string;
-
-  phone?: never;
 
 }
 );
@@ -593,6 +691,11 @@ export declare type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
 export declare type CelValidationUnionValid = Message<"spec.CelValidationUnion"> & (
 {
   /**
+   * @generated from field: string email = 1;
+   */
+  email: "";
+
+  /**
    * @generated from field: string phone = 2;
    */
   phone: string;
@@ -604,8 +707,6 @@ export declare type CelValidationUnionValid = Message<"spec.CelValidationUnion">
    */
   name: string;
 
-  email?: never;
-
 }
  | 
 {
@@ -615,13 +716,16 @@ export declare type CelValidationUnionValid = Message<"spec.CelValidationUnion">
   email: string;
 
   /**
+   * @generated from field: string phone = 2;
+   */
+  phone: "";
+
+  /**
    * This should always be present
    *
    * @generated from field: string name = 3;
    */
   name: string;
-
-  phone?: never;
 
 }
 );
@@ -712,17 +816,36 @@ export declare const CelValidationNestedUnionSchema: GenMessage<CelValidationNes
 export declare type CelValidationMixedUnion = Message<"spec.CelValidationMixedUnion"> & (
 {
   /**
+   * Always omitted
+   *
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
+  /**
+   * Omitted in one union branch
+   *
+   * @generated from field: string email = 2;
+   */
+  email: "";
+
+  /**
    * Omitted in the other union branch
    *
    * @generated from field: string phone = 3;
    */
   phone: string;
 
-  email?: never;
-
 }
  | 
 {
+  /**
+   * Always omitted
+   *
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
   /**
    * Omitted in one union branch
    *
@@ -730,7 +853,12 @@ export declare type CelValidationMixedUnion = Message<"spec.CelValidationMixedUn
    */
   email: string;
 
-  phone?: never;
+  /**
+   * Omitted in the other union branch
+   *
+   * @generated from field: string phone = 3;
+   */
+  phone: "";
 
 }
 );
@@ -743,17 +871,36 @@ export declare type CelValidationMixedUnion = Message<"spec.CelValidationMixedUn
 export declare type CelValidationMixedUnionValid = Message<"spec.CelValidationMixedUnion"> & (
 {
   /**
+   * Always omitted
+   *
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
+  /**
+   * Omitted in one union branch
+   *
+   * @generated from field: string email = 2;
+   */
+  email: "";
+
+  /**
    * Omitted in the other union branch
    *
    * @generated from field: string phone = 3;
    */
   phone: string;
 
-  email?: never;
-
 }
  | 
 {
+  /**
+   * Always omitted
+   *
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
   /**
    * Omitted in one union branch
    *
@@ -761,7 +908,12 @@ export declare type CelValidationMixedUnionValid = Message<"spec.CelValidationMi
    */
   email: string;
 
-  phone?: never;
+  /**
+   * Omitted in the other union branch
+   *
+   * @generated from field: string phone = 3;
+   */
+  phone: "";
 
 }
 );
@@ -821,4 +973,426 @@ export declare type AddressValid = Message<"spec.Address"> & {
  * Use `create(AddressSchema)` to create a new message.
  */
 export declare const AddressSchema: GenMessage<Address, {validType: AddressValid}>;
+
+/**
+ * Test message with literal string constraint
+ *
+ * @generated from message spec.CelValidationLiteralString
+ */
+export declare type CelValidationLiteralString = Message<"spec.CelValidationLiteralString"> & {
+  /**
+   * Should be typed as "active", not string
+   *
+   * @generated from field: string status = 1;
+   */
+  status: "active";
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+}
+
+/**
+ * Test message with literal string constraint
+ *
+ * @generated from message spec.CelValidationLiteralString
+ */
+export declare type CelValidationLiteralStringValid = Message<"spec.CelValidationLiteralString"> & {
+  /**
+   * Should be typed as "active", not string
+   *
+   * @generated from field: string status = 1;
+   */
+  status: "active";
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralString.
+ * Use `create(CelValidationLiteralStringSchema)` to create a new message.
+ */
+export declare const CelValidationLiteralStringSchema: GenMessage<CelValidationLiteralString, {validType: CelValidationLiteralStringValid}>;
+
+/**
+ * Test message with literal number constraint
+ *
+ * @generated from message spec.CelValidationLiteralNumber
+ */
+export declare type CelValidationLiteralNumber = Message<"spec.CelValidationLiteralNumber"> & {
+  /**
+   * Should be typed as 1, not int32
+   *
+   * @generated from field: int32 version = 1;
+   */
+  version: 1;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+}
+
+/**
+ * Test message with literal number constraint
+ *
+ * @generated from message spec.CelValidationLiteralNumber
+ */
+export declare type CelValidationLiteralNumberValid = Message<"spec.CelValidationLiteralNumber"> & {
+  /**
+   * Should be typed as 1, not int32
+   *
+   * @generated from field: int32 version = 1;
+   */
+  version: 1;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralNumber.
+ * Use `create(CelValidationLiteralNumberSchema)` to create a new message.
+ */
+export declare const CelValidationLiteralNumberSchema: GenMessage<CelValidationLiteralNumber, {validType: CelValidationLiteralNumberValid}>;
+
+/**
+ * Test message with literal boolean constraint
+ *
+ * @generated from message spec.CelValidationLiteralBool
+ */
+export declare type CelValidationLiteralBool = Message<"spec.CelValidationLiteralBool"> & {
+  /**
+   * Should be typed as true, not bool
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: true;
+
+  /**
+   * @generated from field: string note = 2;
+   */
+  note: string;
+}
+
+/**
+ * Test message with literal boolean constraint
+ *
+ * @generated from message spec.CelValidationLiteralBool
+ */
+export declare type CelValidationLiteralBoolValid = Message<"spec.CelValidationLiteralBool"> & {
+  /**
+   * Should be typed as true, not bool
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: true;
+
+  /**
+   * @generated from field: string note = 2;
+   */
+  note: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralBool.
+ * Use `create(CelValidationLiteralBoolSchema)` to create a new message.
+ */
+export declare const CelValidationLiteralBoolSchema: GenMessage<CelValidationLiteralBool, {validType: CelValidationLiteralBoolValid}>;
+
+/**
+ * Test message with multiple literal constraints
+ *
+ * @generated from message spec.CelValidationLiteralsMultiple
+ */
+export declare type CelValidationLiteralsMultiple = Message<"spec.CelValidationLiteralsMultiple"> & {
+  /**
+   * Should be "user"
+   *
+   * @generated from field: string type = 1;
+   */
+  type: "user";
+
+  /**
+   * Should be 5
+   *
+   * @generated from field: int32 level = 2;
+   */
+  level: 5;
+
+  /**
+   * @generated from field: string info = 3;
+   */
+  info: string;
+}
+
+/**
+ * Test message with multiple literal constraints
+ *
+ * @generated from message spec.CelValidationLiteralsMultiple
+ */
+export declare type CelValidationLiteralsMultipleValid = Message<"spec.CelValidationLiteralsMultiple"> & {
+  /**
+   * Should be "user"
+   *
+   * @generated from field: string type = 1;
+   */
+  type: "user";
+
+  /**
+   * Should be 5
+   *
+   * @generated from field: int32 level = 2;
+   */
+  level: 5;
+
+  /**
+   * @generated from field: string info = 3;
+   */
+  info: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralsMultiple.
+ * Use `create(CelValidationLiteralsMultipleSchema)` to create a new message.
+ */
+export declare const CelValidationLiteralsMultipleSchema: GenMessage<CelValidationLiteralsMultiple, {validType: CelValidationLiteralsMultipleValid}>;
+
+/**
+ * Test message with literal in OR constraint
+ *
+ * @generated from message spec.CelValidationLiteralOr
+ */
+export declare type CelValidationLiteralOr = Message<"spec.CelValidationLiteralOr"> & (
+{
+  /**
+   * Should be "admin" in one branch
+   *
+   * @generated from field: string role = 1;
+   */
+  role: "admin";
+
+  /**
+   * Should be "pending" in the other branch
+   *
+   * @generated from field: string status = 2;
+   */
+  status: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+}
+ | 
+{
+  /**
+   * Should be "admin" in one branch
+   *
+   * @generated from field: string role = 1;
+   */
+  role: string;
+
+  /**
+   * Should be "pending" in the other branch
+   *
+   * @generated from field: string status = 2;
+   */
+  status: "pending";
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+}
+);
+
+/**
+ * Test message with literal in OR constraint
+ *
+ * @generated from message spec.CelValidationLiteralOr
+ */
+export declare type CelValidationLiteralOrValid = Message<"spec.CelValidationLiteralOr"> & (
+{
+  /**
+   * Should be "admin" in one branch
+   *
+   * @generated from field: string role = 1;
+   */
+  role: "admin";
+
+  /**
+   * Should be "pending" in the other branch
+   *
+   * @generated from field: string status = 2;
+   */
+  status: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+}
+ | 
+{
+  /**
+   * Should be "admin" in one branch
+   *
+   * @generated from field: string role = 1;
+   */
+  role: string;
+
+  /**
+   * Should be "pending" in the other branch
+   *
+   * @generated from field: string status = 2;
+   */
+  status: "pending";
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+}
+);
+
+/**
+ * Describes the message spec.CelValidationLiteralOr.
+ * Use `create(CelValidationLiteralOrSchema)` to create a new message.
+ */
+export declare const CelValidationLiteralOrSchema: GenMessage<CelValidationLiteralOr, {validType: CelValidationLiteralOrValid}>;
+
+/**
+ * Test message with literal boolean false constraint
+ *
+ * @generated from message spec.CelValidationLiteralBoolFalse
+ */
+export declare type CelValidationLiteralBoolFalse = Message<"spec.CelValidationLiteralBoolFalse"> & {
+  /**
+   * Should be typed as false, not bool
+   *
+   * @generated from field: bool disabled = 1;
+   */
+  disabled: false;
+
+  /**
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+}
+
+/**
+ * Test message with literal boolean false constraint
+ *
+ * @generated from message spec.CelValidationLiteralBoolFalse
+ */
+export declare type CelValidationLiteralBoolFalseValid = Message<"spec.CelValidationLiteralBoolFalse"> & {
+  /**
+   * Should be typed as false, not bool
+   *
+   * @generated from field: bool disabled = 1;
+   */
+  disabled: false;
+
+  /**
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralBoolFalse.
+ * Use `create(CelValidationLiteralBoolFalseSchema)` to create a new message.
+ */
+export declare const CelValidationLiteralBoolFalseSchema: GenMessage<CelValidationLiteralBoolFalse, {validType: CelValidationLiteralBoolFalseValid}>;
+
+/**
+ * Test message with literal enum constraint
+ * Demonstrates that enum values in TypeScript are numbers,
+ * so this.status == 2 should generate: status: 2
+ *
+ * @generated from message spec.CelValidationLiteralEnum
+ */
+export declare type CelValidationLiteralEnum = Message<"spec.CelValidationLiteralEnum"> & {
+  /**
+   * Should be typed as literal 2 (STATUS_ACTIVE)
+   *
+   * @generated from field: spec.Status status = 1;
+   */
+  status: 2;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+}
+
+/**
+ * Test message with literal enum constraint
+ * Demonstrates that enum values in TypeScript are numbers,
+ * so this.status == 2 should generate: status: 2
+ *
+ * @generated from message spec.CelValidationLiteralEnum
+ */
+export declare type CelValidationLiteralEnumValid = Message<"spec.CelValidationLiteralEnum"> & {
+  /**
+   * Should be typed as literal 2 (STATUS_ACTIVE)
+   *
+   * @generated from field: spec.Status status = 1;
+   */
+  status: 2;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralEnum.
+ * Use `create(CelValidationLiteralEnumSchema)` to create a new message.
+ */
+export declare const CelValidationLiteralEnumSchema: GenMessage<CelValidationLiteralEnum, {validType: CelValidationLiteralEnumValid}>;
+
+/**
+ * Enum for testing literal enum constraints
+ *
+ * @generated from enum spec.Status
+ */
+export enum Status {
+  /**
+   * @generated from enum value: STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: STATUS_PENDING = 1;
+   */
+  PENDING = 1,
+
+  /**
+   * @generated from enum value: STATUS_ACTIVE = 2;
+   */
+  ACTIVE = 2,
+
+  /**
+   * @generated from enum value: STATUS_INACTIVE = 3;
+   */
+  INACTIVE = 3,
+}
+
+/**
+ * Describes the enum spec.Status.
+ */
+export declare const StatusSchema: GenEnum<Status>;
 

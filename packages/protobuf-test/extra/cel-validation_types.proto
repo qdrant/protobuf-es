@@ -218,3 +218,105 @@ message Address {
   string city = 2;
   string country = 3;
 }
+
+// Test message with literal string constraint
+message CelValidationLiteralString {
+  option (buf.validate.message).cel = {
+    id: "literal_status",
+    message: "status must be 'active'",
+    expression: "this.status == 'active'"
+  };
+
+  string status = 1; // Should be typed as "active", not string
+  string name = 2;
+}
+
+// Test message with literal number constraint
+message CelValidationLiteralNumber {
+  option (buf.validate.message).cel = {
+    id: "literal_version",
+    message: "version must be 1",
+    expression: "this.version == 1"
+  };
+
+  int32 version = 1; // Should be typed as 1, not int32
+  string description = 2;
+}
+
+// Test message with literal boolean constraint
+message CelValidationLiteralBool {
+  option (buf.validate.message).cel = {
+    id: "literal_enabled",
+    message: "enabled must be true",
+    expression: "this.enabled == true"
+  };
+
+  bool enabled = 1; // Should be typed as true, not bool
+  string note = 2;
+}
+
+// Test message with multiple literal constraints
+message CelValidationLiteralsMultiple {
+  option (buf.validate.message).cel = {
+    id: "literal_type",
+    message: "type must be 'user'",
+    expression: "this.type == 'user'"
+  };
+  option (buf.validate.message).cel = {
+    id: "literal_level",
+    message: "level must be 5",
+    expression: "this.level == 5"
+  };
+
+  string type = 1; // Should be "user"
+  int32 level = 2; // Should be 5
+  string info = 3;
+}
+
+// Test message with literal in OR constraint
+message CelValidationLiteralOr {
+  option (buf.validate.message).cel = {
+    id: "literal_or",
+    message: "role must be 'admin' or status must be 'pending'",
+    expression: "this.role == 'admin' || this.status == 'pending'"
+  };
+
+  string role = 1;   // Should be "admin" in one branch
+  string status = 2; // Should be "pending" in the other branch
+  string name = 3;
+}
+
+// Test message with literal boolean false constraint
+message CelValidationLiteralBoolFalse {
+  option (buf.validate.message).cel = {
+    id: "literal_disabled",
+    message: "disabled must be false",
+    expression: "this.disabled == false"
+  };
+
+  bool disabled = 1; // Should be typed as false, not bool
+  string reason = 2;
+}
+
+// Enum for testing literal enum constraints
+enum Status {
+  STATUS_UNSPECIFIED = 0;
+  STATUS_PENDING = 1;
+  STATUS_ACTIVE = 2;
+  STATUS_INACTIVE = 3;
+}
+
+// Test message with literal enum constraint
+// Demonstrates that enum values in TypeScript are numbers,
+// so this.status == 2 should generate: status: 2
+message CelValidationLiteralEnum {
+  option (buf.validate.message).cel = {
+    id: "literal_status",
+    message: "status must be ACTIVE (2)",
+    expression: "this.status == 2"
+  };
+
+  Status status = 1; // Should be typed as literal 2 (STATUS_ACTIVE)
+  string description = 2;
+}
+

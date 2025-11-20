@@ -90,6 +90,43 @@ export function getReadOnlyFields(message: DescMessage): string[] {
 }
 
 /**
+ * Extracts literal field constraints from buf.validate.message CEL expressions
+ *
+ * @param message - The message descriptor to analyze
+ * @returns Record mapping field names to their required literal values
+ */
+function getLiteralFields(
+  message: DescMessage,
+): Record<string, string | number | boolean> {
+  try {
+    const messageRules = getOption(message, ext_message);
+    if (!messageRules?.cel || messageRules.cel.length === 0) {
+      return {};
+    }
+
+    // Combine all literal constraints from all CEL expressions
+    const allLiteralFields: Record<string, string | number | boolean> = {};
+
+    for (const constraint of messageRules.cel) {
+      if (constraint.expression) {
+        const result = parseCELExpression(constraint.expression);
+
+        // Merge literal fields
+        for (const [key, value] of Object.entries(result.literalFields)) {
+          allLiteralFields[key] = value;
+        }
+      }
+    }
+
+    return allLiteralFields;
+  } catch {
+    // If there's any error parsing, return empty object to avoid breaking generation
+    return {};
+  }
+}
+
+
+/**
  * Extracts union groups from buf.validate.message CEL expressions
  *
  * @param message - The message descriptor to analyze
@@ -97,6 +134,7 @@ export function getReadOnlyFields(message: DescMessage): string[] {
  */
 function getUnionGroups(message: DescMessage): Array<{
   readOnlyFields: string[];
+  literalFields: Record<string, string | number | boolean>;
   nestedConstraints: Record<string, string[]>;
 }> {
   try {
@@ -107,6 +145,7 @@ function getUnionGroups(message: DescMessage): Array<{
 
     const allUnionGroups: Array<{
       readOnlyFields: string[];
+      literalFields: Record<string, string | number | boolean>;
       nestedConstraints: Record<string, string[]>;
     }> = [];
 
@@ -702,6 +741,7 @@ function generateMessageShape(
 
   const nestedConstraints = getNestedReadOnlyFields(message);
   const readOnlyFields = getReadOnlyFields(message);
+  const literalFields = getLiteralFields(message);
   const unionGroups = getUnionGroups(message);
 
   // If there are union groups, generate a union type
@@ -758,7 +798,8 @@ function generateMessageShape(
           f,
           member,
           undefined,
-          mergedNestedConstraints
+          mergedNestedConstraints,
+          { ...literalFields, ...group.literalFields }
         );
         f.print();
       }
@@ -791,7 +832,7 @@ function generateMessageShape(
       ) {
         continue;
       }
-      generateMessageShapeMember(f, member, undefined, nestedConstraints);
+      generateMessageShapeMember(f, member, undefined, nestedConstraints, literalFields);
       if (message.members.indexOf(member) < message.members.length - 1) {
         f.print();
       }
@@ -828,6 +869,7 @@ function generateMessageValidShape(
 
   const nestedConstraints = getNestedReadOnlyFields(message);
   const readOnlyFields = getReadOnlyFields(message);
+  const literalFields = getLiteralFields(message);
   const unionGroups = getUnionGroups(message);
 
   // If there are union groups, generate a union type
@@ -884,7 +926,8 @@ function generateMessageValidShape(
           f,
           member,
           validTypes,
-          mergedNestedConstraints
+          mergedNestedConstraints,
+          { ...literalFields, ...group.literalFields }
         );
         f.print();
       }
@@ -917,7 +960,7 @@ function generateMessageValidShape(
       ) {
         continue;
       }
-      generateMessageShapeMember(f, member, validTypes, nestedConstraints);
+      generateMessageShapeMember(f, member, validTypes, nestedConstraints, literalFields);
       if (message.members.indexOf(member) < message.members.length - 1) {
         f.print();
       }
@@ -932,7 +975,8 @@ function generateMessageShapeMember(
   f: GeneratedFile,
   member: DescField | DescOneof,
   validTypes?: Options["validTypes"],
-  nestedConstraints?: Record<string, string[]>
+  nestedConstraints?: Record<string, string[]>,
+  literalFields?: Record<string, string | number | boolean>
 ) {
   switch (member.kind) {
     case "oneof":
@@ -972,6 +1016,16 @@ function generateMessageShapeMember(
       // Apply nested constraints
       const fieldName = member.localName;
       typing = applyNestedConstraints(typing, fieldName, nestedConstraints);
+
+      // Override with literal type if specified
+      if (literalFields && fieldName in literalFields) {
+        const literalValue = literalFields[fieldName];
+        if (typeof literalValue === "string") {
+          typing = f.string(literalValue);
+        } else {
+          typing = String(literalValue);
+        }
+      }
 
       if (optional) {
         f.print("  ", member.localName, "?: ", typing, ";");

@@ -1481,24 +1481,44 @@ in the protovalidate-es repository.
 
 This feature uses Common Expression Language (CEL) expressions to generate stricter TypeScript types. While it reads expressions from `buf.validate` options, it is independent of the `buf.validate` runtime and focuses solely on compile-time type safety.
 
-When the `cel_validation=true` plugin option is enabled, the plugin analyzes CEL expressions in `(buf.validate.message).cel` options to identify fields that must be empty or unset. It then modifies the generated TypeScript types to **omit** these fields, preventing you from assigning values to them when the constraints are met.
+When the `cel_validation=true` plugin option is enabled, the plugin analyzes CEL expressions in `(buf.validate.message).cel` options to extract field constraints. It then modifies the generated TypeScript types in two ways:
+
+1. **Omitting fields** that must be empty or unset
+2. **Generating literal types** for fields that must match a specific value
 
 ### How it works
 
-The plugin looks for patterns in CEL expressions that imply a field must be empty, zero, or unset:
-- `this.field == ''`
-- `this.field == 0`
-- `this.field == false`
-- `!has(this.field)`
+The plugin recognizes two types of constraints in CEL expressions:
 
-It handles logical operators to create precise types:
+#### Empty Value Constraints (Literal Types)
 
-- **AND (`&&`)**: If `exprA && exprB` must be true, then fields from *both* expressions are omitted.
-- **OR (`||`)**: If `exprA || exprB` must be true, it generates a **union type**. One branch omits fields from `exprA`, and the other omits fields from `exprB`.
+These patterns generate strict literal types (empty string, zero, false):
+- `this.field == ''` → generates `field: ""`
+- `this.field == 0` → generates `field: 0`
+- `this.field == false` → generates `field: false`
 
-### Example
+#### Field Omission
 
-Consider a message where a user can be either an "email user" or an "age user". We can use a CEL expression to enforce that if one is present, the other must be empty.
+Only the `!has()` check causes a field to be omitted from the type:
+- `!has(this.field)` → Field is omitted from type (e.g. `field?: never`)
+
+#### Literal Value Constraints (Strict Types)
+
+These patterns generate strict literal types:
+- `this.status == 'active'` → generates `status: "active"` instead of `status: string`
+- `this.version == 1` → generates `version: 1` instead of `version: number`
+- `this.enabled == true` → generates `enabled: true` instead of `enabled: boolean`
+
+### Logical Operators
+
+The plugin handles logical operators to create precise types:
+
+- **AND (`&&`)**: If `exprA && exprB` must be true, then constraints from *both* expressions are applied.
+- **OR (`||`)**: If `exprA || exprB` must be true, it generates a **union type** where each branch applies its respective constraints.
+
+### Example: Union Types with Literal Constraints
+
+Consider a message where a user can be either an "email user" or an "age user":
 
 ```protobuf
 syntax = "proto3";
@@ -1507,9 +1527,6 @@ import "buf/validate/validate.proto";
 
 message User {
   // Validation rule: Either email is empty OR age is zero.
-  // This implies:
-  // - If we have an email, age MUST be 0 (omitted).
-  // - If we have an age, email MUST be empty (omitted).
   option (buf.validate.message).cel = {
     id: "email_or_age",
     expression: "this.email == '' || this.age == 0"
@@ -1523,24 +1540,91 @@ message User {
 With `cel_validation=true`, the generated TypeScript type becomes a union:
 
 ```typescript
-export type User =
-  | (Message<"User"> & {
+export type User = Message<"User"> & (
+  | {
       age: number;
-      // email is omitted
-    })
-  | (Message<"User"> & {
+      email: "";      // email must be empty string
+    }
+  | {
       email: string;
-      // age is omitted
-    });
+      age: 0;         // age must be zero
+    }
+);
 ```
 
 This ensures that at compile time, you cannot accidentally set both `email` and `age` to non-empty values.
+
+### Example: Literal Types
+
+When a CEL expression requires a field to have a specific value, the generated type uses that literal value:
+
+```protobuf
+syntax = "proto3";
+
+import "buf/validate/validate.proto";
+
+message Config {
+  option (buf.validate.message).cel = {
+    id: "version_check",
+    expression: "this.version == 1 && this.mode == 'production'"
+  };
+
+  int32 version = 1;
+  string mode = 2;
+  string name = 3;
+}
+```
+
+Generated TypeScript:
+
+```typescript
+export type Config = Message<"Config"> & {
+  version: 1;             // Literal type: can only be 1
+  mode: "production";     // Literal type: can only be "production"
+  name: string;           // Regular type
+}
+```
+
+### Example: Union Types with Literals
+
+Literals work in OR expressions too, creating unions where each branch has different literal constraints:
+
+```protobuf
+message Role {
+  option (buf.validate.message).cel = {
+    id: "role_status",
+    expression: "this.role == 'admin' || this.status == 'pending'"
+  };
+
+  string role = 1;
+  string status = 2;
+  string name = 3;
+}
+```
+
+Generated TypeScript:
+
+```typescript
+export type Role = Message<"Role"> & (
+  | {
+      role: "admin";      // Literal in first branch
+      status: string;     // Generic in first branch  
+      name: string;
+    }
+  | {
+      role: string;       // Generic in second branch
+      status: "pending";  // Literal in second branch
+      name: string;
+    }
+);
+```
 
 ### Supported Features
 
 - **Nested Fields**: Supports constraints on nested fields (e.g., `this.address.city == ''`).
 - **Complex Logic**: Handles arbitrarily nested `&&` and `||` expressions.
-- **Type Safety**: The generated types are standard TypeScript `Omit` and union types, compatible with all TypeScript tooling.
+- **Type Safety**: The generated types are standard TypeScript `Omit`, literal, and union types, compatible with all TypeScript tooling.
+- ***Valid Types**: The same constraints apply to both regular and `*Valid` generated types.
 
 ## Reflection
 

@@ -16,8 +16,8 @@
 // @generated from file extra/cel-validation_types.proto (package spec, edition 2023)
 /* eslint-disable */
 
-import type { GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
-import { fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
+import type { GenEnum, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
+import { enumDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
 import { file_extra_minimal_validate } from "./minimal-validate_pb.js";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -25,7 +25,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file extra/cel-validation_types.proto.
  */
 export const file_extra_cel_validation_types: GenFile = /*@__PURE__*/
-  fileDesc("CiBleHRyYS9jZWwtdmFsaWRhdGlvbl90eXBlcy5wcm90bxIEc3BlYyKAAQoTQ2VsVmFsaWRhdGlvblNpbXBsZRIMCgRuYW1lGAEgASgJEhMKC2Rlc2NyaXB0aW9uGAIgASgJEgsKA2FnZRgDIAEoBTo5ukg2GjQKDXJlYWRvbmx5X25hbWUSEm5hbWUgbXVzdCBiZSBlbXB0eRoPdGhpcy5uYW1lID09ICcnIrkBChVDZWxWYWxpZGF0aW9uTXVsdGlwbGUSCgoCaWQYASABKAkSDAoEY29kZRgCIAEoBRINCgV0aXRsZRgDIAEoCRIOCgZhY3RpdmUYBCABKAg6Z7pIZBouCgtyZWFkb25seV9pZBIQaWQgbXVzdCBiZSBlbXB0eRoNdGhpcy5pZCA9PSAnJxoyCg1yZWFkb25seV9jb2RlEhFjb2RlIG11c3QgYmUgemVybxoOdGhpcy5jb2RlID09IDAinQEKE0NlbFZhbGlkYXRpb25Ob3RIYXMSFgoOb3B0aW9uYWxfZmllbGQYASABKAkSEwoLb3RoZXJfZmllbGQYAiABKAk6WbpIVhpUChdyZWFkb25seV9vcHRpb25hbF9maWVsZBIeb3B0aW9uYWxfZmllbGQgbXVzdCBub3QgYmUgc2V0GhkhaGFzKHRoaXMub3B0aW9uYWxfZmllbGQpIksKC05lc3RlZENoaWxkEhIKCmNoaWxkX25hbWUYASABKAkSEwoLY2hpbGRfdmFsdWUYAiABKAkSEwoLY2hpbGRfY291bnQYAyABKAUikAIKE0NlbFZhbGlkYXRpb25OZXN0ZWQSIQoGbmVzdGVkGAEgASgLMhEuc3BlYy5OZXN0ZWRDaGlsZBIUCgxwYXJlbnRfZmllbGQYAiABKAk6vwG6SLsBGlsKGnJlYWRvbmx5X25lc3RlZF9jaGlsZF9uYW1lEh9uZXN0ZWQuY2hpbGRfbmFtZSBtdXN0IGJlIGVtcHR5Ghx0aGlzLm5lc3RlZC5jaGlsZF9uYW1lID09ICcnGlwKG3JlYWRvbmx5X25lc3RlZF9jaGlsZF9jb3VudBIfbmVzdGVkLmNoaWxkX2NvdW50IG11c3QgYmUgemVybxocdGhpcy5uZXN0ZWQuY2hpbGRfY291bnQgPT0gMCKqAQoVQ2VsVmFsaWRhdGlvbkNvbWJpbmVkEg4KBmZpZWxkMRgBIAEoCRIOCgZmaWVsZDIYAiABKAkSDgoGZmllbGQzGAMgASgJOmG6SF4aXAoRcmVhZG9ubHlfY29tYmluZWQSH2ZpZWxkMSBhbmQgZmllbGQyIG11c3QgYmUgZW1wdHkaJnRoaXMuZmllbGQxID09ICcnICYmIHRoaXMuZmllbGQyID09ICcnIpgBChZDZWxWYWxpZGF0aW9uU25ha2VDYXNlEhEKCXVzZXJfbmFtZRgBIAEoCRISCgpmaXJzdF9uYW1lGAIgASgJEhEKCWxhc3RfbmFtZRgDIAEoCTpEukhBGj8KDnJlYWRvbmx5X3NuYWtlEhd1c2VyX25hbWUgbXVzdCBiZSBlbXB0eRoUdGhpcy51c2VyX25hbWUgPT0gJyciNwoSQ2VsVmFsaWRhdGlvbk5vQ2VsEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkisAIKG0NlbFZhbGlkYXRpb25NdWx0aXBsZU5lc3RlZBIhCgZjaGlsZDEYASABKAsyES5zcGVjLk5lc3RlZENoaWxkEiEKBmNoaWxkMhgCIAEoCzIRLnNwZWMuTmVzdGVkQ2hpbGQSEwoLcGFyZW50X25hbWUYAyABKAk6tQG6SLEBGlUKFHJlYWRvbmx5X2NoaWxkMV9uYW1lEh9jaGlsZDEuY2hpbGRfbmFtZSBtdXN0IGJlIGVtcHR5Ghx0aGlzLmNoaWxkMS5jaGlsZF9uYW1lID09ICcnGlgKFXJlYWRvbmx5X2NoaWxkMl92YWx1ZRIgY2hpbGQyLmNoaWxkX3ZhbHVlIG11c3QgYmUgZW1wdHkaHXRoaXMuY2hpbGQyLmNoaWxkX3ZhbHVlID09ICcnIsIBChlDZWxWYWxpZGF0aW9uV2l0aFJlcXVpcmVkEhYKDnJlYWRvbmx5X2ZpZWxkGAEgASgJEh4KDnJlcXVpcmVkX2ZpZWxkGAIgASgJQga6SAPIAQESFAoMbm9ybWFsX2ZpZWxkGAMgASgJOle6SFQaUgoXcmVhZG9ubHlfcmVhZG9ubHlfZmllbGQSHHJlYWRvbmx5X2ZpZWxkIG11c3QgYmUgZW1wdHkaGXRoaXMucmVhZG9ubHlfZmllbGQgPT0gJycinQEKD0NlbFZhbGlkYXRpb25PchIOCgZmaWVsZDEYASABKAkSDgoGZmllbGQyGAIgASgJEg4KBmZpZWxkMxgDIAEoCTpaukhXGlUKC3JlYWRvbmx5X29yEh5maWVsZDEgb3IgZmllbGQyIG11c3QgYmUgZW1wdHkaJnRoaXMuZmllbGQxID09ICcnIHx8IHRoaXMuZmllbGQyID09ICcnIroBChlDZWxWYWxpZGF0aW9uV2l0aFJlcGVhdGVkEhQKDHNpbmdsZV9maWVsZBgBIAEoCRISCgpsaXN0X2ZpZWxkGAIgAygJEiYKC25lc3RlZF9saXN0GAMgAygLMhEuc3BlYy5OZXN0ZWRDaGlsZDpLukhIGkYKD3JlYWRvbmx5X3NpbmdsZRIac2luZ2xlX2ZpZWxkIG11c3QgYmUgZW1wdHkaF3RoaXMuc2luZ2xlX2ZpZWxkID09ICcnIqgBChJDZWxWYWxpZGF0aW9uVW5pb24SDQoFZW1haWwYASABKAkSDQoFcGhvbmUYAiABKAkSDAoEbmFtZRgDIAEoCTpmukhjGmEKFHVuaW9uX2VtYWlsX29yX3Bob25lEiNlaXRoZXIgZW1haWwgb3IgcGhvbmUgbXVzdCBiZSBlbXB0eRokdGhpcy5lbWFpbCA9PSAnJyB8fCB0aGlzLnBob25lID09ICcnIr8BChhDZWxWYWxpZGF0aW9uTmVzdGVkVW5pb24SHgoHYWRkcmVzcxgBIAEoCzINLnNwZWMuQWRkcmVzcxIMCgRuYW1lGAIgASgJOnW6SHIacAoTdW5pb25fbmVzdGVkX2ZpZWxkcxIjZWl0aGVyIHN0cmVldCBvciBjaXR5IG11c3QgYmUgZW1wdHkaNHRoaXMuYWRkcmVzcy5zdHJlZXQgPT0gJycgfHwgdGhpcy5hZGRyZXNzLmNpdHkgPT0gJyci1QEKF0NlbFZhbGlkYXRpb25NaXhlZFVuaW9uEgwKBG5hbWUYASABKAkSDQoFZW1haWwYAiABKAkSDQoFcGhvbmUYAyABKAk6jQG6SIkBGoYBCgxtaXhlZF9hbmRfb3ISO25hbWUgbXVzdCBiZSBlbXB0eSwgYW5kIGVpdGhlciBlbWFpbCBvciBwaG9uZSBtdXN0IGJlIGVtcHR5Gjl0aGlzLm5hbWUgPT0gJycgJiYgKHRoaXMuZW1haWwgPT0gJycgfHwgdGhpcy5waG9uZSA9PSAnJykiOAoHQWRkcmVzcxIOCgZzdHJlZXQYASABKAkSDAoEY2l0eRgCIAEoCRIPCgdjb3VudHJ5GAMgASgJYghlZGl0aW9uc3DoBw", [file_extra_minimal_validate]);
+  fileDesc("CiBleHRyYS9jZWwtdmFsaWRhdGlvbl90eXBlcy5wcm90bxIEc3BlYyKAAQoTQ2VsVmFsaWRhdGlvblNpbXBsZRIMCgRuYW1lGAEgASgJEhMKC2Rlc2NyaXB0aW9uGAIgASgJEgsKA2FnZRgDIAEoBTo5ukg2GjQKDXJlYWRvbmx5X25hbWUSEm5hbWUgbXVzdCBiZSBlbXB0eRoPdGhpcy5uYW1lID09ICcnIrkBChVDZWxWYWxpZGF0aW9uTXVsdGlwbGUSCgoCaWQYASABKAkSDAoEY29kZRgCIAEoBRINCgV0aXRsZRgDIAEoCRIOCgZhY3RpdmUYBCABKAg6Z7pIZBouCgtyZWFkb25seV9pZBIQaWQgbXVzdCBiZSBlbXB0eRoNdGhpcy5pZCA9PSAnJxoyCg1yZWFkb25seV9jb2RlEhFjb2RlIG11c3QgYmUgemVybxoOdGhpcy5jb2RlID09IDAinQEKE0NlbFZhbGlkYXRpb25Ob3RIYXMSFgoOb3B0aW9uYWxfZmllbGQYASABKAkSEwoLb3RoZXJfZmllbGQYAiABKAk6WbpIVhpUChdyZWFkb25seV9vcHRpb25hbF9maWVsZBIeb3B0aW9uYWxfZmllbGQgbXVzdCBub3QgYmUgc2V0GhkhaGFzKHRoaXMub3B0aW9uYWxfZmllbGQpIksKC05lc3RlZENoaWxkEhIKCmNoaWxkX25hbWUYASABKAkSEwoLY2hpbGRfdmFsdWUYAiABKAkSEwoLY2hpbGRfY291bnQYAyABKAUikAIKE0NlbFZhbGlkYXRpb25OZXN0ZWQSIQoGbmVzdGVkGAEgASgLMhEuc3BlYy5OZXN0ZWRDaGlsZBIUCgxwYXJlbnRfZmllbGQYAiABKAk6vwG6SLsBGlsKGnJlYWRvbmx5X25lc3RlZF9jaGlsZF9uYW1lEh9uZXN0ZWQuY2hpbGRfbmFtZSBtdXN0IGJlIGVtcHR5Ghx0aGlzLm5lc3RlZC5jaGlsZF9uYW1lID09ICcnGlwKG3JlYWRvbmx5X25lc3RlZF9jaGlsZF9jb3VudBIfbmVzdGVkLmNoaWxkX2NvdW50IG11c3QgYmUgemVybxocdGhpcy5uZXN0ZWQuY2hpbGRfY291bnQgPT0gMCKqAQoVQ2VsVmFsaWRhdGlvbkNvbWJpbmVkEg4KBmZpZWxkMRgBIAEoCRIOCgZmaWVsZDIYAiABKAkSDgoGZmllbGQzGAMgASgJOmG6SF4aXAoRcmVhZG9ubHlfY29tYmluZWQSH2ZpZWxkMSBhbmQgZmllbGQyIG11c3QgYmUgZW1wdHkaJnRoaXMuZmllbGQxID09ICcnICYmIHRoaXMuZmllbGQyID09ICcnIpgBChZDZWxWYWxpZGF0aW9uU25ha2VDYXNlEhEKCXVzZXJfbmFtZRgBIAEoCRISCgpmaXJzdF9uYW1lGAIgASgJEhEKCWxhc3RfbmFtZRgDIAEoCTpEukhBGj8KDnJlYWRvbmx5X3NuYWtlEhd1c2VyX25hbWUgbXVzdCBiZSBlbXB0eRoUdGhpcy51c2VyX25hbWUgPT0gJyciNwoSQ2VsVmFsaWRhdGlvbk5vQ2VsEgwKBG5hbWUYASABKAkSEwoLZGVzY3JpcHRpb24YAiABKAkisAIKG0NlbFZhbGlkYXRpb25NdWx0aXBsZU5lc3RlZBIhCgZjaGlsZDEYASABKAsyES5zcGVjLk5lc3RlZENoaWxkEiEKBmNoaWxkMhgCIAEoCzIRLnNwZWMuTmVzdGVkQ2hpbGQSEwoLcGFyZW50X25hbWUYAyABKAk6tQG6SLEBGlUKFHJlYWRvbmx5X2NoaWxkMV9uYW1lEh9jaGlsZDEuY2hpbGRfbmFtZSBtdXN0IGJlIGVtcHR5Ghx0aGlzLmNoaWxkMS5jaGlsZF9uYW1lID09ICcnGlgKFXJlYWRvbmx5X2NoaWxkMl92YWx1ZRIgY2hpbGQyLmNoaWxkX3ZhbHVlIG11c3QgYmUgZW1wdHkaHXRoaXMuY2hpbGQyLmNoaWxkX3ZhbHVlID09ICcnIsIBChlDZWxWYWxpZGF0aW9uV2l0aFJlcXVpcmVkEhYKDnJlYWRvbmx5X2ZpZWxkGAEgASgJEh4KDnJlcXVpcmVkX2ZpZWxkGAIgASgJQga6SAPIAQESFAoMbm9ybWFsX2ZpZWxkGAMgASgJOle6SFQaUgoXcmVhZG9ubHlfcmVhZG9ubHlfZmllbGQSHHJlYWRvbmx5X2ZpZWxkIG11c3QgYmUgZW1wdHkaGXRoaXMucmVhZG9ubHlfZmllbGQgPT0gJycinQEKD0NlbFZhbGlkYXRpb25PchIOCgZmaWVsZDEYASABKAkSDgoGZmllbGQyGAIgASgJEg4KBmZpZWxkMxgDIAEoCTpaukhXGlUKC3JlYWRvbmx5X29yEh5maWVsZDEgb3IgZmllbGQyIG11c3QgYmUgZW1wdHkaJnRoaXMuZmllbGQxID09ICcnIHx8IHRoaXMuZmllbGQyID09ICcnIroBChlDZWxWYWxpZGF0aW9uV2l0aFJlcGVhdGVkEhQKDHNpbmdsZV9maWVsZBgBIAEoCRISCgpsaXN0X2ZpZWxkGAIgAygJEiYKC25lc3RlZF9saXN0GAMgAygLMhEuc3BlYy5OZXN0ZWRDaGlsZDpLukhIGkYKD3JlYWRvbmx5X3NpbmdsZRIac2luZ2xlX2ZpZWxkIG11c3QgYmUgZW1wdHkaF3RoaXMuc2luZ2xlX2ZpZWxkID09ICcnIqgBChJDZWxWYWxpZGF0aW9uVW5pb24SDQoFZW1haWwYASABKAkSDQoFcGhvbmUYAiABKAkSDAoEbmFtZRgDIAEoCTpmukhjGmEKFHVuaW9uX2VtYWlsX29yX3Bob25lEiNlaXRoZXIgZW1haWwgb3IgcGhvbmUgbXVzdCBiZSBlbXB0eRokdGhpcy5lbWFpbCA9PSAnJyB8fCB0aGlzLnBob25lID09ICcnIr8BChhDZWxWYWxpZGF0aW9uTmVzdGVkVW5pb24SHgoHYWRkcmVzcxgBIAEoCzINLnNwZWMuQWRkcmVzcxIMCgRuYW1lGAIgASgJOnW6SHIacAoTdW5pb25fbmVzdGVkX2ZpZWxkcxIjZWl0aGVyIHN0cmVldCBvciBjaXR5IG11c3QgYmUgZW1wdHkaNHRoaXMuYWRkcmVzcy5zdHJlZXQgPT0gJycgfHwgdGhpcy5hZGRyZXNzLmNpdHkgPT0gJyci1QEKF0NlbFZhbGlkYXRpb25NaXhlZFVuaW9uEgwKBG5hbWUYASABKAkSDQoFZW1haWwYAiABKAkSDQoFcGhvbmUYAyABKAk6jQG6SIkBGoYBCgxtaXhlZF9hbmRfb3ISO25hbWUgbXVzdCBiZSBlbXB0eSwgYW5kIGVpdGhlciBlbWFpbCBvciBwaG9uZSBtdXN0IGJlIGVtcHR5Gjl0aGlzLm5hbWUgPT0gJycgJiYgKHRoaXMuZW1haWwgPT0gJycgfHwgdGhpcy5waG9uZSA9PSAnJykiOAoHQWRkcmVzcxIOCgZzdHJlZXQYASABKAkSDAoEY2l0eRgCIAEoCRIPCgdjb3VudHJ5GAMgASgJIoMBChpDZWxWYWxpZGF0aW9uTGl0ZXJhbFN0cmluZxIOCgZzdGF0dXMYASABKAkSDAoEbmFtZRgCIAEoCTpHukhEGkIKDmxpdGVyYWxfc3RhdHVzEhdzdGF0dXMgbXVzdCBiZSAnYWN0aXZlJxoXdGhpcy5zdGF0dXMgPT0gJ2FjdGl2ZScigAEKGkNlbFZhbGlkYXRpb25MaXRlcmFsTnVtYmVyEg8KB3ZlcnNpb24YASABKAUSEwoLZGVzY3JpcHRpb24YAiABKAk6PLpIORo3Cg9saXRlcmFsX3ZlcnNpb24SEXZlcnNpb24gbXVzdCBiZSAxGhF0aGlzLnZlcnNpb24gPT0gMSJ9ChhDZWxWYWxpZGF0aW9uTGl0ZXJhbEJvb2wSDwoHZW5hYmxlZBgBIAEoCBIMCgRub3RlGAIgASgJOkK6SD8aPQoPbGl0ZXJhbF9lbmFibGVkEhRlbmFibGVkIG11c3QgYmUgdHJ1ZRoUdGhpcy5lbmFibGVkID09IHRydWUivAEKHUNlbFZhbGlkYXRpb25MaXRlcmFsc011bHRpcGxlEgwKBHR5cGUYASABKAkSDQoFbGV2ZWwYAiABKAUSDAoEaW5mbxgDIAEoCTpwukhtGjgKDGxpdGVyYWxfdHlwZRITdHlwZSBtdXN0IGJlICd1c2VyJxoTdGhpcy50eXBlID09ICd1c2VyJxoxCg1saXRlcmFsX2xldmVsEg9sZXZlbCBtdXN0IGJlIDUaD3RoaXMubGV2ZWwgPT0gNSK7AQoWQ2VsVmFsaWRhdGlvbkxpdGVyYWxPchIMCgRyb2xlGAEgASgJEg4KBnN0YXR1cxgCIAEoCRIMCgRuYW1lGAMgASgJOnW6SHIacAoKbGl0ZXJhbF9vchIwcm9sZSBtdXN0IGJlICdhZG1pbicgb3Igc3RhdHVzIG11c3QgYmUgJ3BlbmRpbmcnGjB0aGlzLnJvbGUgPT0gJ2FkbWluJyB8fCB0aGlzLnN0YXR1cyA9PSAncGVuZGluZyciigEKHUNlbFZhbGlkYXRpb25MaXRlcmFsQm9vbEZhbHNlEhAKCGRpc2FibGVkGAEgASgIEg4KBnJlYXNvbhgCIAEoCTpHukhEGkIKEGxpdGVyYWxfZGlzYWJsZWQSFmRpc2FibGVkIG11c3QgYmUgZmFsc2UaFnRoaXMuZGlzYWJsZWQgPT0gZmFsc2UikQEKGENlbFZhbGlkYXRpb25MaXRlcmFsRW51bRIcCgZzdGF0dXMYASABKA4yDC5zcGVjLlN0YXR1cxITCgtkZXNjcmlwdGlvbhgCIAEoCTpCukg/Gj0KDmxpdGVyYWxfc3RhdHVzEhlzdGF0dXMgbXVzdCBiZSBBQ1RJVkUgKDIpGhB0aGlzLnN0YXR1cyA9PSAyKlwKBlN0YXR1cxIWChJTVEFUVVNfVU5TUEVDSUZJRUQQABISCg5TVEFUVVNfUEVORElORxABEhEKDVNUQVRVU19BQ1RJVkUQAhITCg9TVEFUVVNfSU5BQ1RJVkUQA2IIZWRpdGlvbnNw6Ac", [file_extra_minimal_validate]);
 
 /**
  * Test message for buf_validate with simple read-only field constraints
@@ -33,6 +33,11 @@ export const file_extra_cel_validation_types: GenFile = /*@__PURE__*/
  * @generated from message spec.CelValidationSimple
  */
 export type CelValidationSimple = Message<"spec.CelValidationSimple"> & {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
   /**
    * @generated from field: string description = 2;
    */
@@ -57,6 +62,16 @@ export const CelValidationSimpleSchema: GenMessage<CelValidationSimple> = /*@__P
  * @generated from message spec.CelValidationMultiple
  */
 export type CelValidationMultiple = Message<"spec.CelValidationMultiple"> & {
+  /**
+   * @generated from field: string id = 1;
+   */
+  id: "";
+
+  /**
+   * @generated from field: int32 code = 2;
+   */
+  code: 0;
+
   /**
    * @generated from field: string title = 3;
    */
@@ -154,6 +169,16 @@ export const CelValidationNestedSchema: GenMessage<CelValidationNested> = /*@__P
  */
 export type CelValidationCombined = Message<"spec.CelValidationCombined"> & {
   /**
+   * @generated from field: string field1 = 1;
+   */
+  field1: "";
+
+  /**
+   * @generated from field: string field2 = 2;
+   */
+  field2: "";
+
+  /**
    * @generated from field: string field3 = 3;
    */
   field3: string;
@@ -172,6 +197,11 @@ export const CelValidationCombinedSchema: GenMessage<CelValidationCombined> = /*
  * @generated from message spec.CelValidationSnakeCase
  */
 export type CelValidationSnakeCase = Message<"spec.CelValidationSnakeCase"> & {
+  /**
+   * @generated from field: string user_name = 1;
+   */
+  userName: "";
+
   /**
    * @generated from field: string first_name = 2;
    */
@@ -250,6 +280,11 @@ export const CelValidationMultipleNestedSchema: GenMessage<CelValidationMultiple
  */
 export type CelValidationWithRequired = Message<"spec.CelValidationWithRequired"> & {
   /**
+   * @generated from field: string readonly_field = 1;
+   */
+  readonlyField: "";
+
+  /**
    * @generated from field: string required_field = 2;
    */
   requiredField: string;
@@ -275,6 +310,11 @@ export const CelValidationWithRequiredSchema: GenMessage<CelValidationWithRequir
 export type CelValidationOr = Message<"spec.CelValidationOr"> & (
 {
   /**
+   * @generated from field: string field1 = 1;
+   */
+  field1: "";
+
+  /**
    * @generated from field: string field2 = 2;
    */
   field2: string;
@@ -283,8 +323,6 @@ export type CelValidationOr = Message<"spec.CelValidationOr"> & (
    * @generated from field: string field3 = 3;
    */
   field3: string;
-
-  field1?: never;
 
 }
  | 
@@ -295,11 +333,14 @@ export type CelValidationOr = Message<"spec.CelValidationOr"> & (
   field1: string;
 
   /**
+   * @generated from field: string field2 = 2;
+   */
+  field2: "";
+
+  /**
    * @generated from field: string field3 = 3;
    */
   field3: string;
-
-  field2?: never;
 
 }
 );
@@ -317,6 +358,11 @@ export const CelValidationOrSchema: GenMessage<CelValidationOr> = /*@__PURE__*/
  * @generated from message spec.CelValidationWithRepeated
  */
 export type CelValidationWithRepeated = Message<"spec.CelValidationWithRepeated"> & {
+  /**
+   * @generated from field: string single_field = 1;
+   */
+  singleField: "";
+
   /**
    * @generated from field: repeated string list_field = 2;
    */
@@ -343,6 +389,11 @@ export const CelValidationWithRepeatedSchema: GenMessage<CelValidationWithRepeat
 export type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
 {
   /**
+   * @generated from field: string email = 1;
+   */
+  email: "";
+
+  /**
    * @generated from field: string phone = 2;
    */
   phone: string;
@@ -354,8 +405,6 @@ export type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
    */
   name: string;
 
-  email?: never;
-
 }
  | 
 {
@@ -365,13 +414,16 @@ export type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
   email: string;
 
   /**
+   * @generated from field: string phone = 2;
+   */
+  phone: "";
+
+  /**
    * This should always be present
    *
    * @generated from field: string name = 3;
    */
   name: string;
-
-  phone?: never;
 
 }
 );
@@ -431,17 +483,36 @@ export const CelValidationNestedUnionSchema: GenMessage<CelValidationNestedUnion
 export type CelValidationMixedUnion = Message<"spec.CelValidationMixedUnion"> & (
 {
   /**
+   * Always omitted
+   *
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
+  /**
+   * Omitted in one union branch
+   *
+   * @generated from field: string email = 2;
+   */
+  email: "";
+
+  /**
    * Omitted in the other union branch
    *
    * @generated from field: string phone = 3;
    */
   phone: string;
 
-  email?: never;
-
 }
  | 
 {
+  /**
+   * Always omitted
+   *
+   * @generated from field: string name = 1;
+   */
+  name: "";
+
   /**
    * Omitted in one union branch
    *
@@ -449,7 +520,12 @@ export type CelValidationMixedUnion = Message<"spec.CelValidationMixedUnion"> & 
    */
   email: string;
 
-  phone?: never;
+  /**
+   * Omitted in the other union branch
+   *
+   * @generated from field: string phone = 3;
+   */
+  phone: "";
 
 }
 );
@@ -489,4 +565,260 @@ export type Address = Message<"spec.Address"> & {
  */
 export const AddressSchema: GenMessage<Address> = /*@__PURE__*/
   messageDesc(file_extra_cel_validation_types, 15);
+
+/**
+ * Test message with literal string constraint
+ *
+ * @generated from message spec.CelValidationLiteralString
+ */
+export type CelValidationLiteralString = Message<"spec.CelValidationLiteralString"> & {
+  /**
+   * Should be typed as "active", not string
+   *
+   * @generated from field: string status = 1;
+   */
+  status: "active";
+
+  /**
+   * @generated from field: string name = 2;
+   */
+  name: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralString.
+ * Use `create(CelValidationLiteralStringSchema)` to create a new message.
+ */
+export const CelValidationLiteralStringSchema: GenMessage<CelValidationLiteralString> = /*@__PURE__*/
+  messageDesc(file_extra_cel_validation_types, 16);
+
+/**
+ * Test message with literal number constraint
+ *
+ * @generated from message spec.CelValidationLiteralNumber
+ */
+export type CelValidationLiteralNumber = Message<"spec.CelValidationLiteralNumber"> & {
+  /**
+   * Should be typed as 1, not int32
+   *
+   * @generated from field: int32 version = 1;
+   */
+  version: 1;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralNumber.
+ * Use `create(CelValidationLiteralNumberSchema)` to create a new message.
+ */
+export const CelValidationLiteralNumberSchema: GenMessage<CelValidationLiteralNumber> = /*@__PURE__*/
+  messageDesc(file_extra_cel_validation_types, 17);
+
+/**
+ * Test message with literal boolean constraint
+ *
+ * @generated from message spec.CelValidationLiteralBool
+ */
+export type CelValidationLiteralBool = Message<"spec.CelValidationLiteralBool"> & {
+  /**
+   * Should be typed as true, not bool
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: true;
+
+  /**
+   * @generated from field: string note = 2;
+   */
+  note: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralBool.
+ * Use `create(CelValidationLiteralBoolSchema)` to create a new message.
+ */
+export const CelValidationLiteralBoolSchema: GenMessage<CelValidationLiteralBool> = /*@__PURE__*/
+  messageDesc(file_extra_cel_validation_types, 18);
+
+/**
+ * Test message with multiple literal constraints
+ *
+ * @generated from message spec.CelValidationLiteralsMultiple
+ */
+export type CelValidationLiteralsMultiple = Message<"spec.CelValidationLiteralsMultiple"> & {
+  /**
+   * Should be "user"
+   *
+   * @generated from field: string type = 1;
+   */
+  type: "user";
+
+  /**
+   * Should be 5
+   *
+   * @generated from field: int32 level = 2;
+   */
+  level: 5;
+
+  /**
+   * @generated from field: string info = 3;
+   */
+  info: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralsMultiple.
+ * Use `create(CelValidationLiteralsMultipleSchema)` to create a new message.
+ */
+export const CelValidationLiteralsMultipleSchema: GenMessage<CelValidationLiteralsMultiple> = /*@__PURE__*/
+  messageDesc(file_extra_cel_validation_types, 19);
+
+/**
+ * Test message with literal in OR constraint
+ *
+ * @generated from message spec.CelValidationLiteralOr
+ */
+export type CelValidationLiteralOr = Message<"spec.CelValidationLiteralOr"> & (
+{
+  /**
+   * Should be "admin" in one branch
+   *
+   * @generated from field: string role = 1;
+   */
+  role: "admin";
+
+  /**
+   * Should be "pending" in the other branch
+   *
+   * @generated from field: string status = 2;
+   */
+  status: string;
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+}
+ | 
+{
+  /**
+   * Should be "admin" in one branch
+   *
+   * @generated from field: string role = 1;
+   */
+  role: string;
+
+  /**
+   * Should be "pending" in the other branch
+   *
+   * @generated from field: string status = 2;
+   */
+  status: "pending";
+
+  /**
+   * @generated from field: string name = 3;
+   */
+  name: string;
+
+}
+);
+
+/**
+ * Describes the message spec.CelValidationLiteralOr.
+ * Use `create(CelValidationLiteralOrSchema)` to create a new message.
+ */
+export const CelValidationLiteralOrSchema: GenMessage<CelValidationLiteralOr> = /*@__PURE__*/
+  messageDesc(file_extra_cel_validation_types, 20);
+
+/**
+ * Test message with literal boolean false constraint
+ *
+ * @generated from message spec.CelValidationLiteralBoolFalse
+ */
+export type CelValidationLiteralBoolFalse = Message<"spec.CelValidationLiteralBoolFalse"> & {
+  /**
+   * Should be typed as false, not bool
+   *
+   * @generated from field: bool disabled = 1;
+   */
+  disabled: false;
+
+  /**
+   * @generated from field: string reason = 2;
+   */
+  reason: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralBoolFalse.
+ * Use `create(CelValidationLiteralBoolFalseSchema)` to create a new message.
+ */
+export const CelValidationLiteralBoolFalseSchema: GenMessage<CelValidationLiteralBoolFalse> = /*@__PURE__*/
+  messageDesc(file_extra_cel_validation_types, 21);
+
+/**
+ * Test message with literal enum constraint
+ * Demonstrates that enum values in TypeScript are numbers,
+ * so this.status == 2 should generate: status: 2
+ *
+ * @generated from message spec.CelValidationLiteralEnum
+ */
+export type CelValidationLiteralEnum = Message<"spec.CelValidationLiteralEnum"> & {
+  /**
+   * Should be typed as literal 2 (STATUS_ACTIVE)
+   *
+   * @generated from field: spec.Status status = 1;
+   */
+  status: 2;
+
+  /**
+   * @generated from field: string description = 2;
+   */
+  description: string;
+}
+
+/**
+ * Describes the message spec.CelValidationLiteralEnum.
+ * Use `create(CelValidationLiteralEnumSchema)` to create a new message.
+ */
+export const CelValidationLiteralEnumSchema: GenMessage<CelValidationLiteralEnum> = /*@__PURE__*/
+  messageDesc(file_extra_cel_validation_types, 22);
+
+/**
+ * Enum for testing literal enum constraints
+ *
+ * @generated from enum spec.Status
+ */
+export enum Status {
+  /**
+   * @generated from enum value: STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: STATUS_PENDING = 1;
+   */
+  PENDING = 1,
+
+  /**
+   * @generated from enum value: STATUS_ACTIVE = 2;
+   */
+  ACTIVE = 2,
+
+  /**
+   * @generated from enum value: STATUS_INACTIVE = 3;
+   */
+  INACTIVE = 3,
+}
+
+/**
+ * Describes the enum spec.Status.
+ */
+export const StatusSchema: GenEnum<Status> = /*@__PURE__*/
+  enumDesc(file_extra_cel_validation_types, 0);
 

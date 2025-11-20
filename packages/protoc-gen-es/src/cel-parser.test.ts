@@ -22,6 +22,7 @@ describe("CEL Parser", () => {
       const result = parseCELExpression("");
       assert.deepStrictEqual(result, {
         readOnlyFields: [],
+        literalFields: {},
         unsupportedFields: [],
         errors: [],
         nestedConstraints: {},
@@ -33,6 +34,7 @@ describe("CEL Parser", () => {
       const result = parseCELExpression("   ");
       assert.deepStrictEqual(result, {
         readOnlyFields: [],
+        literalFields: {},
         unsupportedFields: [],
         errors: [],
         nestedConstraints: {},
@@ -40,34 +42,39 @@ describe("CEL Parser", () => {
       });
     });
 
-    // Basic empty value patterns
+    // Basic empty value patterns - now generate literal types
     test("parses this.field == '' (empty string)", () => {
       const result = parseCELExpression("this.field == ''");
-      assert.deepStrictEqual(result.readOnlyFields, ["field"]);
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: "" });
       assert.deepStrictEqual(result.errors, []);
     });
 
     test("parses this.field == 0 (int zero)", () => {
       const result = parseCELExpression("this.field == 0");
-      assert.deepStrictEqual(result.readOnlyFields, ["field"]);
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: 0 });
       assert.deepStrictEqual(result.errors, []);
     });
 
     test("parses this.field == 0.0 (float zero)", () => {
       const result = parseCELExpression("this.field == 0.0");
-      assert.deepStrictEqual(result.readOnlyFields, ["field"]);
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: 0 });
       assert.deepStrictEqual(result.errors, []);
     });
 
     test("parses this.field == 0u (uint64 zero)", () => {
       const result = parseCELExpression("this.field == 0u");
-      assert.deepStrictEqual(result.readOnlyFields, ["field"]);
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: 0 });
       assert.deepStrictEqual(result.errors, []);
     });
 
     test("parses this.field == false", () => {
       const result = parseCELExpression("this.field == false");
-      assert.deepStrictEqual(result.readOnlyFields, ["field"]);
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: false });
       assert.deepStrictEqual(result.errors, []);
     });
 
@@ -87,7 +94,8 @@ describe("CEL Parser", () => {
     // Field naming
     test("converts snake_case to camelCase", () => {
       const result = parseCELExpression("this.field_name == ''");
-      assert.deepStrictEqual(result.readOnlyFields, ["fieldName"]);
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { fieldName: "" });
       assert.deepStrictEqual(result.errors, []);
     });
 
@@ -96,7 +104,8 @@ describe("CEL Parser", () => {
       const result = parseCELExpression(
         "this.field1 == '' && this.field2 == 0",
       );
-      assert.deepStrictEqual(result.readOnlyFields, ["field1", "field2"]);
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field1: "", field2: 0 });
       assert.deepStrictEqual(result.errors, []);
     });
 
@@ -104,13 +113,13 @@ describe("CEL Parser", () => {
       const result = parseCELExpression(
         "this.field1 == '' || this.field2 == 0",
       );
-      // Fields in OR are not in readOnlyFields (that's for && only)
+      // Fields in OR create union groups with literals
       assert.deepStrictEqual(result.readOnlyFields, []);
       assert.deepStrictEqual(result.nestedConstraints, {});
-      // Instead, they create union groups
+      // Each branch has its literal value
       assert.deepStrictEqual(result.unionGroups, [
-        { readOnlyFields: ["field1"], nestedConstraints: {} },
-        { readOnlyFields: ["field2"], nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field1: "" }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field2: 0 }, nestedConstraints: {} },
       ]);
       assert.deepStrictEqual(result.errors, []);
     });
@@ -119,12 +128,12 @@ describe("CEL Parser", () => {
       const result = parseCELExpression(
         "this.field1 == '' && (this.field2 == 0 || this.field3 == false)",
       );
-      // field1 is in pure && context, so it's read-only
-      assert.deepStrictEqual(result.readOnlyFields, ["field1"]);
-      // field2 and field3 are in OR, so they create union groups
+      // field1 is in pure && context, so it's a literal
+      assert.deepStrictEqual(result.literalFields, { field1: "" });
+      // field2 and field3 are in OR, so they create union groups with literals
       assert.deepStrictEqual(result.unionGroups, [
-        { readOnlyFields: ["field2"], nestedConstraints: {} },
-        { readOnlyFields: ["field3"], nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field2: 0 }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field3: false }, nestedConstraints: {} },
       ]);
       assert.deepStrictEqual(result.errors, []);
     });
@@ -134,15 +143,12 @@ describe("CEL Parser", () => {
         "(this.a == '' || this.b == '') && (this.c == '' || this.d == '')",
       );
       assert.deepStrictEqual(result.readOnlyFields, []);
-      // Should produce two separate union groups sets?
-      // The current implementation flattens union groups into a single array.
-      // This effectively means "Union Group 1 AND Union Group 2", which is correct for Omit.
-      // (Omit<T, A> | Omit<T, B>) & (Omit<T, C> | Omit<T, D>)
+      // Flattened union groups with literal values
       assert.deepStrictEqual(result.unionGroups, [
-        { readOnlyFields: ["a"], nestedConstraints: {} },
-        { readOnlyFields: ["b"], nestedConstraints: {} },
-        { readOnlyFields: ["c"], nestedConstraints: {} },
-        { readOnlyFields: ["d"], nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { a: "" }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { b: "" }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { c: "" }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { d: "" }, nestedConstraints: {} },
       ]);
       assert.deepStrictEqual(result.errors, []);
     });
@@ -151,7 +157,8 @@ describe("CEL Parser", () => {
       const result = parseCELExpression(
         "!has(this.field1) && this.field2 == ''",
       );
-      assert.deepStrictEqual(result.readOnlyFields, ["field1", "field2"]);
+      assert.deepStrictEqual(result.readOnlyFields, ["field1"]);
+      assert.deepStrictEqual(result.literalFields, { field2: "" });
       assert.deepStrictEqual(result.errors, []);
     });
 
@@ -164,8 +171,8 @@ describe("CEL Parser", () => {
       assert.deepStrictEqual(result.nestedConstraints, {});
       // Each branch of OR creates a separate union group
       assert.deepStrictEqual(result.unionGroups, [
-        { readOnlyFields: [], nestedConstraints: { parent: ["child1"] } },
-        { readOnlyFields: [], nestedConstraints: { parent: ["child2"] } },
+        { readOnlyFields: [], literalFields: {}, nestedConstraints: { parent: ["child1"] } },
+        { readOnlyFields: [], literalFields: {}, nestedConstraints: { parent: ["child2"] } },
       ]);
       assert.deepStrictEqual(result.errors, []);
     });
@@ -175,8 +182,8 @@ describe("CEL Parser", () => {
         "this.parent1.field == '' || this.parent2.field == 0",
       );
       assert.deepStrictEqual(result.unionGroups, [
-        { readOnlyFields: [], nestedConstraints: { parent1: ["field"] } },
-        { readOnlyFields: [], nestedConstraints: { parent2: ["field"] } },
+        { readOnlyFields: [], literalFields: {}, nestedConstraints: { parent1: ["field"] } },
+        { readOnlyFields: [], literalFields: {}, nestedConstraints: { parent2: ["field"] } },
       ]);
       assert.deepStrictEqual(result.errors, []);
     });
@@ -186,8 +193,8 @@ describe("CEL Parser", () => {
         "this.topLevel == '' || this.parent.nested == 0",
       );
       assert.deepStrictEqual(result.unionGroups, [
-        { readOnlyFields: ["topLevel"], nestedConstraints: {} },
-        { readOnlyFields: [], nestedConstraints: { parent: ["nested"] } },
+        { readOnlyFields: [], literalFields: { topLevel: "" }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: {}, nestedConstraints: { parent: ["nested"] } },
       ]);
       assert.deepStrictEqual(result.errors, []);
     });
@@ -196,12 +203,12 @@ describe("CEL Parser", () => {
       const result = parseCELExpression(
         "this.field1 == '' || this.field2 == 0 || this.field3 == false",
       );
-      // All three fields should be in separate union groups
+      // All three fields should be in separate union groups with literals
       assert.deepStrictEqual(result.unionGroups.length, 3);
       assert.deepStrictEqual(result.unionGroups, [
-        { readOnlyFields: ["field1"], nestedConstraints: {} },
-        { readOnlyFields: ["field2"], nestedConstraints: {} },
-        { readOnlyFields: ["field3"], nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field1: "" }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field2: 0 }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field3: false }, nestedConstraints: {} },
       ]);
       assert.deepStrictEqual(result.errors, []);
     });
@@ -246,7 +253,8 @@ describe("CEL Parser", () => {
     // Deduplication
     test("removes duplicate top-level fields", () => {
       const result = parseCELExpression("this.field == '' && this.field == 0");
-      assert.deepStrictEqual(result.readOnlyFields, ["field"]);
+      // Last value wins
+      assert.deepStrictEqual(result.literalFields, { field: 0 });
       assert.deepStrictEqual(result.errors, []);
     });
 
@@ -262,28 +270,49 @@ describe("CEL Parser", () => {
       assert.deepStrictEqual(result.errors, []);
     });
 
-    // Non-empty value comparisons (should be ignored)
-    test("ignores non-empty string comparison", () => {
+    // Literal value patterns
+    test("extracts literal string value", () => {
       const result = parseCELExpression("this.field == 'value'");
       assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: "value" });
       assert.deepStrictEqual(result.errors, []);
     });
 
-    test("ignores true value comparison", () => {
-      const result = parseCELExpression("this.field == true");
-      assert.deepStrictEqual(result.readOnlyFields, []);
-      assert.deepStrictEqual(result.errors, []);
-    });
-
-    test("ignores null comparison", () => {
-      const result = parseCELExpression("this.field == null");
-      assert.deepStrictEqual(result.readOnlyFields, []);
-      assert.deepStrictEqual(result.errors, []);
-    });
-
-    test("ignores non-zero numeric comparison", () => {
+    test("extracts literal number value", () => {
       const result = parseCELExpression("this.field == 42");
       assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: 42 });
+      assert.deepStrictEqual(result.errors, []);
+    });
+
+    test("extracts literal boolean true", () => {
+      const result = parseCELExpression("this.field == true");
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: true });
+      assert.deepStrictEqual(result.errors, []);
+    });
+
+    test("extracts literal with reversed comparison", () => {
+      const result = parseCELExpression("'literal' == this.field");
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field: "literal" });
+      assert.deepStrictEqual(result.errors, []);
+    });
+
+    test("extracts multiple literals with AND", () => {
+      const result = parseCELExpression("this.field1 == 'foo' && this.field2 == 123");
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.literalFields, { field1: "foo", field2: 123 });
+      assert.deepStrictEqual(result.errors, []);
+    });
+
+    test("extracts literals in OR branches", () => {
+      const result = parseCELExpression("this.field1 == 'foo' || this.field2 == 'bar'");
+      assert.deepStrictEqual(result.readOnlyFields, []);
+      assert.deepStrictEqual(result.unionGroups, [
+        { readOnlyFields: [], literalFields: { field1: "foo" }, nestedConstraints: {} },
+        { readOnlyFields: [], literalFields: { field2: "bar" }, nestedConstraints: {} },
+      ]);
       assert.deepStrictEqual(result.errors, []);
     });
 
