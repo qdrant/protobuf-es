@@ -429,8 +429,8 @@ export declare const CelValidationWithRequiredSchema: GenMessage<CelValidationWi
  *
  * @generated from message spec.CelValidationOr
  */
-export declare type CelValidationOr = 
-Message<"spec.CelValidationOr"> & {
+export declare type CelValidationOr = Message<"spec.CelValidationOr"> & (
+{
   /**
    * @generated from field: string field2 = 2;
    */
@@ -440,9 +440,12 @@ Message<"spec.CelValidationOr"> & {
    * @generated from field: string field3 = 3;
    */
   field3: string;
+
+  field1?: never;
+
 }
  | 
-Message<"spec.CelValidationOr"> & {
+{
   /**
    * @generated from field: string field1 = 1;
    */
@@ -452,15 +455,19 @@ Message<"spec.CelValidationOr"> & {
    * @generated from field: string field3 = 3;
    */
   field3: string;
+
+  field2?: never;
+
 }
+);
 
 /**
  * Test message for OR logical operator
  *
  * @generated from message spec.CelValidationOr
  */
-export declare type CelValidationOrValid = 
-Message<"spec.CelValidationOr"> & {
+export declare type CelValidationOrValid = Message<"spec.CelValidationOr"> & (
+{
   /**
    * @generated from field: string field2 = 2;
    */
@@ -470,9 +477,12 @@ Message<"spec.CelValidationOr"> & {
    * @generated from field: string field3 = 3;
    */
   field3: string;
+
+  field1?: never;
+
 }
  | 
-Message<"spec.CelValidationOr"> & {
+{
   /**
    * @generated from field: string field1 = 1;
    */
@@ -482,7 +492,11 @@ Message<"spec.CelValidationOr"> & {
    * @generated from field: string field3 = 3;
    */
   field3: string;
+
+  field2?: never;
+
 }
+);
 
 /**
  * Describes the message spec.CelValidationOr.
@@ -535,8 +549,8 @@ export declare const CelValidationWithRepeatedSchema: GenMessage<CelValidationWi
  *
  * @generated from message spec.CelValidationUnion
  */
-export declare type CelValidationUnion = 
-Message<"spec.CelValidationUnion"> & {
+export declare type CelValidationUnion = Message<"spec.CelValidationUnion"> & (
+{
   /**
    * @generated from field: string phone = 2;
    */
@@ -548,9 +562,12 @@ Message<"spec.CelValidationUnion"> & {
    * @generated from field: string name = 3;
    */
   name: string;
+
+  email?: never;
+
 }
  | 
-Message<"spec.CelValidationUnion"> & {
+{
   /**
    * @generated from field: string email = 1;
    */
@@ -562,15 +579,19 @@ Message<"spec.CelValidationUnion"> & {
    * @generated from field: string name = 3;
    */
   name: string;
+
+  phone?: never;
+
 }
+);
 
 /**
  * Test message with OR constraints that should generate union types
  *
  * @generated from message spec.CelValidationUnion
  */
-export declare type CelValidationUnionValid = 
-Message<"spec.CelValidationUnion"> & {
+export declare type CelValidationUnionValid = Message<"spec.CelValidationUnion"> & (
+{
   /**
    * @generated from field: string phone = 2;
    */
@@ -582,9 +603,12 @@ Message<"spec.CelValidationUnion"> & {
    * @generated from field: string name = 3;
    */
   name: string;
+
+  email?: never;
+
 }
  | 
-Message<"spec.CelValidationUnion"> & {
+{
   /**
    * @generated from field: string email = 1;
    */
@@ -596,7 +620,11 @@ Message<"spec.CelValidationUnion"> & {
    * @generated from field: string name = 3;
    */
   name: string;
+
+  phone?: never;
+
 }
+);
 
 /**
  * Describes the message spec.CelValidationUnion.
@@ -609,8 +637,8 @@ export declare const CelValidationUnionSchema: GenMessage<CelValidationUnion, {v
  *
  * @generated from message spec.CelValidationNestedUnion
  */
-export declare type CelValidationNestedUnion = 
-Message<"spec.CelValidationNestedUnion"> & {
+export declare type CelValidationNestedUnion = Message<"spec.CelValidationNestedUnion"> & (
+{
   /**
    * @generated from field: spec.Address address = 1;
    */
@@ -620,9 +648,10 @@ Message<"spec.CelValidationNestedUnion"> & {
    * @generated from field: string name = 2;
    */
   name: string;
+
 }
  | 
-Message<"spec.CelValidationNestedUnion"> & {
+{
   /**
    * @generated from field: spec.Address address = 1;
    */
@@ -632,15 +661,17 @@ Message<"spec.CelValidationNestedUnion"> & {
    * @generated from field: string name = 2;
    */
   name: string;
+
 }
+);
 
 /**
  * Test message with nested OR constraints
  *
  * @generated from message spec.CelValidationNestedUnion
  */
-export declare type CelValidationNestedUnionValid = 
-Message<"spec.CelValidationNestedUnion"> & {
+export declare type CelValidationNestedUnionValid = Message<"spec.CelValidationNestedUnion"> & (
+{
   /**
    * @generated from field: spec.Address address = 1;
    */
@@ -650,9 +681,10 @@ Message<"spec.CelValidationNestedUnion"> & {
    * @generated from field: string name = 2;
    */
   name: string;
+
 }
  | 
-Message<"spec.CelValidationNestedUnion"> & {
+{
   /**
    * @generated from field: spec.Address address = 1;
    */
@@ -662,7 +694,9 @@ Message<"spec.CelValidationNestedUnion"> & {
    * @generated from field: string name = 2;
    */
   name: string;
+
 }
+);
 
 /**
  * Describes the message spec.CelValidationNestedUnion.
@@ -675,17 +709,20 @@ export declare const CelValidationNestedUnionSchema: GenMessage<CelValidationNes
  *
  * @generated from message spec.CelValidationMixedUnion
  */
-export declare type CelValidationMixedUnion = 
-Message<"spec.CelValidationMixedUnion"> & {
+export declare type CelValidationMixedUnion = Message<"spec.CelValidationMixedUnion"> & (
+{
   /**
    * Omitted in the other union branch
    *
    * @generated from field: string phone = 3;
    */
   phone: string;
+
+  email?: never;
+
 }
  | 
-Message<"spec.CelValidationMixedUnion"> & {
+{
   /**
    * Omitted in one union branch
    *
@@ -693,24 +730,30 @@ Message<"spec.CelValidationMixedUnion"> & {
    */
   email: string;
 
+  phone?: never;
+
 }
+);
 
 /**
  * Test message with mixed AND/OR constraints
  *
  * @generated from message spec.CelValidationMixedUnion
  */
-export declare type CelValidationMixedUnionValid = 
-Message<"spec.CelValidationMixedUnion"> & {
+export declare type CelValidationMixedUnionValid = Message<"spec.CelValidationMixedUnion"> & (
+{
   /**
    * Omitted in the other union branch
    *
    * @generated from field: string phone = 3;
    */
   phone: string;
+
+  email?: never;
+
 }
  | 
-Message<"spec.CelValidationMixedUnion"> & {
+{
   /**
    * Omitted in one union branch
    *
@@ -718,7 +761,10 @@ Message<"spec.CelValidationMixedUnion"> & {
    */
   email: string;
 
+  phone?: never;
+
 }
+);
 
 /**
  * Describes the message spec.CelValidationMixedUnion.
