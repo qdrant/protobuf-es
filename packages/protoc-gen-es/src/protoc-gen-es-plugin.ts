@@ -706,7 +706,14 @@ function generateMessageShape(
 
   // If there are union groups, generate a union type
   if (unionGroups.length > 0) {
-    f.print(f.export(declaration, f.importShape(message).name), " = ");
+    f.print(
+      f.export(declaration, f.importShape(message).name),
+      " = ",
+      Message,
+      "<",
+      f.string(message.typeName),
+      "> & ("
+    );
 
     // Generate each union branch
     for (let i = 0; i < unionGroups.length; i++) {
@@ -715,45 +722,56 @@ function generateMessageShape(
         f.print(" | ");
       }
 
-      // Create a type that omits fields from this union group
-      // Note: readOnlyFields are already omitted from all branches,
-      // and group.readOnlyFields are omitted from this specific branch
+      f.print("{");
 
-      // Merge nested constraints
-      const mergedNestedConstraints = { ...nestedConstraints };
-      for (const [key, fields] of Object.entries(group.nestedConstraints)) {
-        if (!mergedNestedConstraints[key]) {
-          mergedNestedConstraints[key] = [];
-        }
-        mergedNestedConstraints[key].push(...fields);
-        mergedNestedConstraints[key] = [
-          ...new Set(mergedNestedConstraints[key]),
-        ];
-      }
-
-      f.print(Message, "<", f.string(message.typeName), "> & {");
-
+      // 1. Generate normal fields
       for (const member of message.members) {
-        // Skip members that are in the readOnlyFields list or in this union group's readOnlyFields
+        // Skip members that are in the global readOnlyFields list (always omitted)
         if (
           member.kind === "field" &&
-          (readOnlyFields.includes(member.localName) ||
-            group.readOnlyFields.includes(member.localName))
+          readOnlyFields.includes(member.localName)
         ) {
           continue;
         }
+
+        // If member is in this group's readOnlyFields, it will be handled in step 2 as 'never'
+        if (
+          member.kind === "field" &&
+          group.readOnlyFields.includes(member.localName)
+        ) {
+          continue;
+        }
+
+        // Merge nested constraints
+        const mergedNestedConstraints = { ...nestedConstraints };
+        for (const [key, fields] of Object.entries(group.nestedConstraints)) {
+          if (!mergedNestedConstraints[key]) {
+            mergedNestedConstraints[key] = [];
+          }
+          mergedNestedConstraints[key].push(...fields);
+          mergedNestedConstraints[key] = [
+            ...new Set(mergedNestedConstraints[key]),
+          ];
+        }
+
         generateMessageShapeMember(
           f,
           member,
           undefined,
           mergedNestedConstraints
         );
-        if (message.members.indexOf(member) < message.members.length - 1) {
-          f.print();
-        }
+        f.print();
       }
+
+      // 2. Generate 'never' fields for this group's omitted fields
+      for (const fieldName of group.readOnlyFields) {
+        f.print("  ", fieldName, "?: never;");
+        f.print();
+      }
+
       f.print("}");
     }
+    f.print(");");
   } else {
     // Standard case without union groups
     f.print(
@@ -814,7 +832,14 @@ function generateMessageValidShape(
 
   // If there are union groups, generate a union type
   if (unionGroups.length > 0) {
-    f.print(f.export(declaration, f.importValid(message).name), " = ");
+    f.print(
+      f.export(declaration, f.importValid(message).name),
+      " = ",
+      Message,
+      "<",
+      f.string(message.typeName),
+      "> & ("
+    );
 
     // Generate each union branch
     for (let i = 0; i < unionGroups.length; i++) {
@@ -823,41 +848,56 @@ function generateMessageValidShape(
         f.print(" | ");
       }
 
-      // Merge nested constraints
-      const mergedNestedConstraints = { ...nestedConstraints };
-      for (const [key, fields] of Object.entries(group.nestedConstraints)) {
-        if (!mergedNestedConstraints[key]) {
-          mergedNestedConstraints[key] = [];
-        }
-        mergedNestedConstraints[key].push(...fields);
-        mergedNestedConstraints[key] = [
-          ...new Set(mergedNestedConstraints[key]),
-        ];
-      }
+      f.print("{");
 
-      f.print(Message, "<", f.string(message.typeName), "> & {");
-
+      // 1. Generate normal fields
       for (const member of message.members) {
-        // Skip members that are in the readOnlyFields list or in this union group's readOnlyFields
+        // Skip members that are in the global readOnlyFields list (always omitted)
         if (
           member.kind === "field" &&
-          (readOnlyFields.includes(member.localName) ||
-            group.readOnlyFields.includes(member.localName))
+          readOnlyFields.includes(member.localName)
         ) {
           continue;
         }
+
+        // If member is in this group's readOnlyFields, it will be handled in step 2 as 'never'
+        if (
+          member.kind === "field" &&
+          group.readOnlyFields.includes(member.localName)
+        ) {
+          continue;
+        }
+
+        // Merge nested constraints
+        const mergedNestedConstraints = { ...nestedConstraints };
+        for (const [key, fields] of Object.entries(group.nestedConstraints)) {
+          if (!mergedNestedConstraints[key]) {
+            mergedNestedConstraints[key] = [];
+          }
+          mergedNestedConstraints[key].push(...fields);
+          mergedNestedConstraints[key] = [
+            ...new Set(mergedNestedConstraints[key]),
+          ];
+        }
+
         generateMessageShapeMember(
           f,
           member,
           validTypes,
           mergedNestedConstraints
         );
-        if (message.members.indexOf(member) < message.members.length - 1) {
-          f.print();
-        }
+        f.print();
       }
+
+      // 2. Generate 'never' fields for this group's omitted fields
+      for (const fieldName of group.readOnlyFields) {
+        f.print("  ", fieldName, "?: never;");
+        f.print();
+      }
+
       f.print("}");
     }
+    f.print(");");
   } else {
     // Standard case without union groups
     f.print(

@@ -77,7 +77,7 @@ function getTypeBody(content: string, typeName: string): string {
 // Helper to extract union type definition body
 function getUnionTypeBody(content: string, typeName: string): string {
   const regex = new RegExp(
-    `export type ${typeName} =([\\s\\S]+?)(?=export const ${typeName}Schema)`,
+    `export type ${typeName} =([\\s\\S]+?)(?=export (const|type))`,
   );
   const match = content.match(regex);
   assert.ok(match, `Should find ${typeName} type definition`);
@@ -167,22 +167,30 @@ test("CelValidationNoCel includes ALL fields when no CEL constraints", () => {
 test("CelValidationOr includes ALL fields (OR doesn't create read-only)", () => {
   const content = readFileSync(generatedFilePath, "utf-8");
 
-  // OR constraint generates a union type, not a single type
+  // OR constraint generates a union type
   assert.ok(
     content.includes("export type CelValidationOr ="),
     "Should find CelValidationOr type definition",
   );
 
-  // OR constraint (field1 == '' || field2 == '') means "at least one must be empty"
-  // NOT "both must be empty", so fields are NOT read-only in the base sense,
-  // but they create a union where each branch has one omitted.
-  // However, checking the file content for specific fields is tricky with unions.
-  // We'll check that the type definition exists and contains the fields.
   const unionBody = getUnionTypeBody(content, "CelValidationOr");
 
-  assert.ok(unionBody.includes("field1"), "Should include field1 in union");
-  assert.ok(unionBody.includes("field2"), "Should include field2 in union");
-  assert.ok(unionBody.includes("field3"), "Should include field3 in union");
+  // Now we expect fields to be present as optional never in the branches where they are omitted
+  // Branch 1: field1 is empty -> field1?: never
+  // Branch 2: field2 is empty -> field2?: never
+
+  // Since we can't easily parse the exact structure with regex, we check for the presence of the never definitions
+  assert.ok(
+    unionBody.includes("field1?: never"),
+    "Should include field1?: never",
+  );
+  assert.ok(
+    unionBody.includes("field2?: never"),
+    "Should include field2?: never",
+  );
+
+  // field3 should be present normally
+  assert.ok(unionBody.includes("field3"), "Should include field3");
 });
 
 test("CelValidationCombined omits fields from AND constraint", () => {
@@ -225,28 +233,14 @@ test("CelValidationUnion generates union type with OR constraints", () => {
 
   const unionBody = getUnionTypeBody(content, "CelValidationUnion");
 
-  // OR constraint means fields are not omitted, should be union without Omit
-  // Wait, if it's a union of Omits, it WILL have Omit.
-  // "this.email == '' || this.phone == ''"
-  // -> Omit<T, 'email'> | Omit<T, 'phone'>
-  // So it SHOULD have Omit.
-  // Let's check the previous test logic.
-  // Previous test said: "Should NOT use Omit<> for OR constraints in CelValidationUnion"
-  // But wait, if it's a union of Omits, it must use Omit.
-  // Let's re-read `cel-parser.ts`:
-  // "Union of omits: Omit<T, 'field1'> | Omit<T, 'field2'>"
-  // So yes, it should use Omit.
-  // The previous test might have been asserting something else or I misunderstood.
-  // Let's check if the generated code actually uses Omit or if it just defines the type as a union of shapes.
-  // If it's `Omit<Message<...>, "email"> | Omit<Message<...>, "phone">`, then it uses Omit.
-
+  // Check for strict union with never
   assert.ok(
-    unionBody.includes("email"),
-    "Should reference email in union branches",
+    unionBody.includes("email?: never"),
+    "Should include email?: never in one branch",
   );
   assert.ok(
-    unionBody.includes("phone"),
-    "Should reference phone in union branches",
+    unionBody.includes("phone?: never"),
+    "Should include phone?: never in one branch",
   );
   assert.ok(unionBody.includes("name"), "Should include name field");
 });
@@ -283,20 +277,22 @@ test("CelValidationMixedUnion generates complex union type with AND+OR", () => {
 
   const unionBody = getUnionTypeBody(content, "CelValidationMixedUnion");
 
-  // Should be a union type with name omitted from all branches
-  // It's hard to check "omitted from all branches" with regex on the union string.
-  // But we can check that 'name' is NOT present as a property key "name:"
-  // However, "name" might appear in Omit<..., "name">.
-  // So we check that "name:" (property definition) is NOT present.
-
+  // Name is omitted globally, so it shouldn't be present as a property or never
   const namePropRegex = /\bname\??\s*:/;
   assert.ok(
     !namePropRegex.test(unionBody),
-    "Should NOT include name property definition (omitted from all branches)",
+    "Should NOT include name property definition",
   );
 
-  assert.ok(unionBody.includes("email"), "Should reference email");
-  assert.ok(unionBody.includes("phone"), "Should reference phone");
+  // Email and phone should be never in respective branches
+  assert.ok(
+    unionBody.includes("email?: never"),
+    "Should include email?: never",
+  );
+  assert.ok(
+    unionBody.includes("phone?: never"),
+    "Should include phone?: never",
+  );
 });
 
 test("CelValidationMultipleNested handles multiple nested constraints", () => {
@@ -339,4 +335,18 @@ test("CelValidationWithRepeated handles repeated fields correctly", () => {
   assertField(typeBody, "singleField", false, "singleField should be omitted");
   assertField(typeBody, "listField", true);
   assertField(typeBody, "nestedList", true);
+});
+
+test("CelValidationOrValid uses strict union with never", () => {
+  const content = readFileSync(generatedFilePath, "utf-8");
+  const unionBody = getUnionTypeBody(content, "CelValidationOrValid");
+
+  assert.ok(
+    unionBody.includes("field1?: never"),
+    "Should include field1?: never in Valid type union",
+  );
+  assert.ok(
+    unionBody.includes("field2?: never"),
+    "Should include field2?: never in Valid type union",
+  );
 });
