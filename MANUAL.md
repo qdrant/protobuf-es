@@ -209,9 +209,9 @@ Learn more about [Valid types](#valid-types).
 
 ### `cel_validation=true`
 
-Enables support for buf.validate options, generating types with union groups for complex constraints using CEL expressions.
+Enables support for `buf.validate` options. It analyzes CEL expressions in message options to identify fields that must be empty or unset, and generates TypeScript types that omit these fields to prevent invalid assignments at compile time.
 
-Learn more about [Buf.validate support](#bufvalidate-support).
+Learn more about [CEL Validation](#cel-validation).
 
 ## Generated code
 
@@ -1477,13 +1477,28 @@ in the protovalidate-es repository.
 > - `MessageValidType` extracts the Valid type from a message descriptor.
 > - When [writing a plugin](#writing-plugins), the method `importValid` of `GeneratedFile` imports a Valid type.
 
-## Buf.validate support
+## CEL Validation
 
-This feature enables support for [buf.validate](https://buf.build/docs/reference/protovalidate/rules) options, which allow you to define validation rules for your Protobuf messages using Common Expression Language (CEL) expressions.
+This feature uses Common Expression Language (CEL) expressions to generate stricter TypeScript types. While it reads expressions from `buf.validate` options, it is independent of the `buf.validate` runtime and focuses solely on compile-time type safety.
 
-When the `cel_validation=true` plugin option is enabled, [@qdrant/protoc-gen-es] generates types with union groups for complex constraints. This allows for more precise type checking based on the validation rules defined in your Protobuf files.
+When the `cel_validation=true` plugin option is enabled, the plugin analyzes CEL expressions in `(buf.validate.message).cel` options to identify fields that must be empty or unset. It then modifies the generated TypeScript types to **omit** these fields, preventing you from assigning values to them when the constraints are met.
 
-For example, consider the following Protobuf message with buf.validate options:
+### How it works
+
+The plugin looks for patterns in CEL expressions that imply a field must be empty, zero, or unset:
+- `this.field == ''`
+- `this.field == 0`
+- `this.field == false`
+- `!has(this.field)`
+
+It handles logical operators to create precise types:
+
+- **AND (`&&`)**: If `exprA && exprB` must be true, then fields from *both* expressions are omitted.
+- **OR (`||`)**: If `exprA || exprB` must be true, it generates a **union type**. One branch omits fields from `exprA`, and the other omits fields from `exprB`.
+
+### Example
+
+Consider a message where a user can be either an "email user" or an "age user". We can use a CEL expression to enforce that if one is present, the other must be empty.
 
 ```protobuf
 syntax = "proto3";
@@ -1491,27 +1506,41 @@ syntax = "proto3";
 import "buf/validate/validate.proto";
 
 message User {
+  // Validation rule: Either email is empty OR age is zero.
+  // This implies:
+  // - If we have an email, age MUST be 0 (omitted).
+  // - If we have an age, email MUST be empty (omitted).
   option (buf.validate.message).cel = {
+    id: "email_or_age",
     expression: "this.email == '' || this.age == 0"
   };
 
-  string email = 1 [(buf.validate.field).string.email = true];
-  int32 age = 2 [(buf.validate.field).int32 = { gte: 0, lte: 120 }];
-  repeated string tags = 3 [(buf.validate.field).repeated = { min_items: 1, max_items: 10 }];
+  string email = 1;
+  int32 age = 2;
 }
 ```
 
-With `cel_validation=true`, the generated TypeScript type will reflect the validation constraints, creating union types for fields with complex rules. In this example, the CEL expression `this.email == '' || this.age == 0` generates a union type where either the `email` field is omitted (indicating it should be empty) or the `age` field is omitted (indicating it should be zero), but not both.
+With `cel_validation=true`, the generated TypeScript type becomes a union:
 
-CEL expressions support accessing nested fields using dot notation (e.g., `this.address.city`), allowing for complex validation rules on message hierarchies.
+```typescript
+export type User =
+  | (Message<"User"> & {
+      age: number;
+      // email is omitted
+    })
+  | (Message<"User"> & {
+      email: string;
+      // age is omitted
+    });
+```
 
-The implementation includes:
+This ensures that at compile time, you cannot accidentally set both `email` and `age` to non-empty values.
 
-- Parsing of CEL expressions from buf.validate message options
-- Generation of union groups for constraints that cannot be represented as simple type unions
-- Support for read-only fields in generated types where appropriate
+### Supported Features
 
-This feature is particularly useful for ensuring type safety at compile time based on the validation rules defined in your Protobuf schemas.
+- **Nested Fields**: Supports constraints on nested fields (e.g., `this.address.city == ''`).
+- **Complex Logic**: Handles arbitrarily nested `&&` and `||` expressions.
+- **Type Safety**: The generated types are standard TypeScript `Omit` and union types, compatible with all TypeScript tooling.
 
 ## Reflection
 
