@@ -125,7 +125,6 @@ function getLiteralFields(
   }
 }
 
-
 /**
  * Extracts union groups from buf.validate.message CEL expressions
  *

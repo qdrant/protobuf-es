@@ -86,7 +86,9 @@ export function parseCELExpression(celExpression: string) {
     deduplicateResult(result);
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
-    result.errors.push(`Failed to parse CEL expression "${celExpression}": ${message}`);
+    result.errors.push(
+      `Failed to parse CEL expression "${celExpression}": ${message}`,
+    );
   }
 
   return result;
@@ -147,21 +149,24 @@ function handleNegation(arg: Expr | undefined, result: CELParseResult) {
   }
 }
 
-function handleEquality(args: readonly (Expr | undefined)[], result: CELParseResult) {
+function handleEquality(
+  args: readonly (Expr | undefined)[],
+  result: CELParseResult,
+) {
   if (args.length !== 2) return;
 
   const [left, right] = args;
-  
+
   // Try: field == constant
   processEqualityPair(left, right, result);
-  // Try: constant == field  
+  // Try: constant == field
   processEqualityPair(right, left, result);
 }
 
 function processEqualityPair(
-  fieldExpr: Expr | undefined, 
-  valueExpr: Expr | undefined, 
-  result: CELParseResult
+  fieldExpr: Expr | undefined,
+  valueExpr: Expr | undefined,
+  result: CELParseResult,
 ) {
   const constantValue = extractConstant(valueExpr);
   if (constantValue === undefined) return;
@@ -180,7 +185,10 @@ function processEqualityPair(
   }
 }
 
-function handleAnd(args: readonly (Expr | undefined)[], result: CELParseResult) {
+function handleAnd(
+  args: readonly (Expr | undefined)[],
+  result: CELParseResult,
+) {
   // All conditions must be true → accumulate in same result
   for (const arg of args) {
     if (arg) {
@@ -251,8 +259,7 @@ function extractFieldPath(expr: Expr | undefined): string | null {
 
 function isThisIdentifier(expr: Expr) {
   return (
-    expr.exprKind?.case === "identExpr" &&
-    expr.exprKind.value.name === "this"
+    expr.exprKind?.case === "identExpr" && expr.exprKind.value.name === "this"
   );
 }
 
@@ -328,6 +335,8 @@ function deduplicateResult(result: CELParseResult) {
   result.unsupportedFields = [...new Set(result.unsupportedFields)];
 
   for (const parent in result.nestedConstraints) {
-    result.nestedConstraints[parent] = [...new Set(result.nestedConstraints[parent])];
+    result.nestedConstraints[parent] = [
+      ...new Set(result.nestedConstraints[parent]),
+    ];
   }
 }

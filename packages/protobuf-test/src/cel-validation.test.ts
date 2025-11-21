@@ -99,9 +99,12 @@ test("CelValidationSimple type has literal 'name' field", () => {
 
   assertField(typeBody, "description", true);
   assertField(typeBody, "age", true);
-  
+
   // name should be literal empty string
-  assert.ok(typeBody.includes('name: ""'), "name should be literal empty string");
+  assert.ok(
+    typeBody.includes('name: ""'),
+    "name should be literal empty string",
+  );
 });
 
 test("CelValidationMultiple type has literal 'id' and 'code' fields", () => {
@@ -110,12 +113,12 @@ test("CelValidationMultiple type has literal 'id' and 'code' fields", () => {
 
   assertField(typeBody, "title", true);
   assertField(typeBody, "active", true);
-  
+
   // id should be literal empty string
   assert.ok(typeBody.includes('id: ""'), "id should be literal empty string");
-  
+
   // code should be literal 0
-  assert.ok(typeBody.includes('code: 0'), "code should be literal 0");
+  assert.ok(typeBody.includes("code: 0"), "code should be literal 0");
 });
 
 test("CelValidationNotHas type omits 'optionalField' due to !has()", () => {
@@ -159,9 +162,12 @@ test("CelValidationSnakeCase converts field names to camelCase and uses literals
 
   assertField(typeBody, "firstName", true);
   assertField(typeBody, "lastName", true);
-  
+
   // userName should be literal empty string
-  assert.ok(typeBody.includes('userName: ""'), "userName should be literal empty string");
+  assert.ok(
+    typeBody.includes('userName: ""'),
+    "userName should be literal empty string",
+  );
 });
 
 test("CelValidationNoCel includes ALL fields when no CEL constraints", () => {
@@ -187,14 +193,8 @@ test("CelValidationOr includes ALL fields (OR doesn't create read-only)", () => 
   // Branch 1: field1 is empty -> field1: ""
   // Branch 2: field2 is empty -> field2: ""
 
-  assert.ok(
-    unionBody.includes('field1: ""'),
-    "Should include field1: \"\"",
-  );
-  assert.ok(
-    unionBody.includes('field2: ""'),
-    "Should include field2: \"\"",
-  );
+  assert.ok(unionBody.includes('field1: ""'), 'Should include field1: ""');
+  assert.ok(unionBody.includes('field2: ""'), 'Should include field2: ""');
 
   // field3 should be present normally
   assert.ok(unionBody.includes("field3"), "Should include field3");
@@ -205,10 +205,16 @@ test("CelValidationCombined generates literal types from AND constraint", () => 
   const typeBody = getTypeBody(content, "CelValidationCombined");
 
   assertField(typeBody, "field3", true);
-  
+
   // field1 and field2 should be literal empty strings
-  assert.ok(typeBody.includes('field1: ""'), "field1 should be literal empty string");
-  assert.ok(typeBody.includes('field2: ""'), "field2 should be literal empty string");
+  assert.ok(
+    typeBody.includes('field1: ""'),
+    "field1 should be literal empty string",
+  );
+  assert.ok(
+    typeBody.includes('field2: ""'),
+    "field2 should be literal empty string",
+  );
 });
 
 test("CelValidationWithRequired keeps required field, sets readonly field to literal", () => {
@@ -216,7 +222,10 @@ test("CelValidationWithRequired keeps required field, sets readonly field to lit
   const typeBody = getTypeBody(content, "CelValidationWithRequired");
 
   assertField(typeBody, "requiredField", true);
-  assert.ok(typeBody.includes('readonlyField: ""'), "readonlyField should be literal empty string");
+  assert.ok(
+    typeBody.includes('readonlyField: ""'),
+    "readonlyField should be literal empty string",
+  );
 });
 
 test("Valid types also have correct literal types", () => {
@@ -224,7 +233,10 @@ test("Valid types also have correct literal types", () => {
   const typeBody = getTypeBody(content, "CelValidationSimpleValid");
 
   assertField(typeBody, "description", true);
-  assert.ok(typeBody.includes('name: ""'), "Valid type should also have literal name");
+  assert.ok(
+    typeBody.includes('name: ""'),
+    "Valid type should also have literal name",
+  );
 });
 
 test("CelValidationUnion generates union type with literal OR constraints", () => {
@@ -240,11 +252,11 @@ test("CelValidationUnion generates union type with literal OR constraints", () =
   // Check for literal types in union
   assert.ok(
     unionBody.includes('email: ""'),
-    "Should include email: \"\" in one branch",
+    'Should include email: "" in one branch',
   );
   assert.ok(
     unionBody.includes('phone: ""'),
-    "Should include phone: \"\" in one branch",
+    'Should include phone: "" in one branch',
   );
   assert.ok(unionBody.includes("name"), "Should include name field");
 });
@@ -284,18 +296,12 @@ test("CelValidationMixedUnion generates complex union type with AND+OR literals"
   // Name is literal empty string globally
   assert.ok(
     unionBody.includes('name: ""'),
-    "Should include name: \"\" property definition",
+    'Should include name: "" property definition',
   );
 
   // Email and phone should be literal empty strings in respective branches
-  assert.ok(
-    unionBody.includes('email: ""'),
-    "Should include email: \"\"",
-  );
-  assert.ok(
-    unionBody.includes('phone: ""'),
-    "Should include phone: \"\"",
-  );
+  assert.ok(unionBody.includes('email: ""'), 'Should include email: ""');
+  assert.ok(unionBody.includes('phone: ""'), 'Should include phone: ""');
 });
 
 test("CelValidationMultipleNested handles multiple nested constraints", () => {
@@ -335,7 +341,10 @@ test("CelValidationWithRepeated handles repeated fields correctly", () => {
 
   const typeBody = getTypeBody(content, "CelValidationWithRepeated");
 
-  assert.ok(typeBody.includes('singleField: ""'), "singleField should be literal empty string");
+  assert.ok(
+    typeBody.includes('singleField: ""'),
+    "singleField should be literal empty string",
+  );
   assertField(typeBody, "listField", true);
   assertField(typeBody, "nestedList", true);
 });
@@ -346,11 +355,11 @@ test("CelValidationOrValid uses union with literals", () => {
 
   assert.ok(
     unionBody.includes('field1: ""'),
-    "Should include field1: \"\" in Valid type union",
+    'Should include field1: "" in Valid type union',
   );
   assert.ok(
     unionBody.includes('field2: ""'),
-    "Should include field2: \"\" in Valid type union",
+    'Should include field2: "" in Valid type union',
   );
 });
 
@@ -363,7 +372,8 @@ test("CelValidationLiteralString generates literal string type", () => {
 
   // Check that status field has literal type "active"
   assert.ok(
-    typeBody.includes('status: "active"') || typeBody.includes("status: 'active'"),
+    typeBody.includes('status: "active"') ||
+      typeBody.includes("status: 'active'"),
     "status should have literal type 'active'",
   );
 });
@@ -410,7 +420,6 @@ test("CelValidationLiteralBoolFalse generates literal boolean false type", () =>
   );
 });
 
-
 test("CelValidationLiteralsMultiple generates multiple literal types", () => {
   const content = readFileSync(generatedFilePath, "utf-8");
   const typeBody = getTypeBody(content, "CelValidationLiteralsMultiple");
@@ -424,10 +433,7 @@ test("CelValidationLiteralsMultiple generates multiple literal types", () => {
     typeBody.includes('type: "user"') || typeBody.includes("type: 'user'"),
     "type should have literal type 'user'",
   );
-  assert.ok(
-    typeBody.includes("level: 5"),
-    "level should have literal type 5",
-  );
+  assert.ok(typeBody.includes("level: 5"), "level should have literal type 5");
 });
 
 test("CelValidationLiteralOr generates union with literal types", () => {
@@ -448,7 +454,7 @@ test("CelValidationLiteralOr generates union with literal types", () => {
     unionBody.includes('"pending"') || unionBody.includes("'pending'"),
     "Should include literal 'pending' in another branch",
   );
-  
+
   // Name field should be present
   assert.ok(unionBody.includes("name"), "Should include name field");
 });
@@ -468,4 +474,3 @@ test("CelValidationLiteralEnum generates literal enum value type", () => {
     "status should have literal type 2",
   );
 });
-
