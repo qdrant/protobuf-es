@@ -225,7 +225,7 @@ export declare type WrappersMessage = Message<"spec.WrappersMessage"> & {
    * @generated from field: map<string, google.protobuf.BytesValue> map_bytes_value_field = 39;
    */
   mapBytesValueField: { [key: string]: BytesValue };
-};
+}
 
 /**
  * Describes the message spec.WrappersMessage.

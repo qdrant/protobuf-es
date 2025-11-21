@@ -28,7 +28,7 @@ export declare const file_extra_wkt_features: GenFile;
  * @generated from message spec.WktFeaturesMessage
  */
 export declare type WktFeaturesMessage = Message<"spec.WktFeaturesMessage"> & {
-};
+}
 
 /**
  * Describes the message spec.WktFeaturesMessage.

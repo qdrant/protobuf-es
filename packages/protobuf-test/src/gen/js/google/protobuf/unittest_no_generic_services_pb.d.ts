@@ -34,7 +34,7 @@ export declare type TestMessage = Message<"proto2_unittest.no_generic_services_t
    * @generated from field: optional int32 a = 1;
    */
   a: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest.no_generic_services_test.TestMessage.

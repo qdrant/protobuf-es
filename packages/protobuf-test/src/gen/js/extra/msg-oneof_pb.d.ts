@@ -84,7 +84,7 @@ export declare type OneofMessage = Message<"spec.OneofMessage"> & {
     value: OneofEnum;
     case: "e";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message spec.OneofMessage.
@@ -105,7 +105,7 @@ export declare type OneofMessageFoo = Message<"spec.OneofMessageFoo"> & {
    * @generated from field: bool toggle = 2;
    */
   toggle: boolean;
-};
+}
 
 /**
  * Describes the message spec.OneofMessageFoo.
@@ -126,7 +126,7 @@ export declare type OneofMessageBar = Message<"spec.OneofMessageBar"> & {
    * @generated from field: int32 b = 2;
    */
   b: number;
-};
+}
 
 /**
  * Describes the message spec.OneofMessageBar.

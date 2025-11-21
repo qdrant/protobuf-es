@@ -37,7 +37,7 @@ export declare type MessageFieldMessage = Message<"spec.MessageFieldMessage"> & 
    * @generated from field: repeated spec.MessageFieldMessage.TestMessage repeated_message_field = 2;
    */
   repeatedMessageField: MessageFieldMessage_TestMessage[];
-};
+}
 
 /**
  * Describes the message spec.MessageFieldMessage.
@@ -53,7 +53,7 @@ export declare type MessageFieldMessage_TestMessage = Message<"spec.MessageField
    * @generated from field: string name = 1;
    */
   name: string;
-};
+}
 
 /**
  * Describes the message spec.MessageFieldMessage.TestMessage.

@@ -79,7 +79,7 @@ export declare type Proto2MessageForEdition2023 = Message<"spec.Proto2MessageFor
    * @generated from field: repeated double unpacked_double_field = 10 [packed = false];
    */
   unpackedDoubleField: number[];
-};
+}
 
 /**
  * Describes the message spec.Proto2MessageForEdition2023.
@@ -95,7 +95,7 @@ export declare type Proto2MessageForEdition2023_OptionalGroup = Message<"spec.Pr
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2MessageForEdition2023.OptionalGroup.
@@ -111,7 +111,7 @@ export declare type Proto2MessageForEdition2023_RequiredGroup = Message<"spec.Pr
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2MessageForEdition2023.RequiredGroup.

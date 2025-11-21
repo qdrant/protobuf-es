@@ -471,7 +471,7 @@ export type Edition2023Message = Message<"spec.Edition2023Message"> & {
    * @generated from field: map<int32, google.protobuf.UInt32Value> map_int32_wrapped_uint32_field = 608;
    */
   mapInt32WrappedUint32Field: { [key: number]: UInt32Value };
-};
+}
 
 /**
  * Describes the message spec.Edition2023Message.
@@ -490,7 +490,7 @@ export type Edition2023Message_Child = Message<"spec.Edition2023Message.Child"> 
    * @generated from field: int32 f = 1;
    */
   f: number;
-};
+}
 
 /**
  * Describes the message spec.Edition2023Message.Child.
@@ -555,7 +555,7 @@ export type Edition2023FromProto2Message = Message<"spec.Edition2023FromProto2Me
    * @generated from field: repeated double unpacked_double_field = 10 [features.repeated_field_encoding = EXPANDED];
    */
   unpackedDoubleField: number[];
-};
+}
 
 /**
  * Describes the message spec.Edition2023FromProto2Message.
@@ -572,7 +572,7 @@ export type Edition2023FromProto2Message_OptionalGroup = Message<"spec.Edition20
    * @generated from field: int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Edition2023FromProto2Message.OptionalGroup.
@@ -589,7 +589,7 @@ export type Edition2023FromProto2Message_RequiredGroup = Message<"spec.Edition20
    * @generated from field: int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Edition2023FromProto2Message.RequiredGroup.
@@ -634,7 +634,7 @@ export type Edition2023FromProto3Message = Message<"spec.Edition2023FromProto3Me
    * @generated from field: repeated double unpacked_double_field = 10 [features.repeated_field_encoding = EXPANDED];
    */
   unpackedDoubleField: number[];
-};
+}
 
 /**
  * Describes the message spec.Edition2023FromProto3Message.

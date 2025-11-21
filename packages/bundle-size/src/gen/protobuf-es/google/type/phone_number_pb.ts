@@ -113,7 +113,7 @@ export type PhoneNumber = Message<"google.type.PhoneNumber"> & {
    * @generated from field: string extension = 3;
    */
   extension: string;
-};
+}
 
 /**
  * Describes the message google.type.PhoneNumber.
@@ -154,7 +154,7 @@ export type PhoneNumber_ShortCode = Message<"google.type.PhoneNumber.ShortCode">
    * @generated from field: string number = 2;
    */
   number: string;
-};
+}
 
 /**
  * Describes the message google.type.PhoneNumber.ShortCode.

@@ -47,7 +47,7 @@ export type TestLiteImportsNonlite = Message<"proto2_unittest.TestLiteImportsNon
    * @generated from field: optional proto2_unittest.TestRequired message_with_required = 2;
    */
   messageWithRequired?: TestRequired;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestLiteImportsNonlite.

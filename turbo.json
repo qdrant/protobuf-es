@@ -49,7 +49,7 @@
       "dependsOn": ["format", "^build", "generate", "build"],
       "outputLogs": "new-only"
     },
-    "@bufbuild/protoc-gen-es#lint": {
+    "@qdrant/protoc-gen-es#lint": {
       "dependsOn": ["format", "^build", "generate", "build"],
       "outputLogs": "new-only"
     }

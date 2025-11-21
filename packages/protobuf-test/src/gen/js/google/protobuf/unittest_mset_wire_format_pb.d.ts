@@ -36,7 +36,7 @@ export declare const file_google_protobuf_unittest_mset_wire_format: GenFile;
  * @generated from message proto2_wireformat_unittest.TestMessageSet
  */
 export declare type TestMessageSet = Message<"proto2_wireformat_unittest.TestMessageSet"> & {
-};
+}
 
 /**
  * Describes the message proto2_wireformat_unittest.TestMessageSet.
@@ -52,7 +52,7 @@ export declare type TestMessageSetWireFormatContainer = Message<"proto2_wireform
    * @generated from field: optional proto2_wireformat_unittest.TestMessageSet message_set = 1;
    */
   messageSet?: TestMessageSet;
-};
+}
 
 /**
  * Describes the message proto2_wireformat_unittest.TestMessageSetWireFormatContainer.

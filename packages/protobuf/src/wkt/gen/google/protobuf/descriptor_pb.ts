@@ -47,7 +47,7 @@ export type FileDescriptorSet = Message<"google.protobuf.FileDescriptorSet"> & {
    * @generated from field: repeated google.protobuf.FileDescriptorProto file = 1;
    */
   file: FileDescriptorProto[];
-};
+}
 
 /**
  * The protocol compiler can output a FileDescriptorSet containing the .proto
@@ -178,7 +178,7 @@ export type FileDescriptorProto = Message<"google.protobuf.FileDescriptorProto">
    * @generated from field: optional google.protobuf.Edition edition = 14;
    */
   edition: Edition;
-};
+}
 
 /**
  * Describes a complete .proto file.
@@ -363,7 +363,7 @@ export type DescriptorProto = Message<"google.protobuf.DescriptorProto"> & {
    * @generated from field: optional google.protobuf.SymbolVisibility visibility = 11;
    */
   visibility: SymbolVisibility;
-};
+}
 
 /**
  * Describes a message type.
@@ -461,7 +461,7 @@ export type DescriptorProto_ExtensionRange = Message<"google.protobuf.Descriptor
    * @generated from field: optional google.protobuf.ExtensionRangeOptions options = 3;
    */
   options?: ExtensionRangeOptions;
-};
+}
 
 /**
  * @generated from message google.protobuf.DescriptorProto.ExtensionRange
@@ -515,7 +515,7 @@ export type DescriptorProto_ReservedRange = Message<"google.protobuf.DescriptorP
    * @generated from field: optional int32 end = 2;
    */
   end: number;
-};
+}
 
 /**
  * Range of reserved tag numbers. Reserved tag numbers may not be used by
@@ -582,7 +582,7 @@ export type ExtensionRangeOptions = Message<"google.protobuf.ExtensionRangeOptio
    * @generated from field: optional google.protobuf.ExtensionRangeOptions.VerificationState verification = 3 [default = UNVERIFIED];
    */
   verification: ExtensionRangeOptions_VerificationState;
-};
+}
 
 /**
  * @generated from message google.protobuf.ExtensionRangeOptions
@@ -672,7 +672,7 @@ export type ExtensionRangeOptions_Declaration = Message<"google.protobuf.Extensi
    * @generated from field: optional bool repeated = 6;
    */
   repeated: boolean;
-};
+}
 
 /**
  * @generated from message google.protobuf.ExtensionRangeOptions.Declaration
@@ -866,7 +866,7 @@ export type FieldDescriptorProto = Message<"google.protobuf.FieldDescriptorProto
    * @generated from field: optional bool proto3_optional = 17;
    */
   proto3Optional: boolean;
-};
+}
 
 /**
  * Describes a field within a message.
@@ -1165,7 +1165,7 @@ export type OneofDescriptorProto = Message<"google.protobuf.OneofDescriptorProto
    * @generated from field: optional google.protobuf.OneofOptions options = 2;
    */
   options?: OneofOptions;
-};
+}
 
 /**
  * Describes a oneof.
@@ -1235,7 +1235,7 @@ export type EnumDescriptorProto = Message<"google.protobuf.EnumDescriptorProto">
    * @generated from field: optional google.protobuf.SymbolVisibility visibility = 6;
    */
   visibility: SymbolVisibility;
-};
+}
 
 /**
  * Describes an enum type.
@@ -1314,7 +1314,7 @@ export type EnumDescriptorProto_EnumReservedRange = Message<"google.protobuf.Enu
    * @generated from field: optional int32 end = 2;
    */
   end: number;
-};
+}
 
 /**
  * Range of reserved numeric values. Reserved values may not be used by
@@ -1369,7 +1369,7 @@ export type EnumValueDescriptorProto = Message<"google.protobuf.EnumValueDescrip
    * @generated from field: optional google.protobuf.EnumValueOptions options = 3;
    */
   options?: EnumValueOptions;
-};
+}
 
 /**
  * Describes a value within an enum.
@@ -1420,7 +1420,7 @@ export type ServiceDescriptorProto = Message<"google.protobuf.ServiceDescriptorP
    * @generated from field: optional google.protobuf.ServiceOptions options = 3;
    */
   options?: ServiceOptions;
-};
+}
 
 /**
  * Describes a service.
@@ -1493,7 +1493,7 @@ export type MethodDescriptorProto = Message<"google.protobuf.MethodDescriptorPro
    * @generated from field: optional bool server_streaming = 6 [default = false];
    */
   serverStreaming: boolean;
-};
+}
 
 /**
  * Describes a method of a service.
@@ -1744,7 +1744,7 @@ export type FileOptions = Message<"google.protobuf.FileOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.FileOptions
@@ -2103,7 +2103,7 @@ export type MessageOptions = Message<"google.protobuf.MessageOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.MessageOptions
@@ -2368,7 +2368,7 @@ export type FieldOptions = Message<"google.protobuf.FieldOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.FieldOptions
@@ -2541,7 +2541,7 @@ export type FieldOptions_EditionDefault = Message<"google.protobuf.FieldOptions.
    * @generated from field: optional string value = 2;
    */
   value: string;
-};
+}
 
 /**
  * @generated from message google.protobuf.FieldOptions.EditionDefault
@@ -2606,7 +2606,7 @@ export type FieldOptions_FeatureSupport = Message<"google.protobuf.FieldOptions.
    * @generated from field: optional google.protobuf.Edition edition_removed = 4;
    */
   editionRemoved: Edition;
-};
+}
 
 /**
  * Information about the support window of a feature.
@@ -2862,7 +2862,7 @@ export type OneofOptions = Message<"google.protobuf.OneofOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.OneofOptions
@@ -2944,7 +2944,7 @@ export type EnumOptions = Message<"google.protobuf.EnumOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.EnumOptions
@@ -3052,7 +3052,7 @@ export type EnumValueOptions = Message<"google.protobuf.EnumValueOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.EnumValueOptions
@@ -3139,7 +3139,7 @@ export type ServiceOptions = Message<"google.protobuf.ServiceOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.ServiceOptions
@@ -3215,7 +3215,7 @@ export type MethodOptions = Message<"google.protobuf.MethodOptions"> & {
    * @generated from field: repeated google.protobuf.UninterpretedOption uninterpreted_option = 999;
    */
   uninterpretedOption: UninterpretedOption[];
-};
+}
 
 /**
  * @generated from message google.protobuf.MethodOptions
@@ -3352,7 +3352,7 @@ export type UninterpretedOption = Message<"google.protobuf.UninterpretedOption">
    * @generated from field: optional string aggregate_value = 8;
    */
   aggregateValue: string;
-};
+}
 
 /**
  * A message representing a option the parser does not recognize. This only
@@ -3430,7 +3430,7 @@ export type UninterpretedOption_NamePart = Message<"google.protobuf.Uninterprete
    * @generated from field: required bool is_extension = 2;
    */
   isExtension: boolean;
-};
+}
 
 /**
  * The name of the uninterpreted option.  Each string represents a segment in
@@ -3510,7 +3510,7 @@ export type FeatureSet = Message<"google.protobuf.FeatureSet"> & {
    * @generated from field: optional google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility default_symbol_visibility = 8;
    */
   defaultSymbolVisibility: FeatureSet_VisibilityFeature_DefaultSymbolVisibility;
-};
+}
 
 /**
  * TODO Enums in C++ gencode (and potentially other languages) are
@@ -3575,7 +3575,7 @@ export const FeatureSetSchema: GenMessage<FeatureSet, {jsonType: FeatureSetJson}
  * @generated from message google.protobuf.FeatureSet.VisibilityFeature
  */
 export type FeatureSet_VisibilityFeature = Message<"google.protobuf.FeatureSet.VisibilityFeature"> & {
-};
+}
 
 /**
  * @generated from message google.protobuf.FeatureSet.VisibilityFeature
@@ -3892,7 +3892,7 @@ export type FeatureSetDefaults = Message<"google.protobuf.FeatureSetDefaults"> &
    * @generated from field: optional google.protobuf.Edition maximum_edition = 5;
    */
   maximumEdition: Edition;
-};
+}
 
 /**
  * A compiled specification for the defaults of a set of features.  These
@@ -3959,7 +3959,7 @@ export type FeatureSetDefaults_FeatureSetEditionDefault = Message<"google.protob
    * @generated from field: optional google.protobuf.FeatureSet fixed_features = 5;
    */
   fixedFeatures?: FeatureSet;
-};
+}
 
 /**
  * A map from every known edition with a unique set of defaults to its
@@ -4052,7 +4052,7 @@ export type SourceCodeInfo = Message<"google.protobuf.SourceCodeInfo"> & {
    * @generated from field: repeated google.protobuf.SourceCodeInfo.Location location = 1;
    */
   location: SourceCodeInfo_Location[];
-};
+}
 
 /**
  * Encapsulates information about the original source file from which a
@@ -4224,7 +4224,7 @@ export type SourceCodeInfo_Location = Message<"google.protobuf.SourceCodeInfo.Lo
    * @generated from field: repeated string leading_detached_comments = 6;
    */
   leadingDetachedComments: string[];
-};
+}
 
 /**
  * @generated from message google.protobuf.SourceCodeInfo.Location
@@ -4356,7 +4356,7 @@ export type GeneratedCodeInfo = Message<"google.protobuf.GeneratedCodeInfo"> & {
    * @generated from field: repeated google.protobuf.GeneratedCodeInfo.Annotation annotation = 1;
    */
   annotation: GeneratedCodeInfo_Annotation[];
-};
+}
 
 /**
  * Describes the relationship between generated code and its original source
@@ -4422,7 +4422,7 @@ export type GeneratedCodeInfo_Annotation = Message<"google.protobuf.GeneratedCod
    * @generated from field: optional google.protobuf.GeneratedCodeInfo.Annotation.Semantic semantic = 5;
    */
   semantic: GeneratedCodeInfo_Annotation_Semantic;
-};
+}
 
 /**
  * @generated from message google.protobuf.GeneratedCodeInfo.Annotation

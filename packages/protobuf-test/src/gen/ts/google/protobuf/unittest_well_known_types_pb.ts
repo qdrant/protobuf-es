@@ -134,7 +134,7 @@ export type TestWellKnownTypes = Message<"proto2_unittest.TestWellKnownTypes"> &
    * @generated from field: google.protobuf.Value value_field = 19;
    */
   valueField?: Value;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestWellKnownTypes.
@@ -240,7 +240,7 @@ export type RepeatedWellKnownTypes = Message<"proto2_unittest.RepeatedWellKnownT
    * @generated from field: repeated google.protobuf.BytesValue bytes_field = 18;
    */
   bytesField: BytesValue[];
-};
+}
 
 /**
  * Describes the message proto2_unittest.RepeatedWellKnownTypes.
@@ -365,7 +365,7 @@ export type OneofWellKnownTypes = Message<"proto2_unittest.OneofWellKnownTypes">
     value: BytesValue;
     case: "bytesField";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message proto2_unittest.OneofWellKnownTypes.
@@ -471,7 +471,7 @@ export type MapWellKnownTypes = Message<"proto2_unittest.MapWellKnownTypes"> & {
    * @generated from field: map<int32, google.protobuf.BytesValue> bytes_field = 18;
    */
   bytesField: { [key: number]: BytesValue };
-};
+}
 
 /**
  * Describes the message proto2_unittest.MapWellKnownTypes.

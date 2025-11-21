@@ -77,7 +77,7 @@ export type JavaFeatures = Message<"pb.JavaFeatures"> & {
    * @generated from field: optional pb.JavaFeatures.NestInFileClassFeature.NestInFileClass nest_in_file_class = 5;
    */
   nestInFileClass: JavaFeatures_NestInFileClassFeature_NestInFileClass;
-};
+}
 
 /**
  * @generated from message pb.JavaFeatures
@@ -138,7 +138,7 @@ export const JavaFeaturesSchema: GenMessage<JavaFeatures, {jsonType: JavaFeature
  * @generated from message pb.JavaFeatures.NestInFileClassFeature
  */
 export type JavaFeatures_NestInFileClassFeature = Message<"pb.JavaFeatures.NestInFileClassFeature"> & {
-};
+}
 
 /**
  * @generated from message pb.JavaFeatures.NestInFileClassFeature

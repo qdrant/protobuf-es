@@ -86,7 +86,7 @@ export declare type MessageWithComments = Message<"spec.MessageWithComments"> & 
    * @deprecated
    */
   thisFieldIsDeprecated: string;
-};
+}
 
 /**
  * Describes the message spec.MessageWithComments.
@@ -100,7 +100,7 @@ export declare const MessageWithCommentsSchema: GenMessage<MessageWithComments>;
  * @generated from message spec.EmptyMessageWithComment
  */
 export declare type EmptyMessageWithComment = Message<"spec.EmptyMessageWithComment"> & {
-};
+}
 
 /**
  * Describes the message spec.EmptyMessageWithComment.
@@ -161,7 +161,7 @@ export declare type GoogleCommentExample = Message<"spec.GoogleCommentExample"> 
    * @generated from field: int32 grault = 6;
    */
   grault: number;
-};
+}
 
 /**
  * Describes the message spec.GoogleCommentExample.

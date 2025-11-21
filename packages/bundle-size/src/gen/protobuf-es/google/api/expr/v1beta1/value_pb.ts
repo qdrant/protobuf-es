@@ -139,7 +139,7 @@ export type Value = Message<"google.api.expr.v1beta1.Value"> & {
     value: string;
     case: "typeValue";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message google.api.expr.v1beta1.Value.
@@ -167,7 +167,7 @@ export type EnumValue = Message<"google.api.expr.v1beta1.EnumValue"> & {
    * @generated from field: int32 value = 2;
    */
   value: number;
-};
+}
 
 /**
  * Describes the message google.api.expr.v1beta1.EnumValue.
@@ -191,7 +191,7 @@ export type ListValue = Message<"google.api.expr.v1beta1.ListValue"> & {
    * @generated from field: repeated google.api.expr.v1beta1.Value values = 1;
    */
   values: Value[];
-};
+}
 
 /**
  * Describes the message google.api.expr.v1beta1.ListValue.
@@ -218,7 +218,7 @@ export type MapValue = Message<"google.api.expr.v1beta1.MapValue"> & {
    * @generated from field: repeated google.api.expr.v1beta1.MapValue.Entry entries = 1;
    */
   entries: MapValue_Entry[];
-};
+}
 
 /**
  * Describes the message google.api.expr.v1beta1.MapValue.
@@ -249,7 +249,7 @@ export type MapValue_Entry = Message<"google.api.expr.v1beta1.MapValue.Entry"> &
    * @generated from field: google.api.expr.v1beta1.Value value = 2;
    */
   value?: Value;
-};
+}
 
 /**
  * Describes the message google.api.expr.v1beta1.MapValue.Entry.

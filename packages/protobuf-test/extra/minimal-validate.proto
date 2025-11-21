@@ -36,6 +36,15 @@ extend google.protobuf.FieldOptions {
 message MessageRules {
   // removed in https://github.com/bufbuild/protovalidate/pull/394
   optional bool disabled = 1 [deprecated = true];
+  
+  // CEL validation rules
+  repeated Constraint cel = 3;
+}
+
+message Constraint {
+  optional string id = 1;
+  optional string message = 2;
+  optional string expression = 3;
 }
 
 message OneofRules {

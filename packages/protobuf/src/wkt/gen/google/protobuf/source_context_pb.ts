@@ -41,7 +41,7 @@ export type SourceContext = Message<"google.protobuf.SourceContext"> & {
    * @generated from field: string file_name = 1;
    */
   fileName: string;
-};
+}
 
 /**
  * `SourceContext` represents information about the source of a

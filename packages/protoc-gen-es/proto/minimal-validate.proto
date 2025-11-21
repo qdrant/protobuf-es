@@ -21,12 +21,29 @@ package buf.validate;
 
 import "google/protobuf/descriptor.proto";
 
+extend google.protobuf.MessageOptions {
+  optional MessageRules message = 1159;
+}
+
 extend google.protobuf.OneofOptions {
   optional OneofRules oneof = 1159;
 }
 
 extend google.protobuf.FieldOptions {
   optional FieldRules field = 1159;
+}
+
+message MessageRules {
+  optional bool disabled = 1 [deprecated = true];
+  
+  // CEL validation rules
+  repeated Constraint cel = 3;
+}
+
+message Constraint {
+  optional string id = 1;
+  optional string message = 2;
+  optional string expression = 3;
 }
 
 message OneofRules {

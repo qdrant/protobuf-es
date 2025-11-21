@@ -35,7 +35,7 @@ export declare type ImplicitlyDeprecatedMessage = Message<"spec.ImplicitlyDeprec
    * @generated from field: string implicitly_deprecated_field = 1;
    */
   implicitlyDeprecatedField: string;
-};
+}
 
 /**
  * Describes the message spec.ImplicitlyDeprecatedMessage.

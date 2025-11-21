@@ -97,7 +97,7 @@ export type HttpBody = Message<"google.api.HttpBody"> & {
    * @generated from field: repeated google.protobuf.Any extensions = 3;
    */
   extensions: Any[];
-};
+}
 
 /**
  * Describes the message google.api.HttpBody.

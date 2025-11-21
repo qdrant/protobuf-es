@@ -159,7 +159,7 @@ export type Any = Message<"google.protobuf.Any"> & {
    * @generated from field: bytes value = 2;
    */
   value: Uint8Array;
-};
+}
 
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a

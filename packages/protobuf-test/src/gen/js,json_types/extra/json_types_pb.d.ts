@@ -216,7 +216,7 @@ export declare type JsonTypesMessage = Message<"spec.JsonTypesMessage"> & {
    * bar\n"];
    */
   jsonNameEscape: boolean;
-};
+}
 
 /**
  * @generated from message spec.JsonTypesMessage

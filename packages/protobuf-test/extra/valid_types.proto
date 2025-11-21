@@ -47,7 +47,7 @@ message VTypes {
 
   // In the generated valid type, this property should be the same as the regular type
   Other msg_ignore_default = 5 [
-    (buf.validate.field).ignore = IGNORE_IF_DEFAULT_VALUE
+    (buf.validate.field).ignore = IGNORE_UNSPECIFIED
   ];
 
   // In the generated valid type, this property should:
@@ -78,7 +78,7 @@ message VTypes {
 
   // In the generated valid type, this property should be the same as the regular type
   repeated Other repeated_msg_ignore_default_items = 11 [
-    (buf.validate.field).repeated.items.ignore = IGNORE_IF_DEFAULT_VALUE
+    (buf.validate.field).repeated.items.ignore = IGNORE_UNSPECIFIED
   ];
 
   // In the generated valid type, this property should:
@@ -109,7 +109,7 @@ message VTypes {
 
   // In the generated valid type, this property should be the same as the regular type
   map<string, Other> map_ignore_default_values = 16 [
-    (buf.validate.field).map.values.ignore = IGNORE_IF_DEFAULT_VALUE
+    (buf.validate.field).map.values.ignore = IGNORE_UNSPECIFIED
   ];
 
   // In the generated valid type, this property should:

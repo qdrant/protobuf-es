@@ -40,7 +40,7 @@ tests—[read more on our blog][blog-post].
 
 Protobuf-ES consists of three npm packages:
 
-- [@bufbuild/protoc-gen-es]: Compiler plugin to generate TypeScript or JavaScript.
+- [@qdrant/protoc-gen-es]: Compiler plugin to generate TypeScript or JavaScript.
 - [@bufbuild/protobuf]: Runtime library with core functionality.
 - [@bufbuild/protoplugin]: Helps to create your own code generator.
 
@@ -62,7 +62,7 @@ The quickstart below shows a simple example of code generation for a `.proto` fi
 
     ```shellsession
     npm install @bufbuild/protobuf
-    npm install --save-dev @bufbuild/buf @bufbuild/protoc-gen-es
+    npm install --save-dev @bufbuild/buf @qdrant/protoc-gen-es
     ```
 
 3.  Create a `buf.gen.yaml` file that looks like this:
@@ -160,7 +160,7 @@ most compatible with various bundler configurations. If you prefer to generate T
 
 ### `import_extension`
 
-By default, [protoc-gen-es][@bufbuild/protoc-gen-es] doesn't add file extensions to import paths. However, some
+By default, [protoc-gen-es][@qdrant/protoc-gen-es] doesn't add file extensions to import paths. However, some
 environments require an import extension. For example, using [ECMAScript modules in Node.js][ecmascript-modules]
 requires the `.js` extension, and Deno requires `.ts`. With this plugin option, you can add `.js`/`.ts` extensions in
 import paths with the given value. Possible values:
@@ -206,6 +206,12 @@ Generates a Valid type for every Protobuf message. Possible values:
 You can combine both options with `+`—for example, `valid_types=legacy_required+protovalidate_required`.
 
 Learn more about [Valid types](#valid-types).
+
+### `cel_validation=true`
+
+Enables support for `buf.validate` options. It analyzes CEL expressions in message options to identify fields that must be empty or unset, and generates TypeScript types that omit these fields to prevent invalid assignments at compile time.
+
+Learn more about [CEL Validation](#cel-validation).
 
 ## Generated code
 
@@ -395,7 +401,7 @@ Protobuf-ES generates the following property:
 phoneType: PhoneType;
 ```
 
-Enum fields use the first value of the enum as the default. 
+Enum fields use the first value of the enum as the default.
 
 ### Repeated fields
 
@@ -548,9 +554,9 @@ proto2 `required` is unchanged between v1 and v2.
 
 ### Proto3 optional fields
 
-In proto3, zero values like `0`, `false`, or `""` aren't serialized by default. 
-When the `optional` keyword is added to a field, zero values are serialized. 
-The keyword enables presence tracking for a field, allowing you to distinguish between an absent value, and an explicitly set zero value. 
+In proto3, zero values like `0`, `false`, or `""` aren't serialized by default.
+When the `optional` keyword is added to a field, zero values are serialized.
+The keyword enables presence tracking for a field, allowing you to distinguish between an absent value, and an explicitly set zero value.
 
 ```protobuf
 optional bool active = 3;
@@ -786,7 +792,7 @@ Protobuf-ES doesn't implement RPC itself, but other projects can use this typed 
 ### Reserved names
 
 Some names that are valid in Protobuf can't be used in ECMAScript, either because they are reserved keywords like
-`catch`, or because they would clash with built-in properties like `constructor`. [@bufbuild/protoc-gen-es]
+`catch`, or because they would clash with built-in properties like `constructor`. [@qdrant/protoc-gen-es]
 escapes reserved names by adding the suffix `$`.
 
 ### Names for nested types
@@ -897,7 +903,11 @@ let ms: number = timestampMs(ts);
 A `Duration` represents a fixed span of time with nanosecond precision. For convenience, we provide functions for conversion to milliseconds:
 
 ```typescript
-import { type Duration, durationFromMs, durationMs } from "@bufbuild/protobuf/wkt";
+import {
+  type Duration,
+  durationFromMs,
+  durationMs,
+} from "@bufbuild/protobuf/wkt";
 
 // Create a Duration from milliseconds.
 let duration: Duration = durationFromMs(1012);
@@ -1297,7 +1307,7 @@ for await (const user of sizeDelimitedDecodeStream(UserSchema, stream)) {
 ## JSON types
 
 This is an advanced feature that's set with the plugin option [`json_types=true`](#json_typestrue). If it's enabled,
-[@bufbuild/protoc-gen-es] generates a JSON type for every Protobuf message.
+[@qdrant/protoc-gen-es] generates a JSON type for every Protobuf message.
 
 Given this definition:
 
@@ -1387,8 +1397,8 @@ if (isEnumJson(FormatSchema, someString)) {
 >
 > JSON cannot represent a Protobuf message as well as the generated message types.
 > For example, a 64-bit integer must be represented as a String in JSON, while it
-> can be represented as a BigInt in the message type. 
-> 
+> can be represented as a BigInt in the message type.
+>
 > Prefer the generated message type over JSON types if you can. Use JSON types in
 > situations where you need the message to be represented by plain JSON, for example
 > for a 3rd party library that only supports JSON.
@@ -1399,11 +1409,10 @@ if (isEnumJson(FormatSchema, someString)) {
 > - `EnumJsonType` extracts the JSON type from an enum descriptor.
 > - When [writing a plugin](#writing-plugins), the method `importJson` of `GeneratedFile` imports a JSON type.
 
-
 ## Valid types
 
 This is an advanced feature that's set with the plugin option [`valid_types`](#valid_types-experimental).
-If it's enabled, [@bufbuild/protoc-gen-es] generates an additional type for every Protobuf message. The Valid
+If it's enabled, [@qdrant/protoc-gen-es] generates an additional type for every Protobuf message. The Valid
 type is a modified type for the message that respects certain Protobuf options.
 
 > [!NOTE]
@@ -1438,11 +1447,11 @@ export type ExampleValid = Message<"Example"> & {
   /**
    * A proto required field.
    * A field with the Edition feature field_presence=LEGACY_REQUIRED works as well.
-   * 
+   *
    * @generated from field: required User = 1;
    */
   user: UserValid;
-}
+};
 ```
 
 With `valid_types=protovalidate_required`, message fields with protovalidate's [`required` rule](https://buf.build/docs/reference/protovalidate/rules/field_rules/#required)
@@ -1454,13 +1463,13 @@ syntax = "proto3";
 import "buf/validate/validate.proto";
 
 message Example {
-  // Enabling this rule has the same effect on the 
+  // Enabling this rule has the same effect on the
   // generated property as the proto2 `required` label.
   User user = 2 [(buf.validate.field).required = true];
 }
 ```
 
-To see integration with protovalidate in action, see the [Valid types example][protovalidate-es-example] 
+To see integration with protovalidate in action, see the [Valid types example][protovalidate-es-example]
 in the protovalidate-es repository.
 
 > [!TIP]
@@ -1468,6 +1477,154 @@ in the protovalidate-es repository.
 > - `MessageValidType` extracts the Valid type from a message descriptor.
 > - When [writing a plugin](#writing-plugins), the method `importValid` of `GeneratedFile` imports a Valid type.
 
+## CEL Validation
+
+This feature uses Common Expression Language (CEL) expressions to generate stricter TypeScript types. While it reads expressions from `buf.validate` options, it is independent of the `buf.validate` runtime and focuses solely on compile-time type safety.
+
+When the `cel_validation=true` plugin option is enabled, the plugin analyzes CEL expressions in `(buf.validate.message).cel` options to extract field constraints. It then modifies the generated TypeScript types in two ways:
+
+1. **Omitting fields** that must be empty or unset
+2. **Generating literal types** for fields that must match a specific value
+
+### How it works
+
+The plugin recognizes two types of constraints in CEL expressions:
+
+#### Empty Value Constraints (Literal Types)
+
+These patterns generate strict literal types (empty string, zero, false):
+- `this.field == ''` → generates `field: ""`
+- `this.field == 0` → generates `field: 0`
+- `this.field == false` → generates `field: false`
+
+#### Field Omission
+
+Only the `!has()` check causes a field to be omitted from the type:
+- `!has(this.field)` → Field is omitted from type (e.g. `field?: never`)
+
+#### Literal Value Constraints (Strict Types)
+
+These patterns generate strict literal types:
+- `this.status == 'active'` → generates `status: "active"` instead of `status: string`
+- `this.version == 1` → generates `version: 1` instead of `version: number`
+- `this.enabled == true` → generates `enabled: true` instead of `enabled: boolean`
+
+### Logical Operators
+
+The plugin handles logical operators to create precise types:
+
+- **AND (`&&`)**: If `exprA && exprB` must be true, then constraints from *both* expressions are applied.
+- **OR (`||`)**: If `exprA || exprB` must be true, it generates a **union type** where each branch applies its respective constraints.
+
+### Example: Union Types with Literal Constraints
+
+Consider a message where a user can be either an "email user" or an "age user":
+
+```protobuf
+syntax = "proto3";
+
+import "buf/validate/validate.proto";
+
+message User {
+  // Validation rule: Either email is empty OR age is zero.
+  option (buf.validate.message).cel = {
+    id: "email_or_age",
+    expression: "this.email == '' || this.age == 0"
+  };
+
+  string email = 1;
+  int32 age = 2;
+}
+```
+
+With `cel_validation=true`, the generated TypeScript type becomes a union:
+
+```typescript
+export type User = Message<"User"> & (
+  | {
+      age: number;
+      email: "";      // email must be empty string
+    }
+  | {
+      email: string;
+      age: 0;         // age must be zero
+    }
+);
+```
+
+This ensures that at compile time, you cannot accidentally set both `email` and `age` to non-empty values.
+
+### Example: Literal Types
+
+When a CEL expression requires a field to have a specific value, the generated type uses that literal value:
+
+```protobuf
+syntax = "proto3";
+
+import "buf/validate/validate.proto";
+
+message Config {
+  option (buf.validate.message).cel = {
+    id: "version_check",
+    expression: "this.version == 1 && this.mode == 'production'"
+  };
+
+  int32 version = 1;
+  string mode = 2;
+  string name = 3;
+}
+```
+
+Generated TypeScript:
+
+```typescript
+export type Config = Message<"Config"> & {
+  version: 1;             // Literal type: can only be 1
+  mode: "production";     // Literal type: can only be "production"
+  name: string;           // Regular type
+}
+```
+
+### Example: Union Types with Literals
+
+Literals work in OR expressions too, creating unions where each branch has different literal constraints:
+
+```protobuf
+message Role {
+  option (buf.validate.message).cel = {
+    id: "role_status",
+    expression: "this.role == 'admin' || this.status == 'pending'"
+  };
+
+  string role = 1;
+  string status = 2;
+  string name = 3;
+}
+```
+
+Generated TypeScript:
+
+```typescript
+export type Role = Message<"Role"> & (
+  | {
+      role: "admin";      // Literal in first branch
+      status: string;     // Generic in first branch  
+      name: string;
+    }
+  | {
+      role: string;       // Generic in second branch
+      status: "pending";  // Literal in second branch
+      name: string;
+    }
+);
+```
+
+### Supported Features
+
+- **Nested Fields**: Supports constraints on nested fields (e.g., `this.address.city == ''`).
+- **Complex Logic**: Handles arbitrarily nested `&&` and `||` expressions.
+- **Type Safety**: The generated types are standard TypeScript `Omit`, literal, and union types, compatible with all TypeScript tooling.
+- ***Valid Types**: The same constraints apply to both regular and `*Valid` generated types.
 
 ## Reflection
 
@@ -1518,7 +1675,7 @@ Descriptors form a hierarchy with a file at the root:
 ```
 
 To convert descriptor messages to the more convenient wrapper types, you can use a [registry](#registries). You can
-also access descriptors from generated code—the schemas generated by [@bufbuild/protoc-gen-es] _are_ these descriptors,
+also access descriptors from generated code—the schemas generated by [@qdrant/protoc-gen-es] _are_ these descriptors,
 just with some additional type information attached.
 
 > [!TIP]
@@ -1597,7 +1754,7 @@ for (const type of nestedTypes(file)) {
 }
 ```
 
-The schemas generated by [@bufbuild/protoc-gen-es] have some additional type information attached and allow for a
+The schemas generated by [@qdrant/protoc-gen-es] have some additional type information attached and allow for a
 type-safe lookup for some elements:
 
 ```typescript
@@ -1618,16 +1775,15 @@ UserService.method.createUser.name; // "CreateUser"
 
 > [!TIP]
 >
-> The function `usedTypes()` from `@bufbuild/protobuf/reflect` returns 
-> messages and enumerations referenced by fields of a given message. 
-> 
+> The function `usedTypes()` from `@bufbuild/protobuf/reflect` returns
+> messages and enumerations referenced by fields of a given message.
+>
 > The function `parentTypes()` returns the ancestors of a given Protobuf
 > element, up to the file.
-> 
+>
 > The type `Path` represents a path to a (nested) member of a Protobuf
 > message, such as a field, oneof, extension, list element, or map entry.
-> See the utilities `buildPath()`, `parsePath()`, and `pathToString()`. 
-
+> See the utilities `buildPath()`, `parsePath()`, and `pathToString()`.
 
 ### Walking through message fields
 
@@ -1795,7 +1951,7 @@ import { UserSchema, file_example } from "./gen/example_pb";
 const registry = createRegistry(
   UserSchema, // Initialize with a message, enum, extension, or service descriptor
   file_example, // add all types from the file descriptor
-  otherRegistry, // Adds all types from the other registry
+  otherRegistry // Adds all types from the other registry
 );
 ```
 
@@ -1836,7 +1992,7 @@ import { FileDescriptorSetSchema } from "@bufbuild/protobuf/wkt";
 // The set can be compiled with `buf build --output set.binpb`
 const fileDescriptorSet = fromBinary(
   FileDescriptorSetSchema,
-  readFileSync("set.binpb"),
+  readFileSync("set.binpb")
 );
 
 // Create a FileRegistry from the google.protobuf.FileDescriptorSet message:
@@ -1964,7 +2120,7 @@ import type { DescMessage, MessageShape } from "@bufbuild/protobuf";
 
 export function redact<Desc extends DescMessage>(
   schema: Desc,
-  message: MessageShape<Desc>,
+  message: MessageShape<Desc>
 ) {
   // ...
 }
@@ -2426,7 +2582,7 @@ The following npm packages are available with version 2.0.0:
 
 - [@bufbuild/protobuf](https://www.npmjs.com/package/@bufbuild/protobuf): The runtime library, containing base types,
   generated well-known types, and core functionality.
-- [@bufbuild/protoc-gen-es](https://www.npmjs.com/package/@bufbuild/protoc-gen-es): Provides the code generator plugin
+- [@qdrant/protoc-gen-es](https://www.npmjs.com/package/@qdrant/protoc-gen-es): Provides the code generator plugin
   `protoc-gen-es`.
 - [@bufbuild/protoplugin](https://www.npmjs.com/package/@bufbuild/protoplugin): Framework to create your own code
   generator plugin.
@@ -2434,7 +2590,7 @@ The following npm packages are available with version 2.0.0:
 Update the ones you use with npm:
 
 ```shellsession
-npm install @bufbuild/protobuf@^2.0.0 @bufbuild/protoc-gen-es@^2.0.0
+npm install @bufbuild/protobuf@^2.0.0 @qdrant/protoc-gen-es@^2.0.0
 ```
 
 Make sure to re-generate code with the new plugin, and verify that the package versions match the generated code.
@@ -2695,7 +2851,7 @@ Serialization to JSON and binary is deterministic within a version of protobuf-e
 
 [@bufbuild/buf]: https://www.npmjs.com/package/@bufbuild/buf
 [@bufbuild/protobuf]: https://www.npmjs.com/package/@bufbuild/protobuf
-[@bufbuild/protoc-gen-es]: https://www.npmjs.com/package/@bufbuild/protoc-gen-es
+[@qdrant/protoc-gen-es]: https://www.npmjs.com/package/@qdrant/protoc-gen-es
 [@bufbuild/protoplugin]: https://www.npmjs.com/package/@bufbuild/protoplugin
 [@bufbuild/protocompile]: https://www.npmjs.com/package/@bufbuild/protocompile
 [tsx]: https://www.npmjs.com/package/tsx
@@ -2764,7 +2920,7 @@ Serialization to JSON and binary is deterministic within a version of protobuf-e
 [protobuf.dev/field_presence]: https://protobuf.dev/programming-guides/field_presence/
 [protobuf.dev/required]: https://protobuf.dev/programming-guides/proto2/#field-labels
 [protobuf.dev]: https://protobuf.dev/overview/
-[protoc-gen-es]: https://www.npmjs.com/package/@bufbuild/protoc-gen-es
+[protoc-gen-es]: https://www.npmjs.com/package/@qdrant/protoc-gen-es
 [protodelim-c++]: https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/util/delimited_message_util.h
 [protodelim-go]: https://pkg.go.dev/google.golang.org/protobuf/encoding/protodelim
 [protodelim-java]: https://developers.google.com/protocol-buffers/docs/reference/java/com/google/protobuf/AbstractParser.html#parseDelimitedFrom-java.io.InputStream-

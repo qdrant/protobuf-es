@@ -61,7 +61,7 @@ export type SourceInfo = Message<"google.api.expr.v1beta1.SourceInfo"> & {
    * @generated from field: map<int32, int32> positions = 4;
    */
   positions: { [key: number]: number };
-};
+}
 
 /**
  * Describes the message google.api.expr.v1beta1.SourceInfo.
@@ -105,7 +105,7 @@ export type SourcePosition = Message<"google.api.expr.v1beta1.SourcePosition"> &
    * @generated from field: int32 column = 4;
    */
   column: number;
-};
+}
 
 /**
  * Describes the message google.api.expr.v1beta1.SourcePosition.

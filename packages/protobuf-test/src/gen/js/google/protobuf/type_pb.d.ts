@@ -84,7 +84,7 @@ export declare type Type = Message<"google.protobuf.Type"> & {
    * @generated from field: string edition = 7;
    */
   edition: string;
-};
+}
 
 /**
  * Describes the message google.protobuf.Type.
@@ -174,7 +174,7 @@ export declare type Field = Message<"google.protobuf.Field"> & {
    * @generated from field: string default_value = 11;
    */
   defaultValue: string;
-};
+}
 
 /**
  * Describes the message google.protobuf.Field.
@@ -419,7 +419,7 @@ export declare type Enum = Message<"google.protobuf.Enum"> & {
    * @generated from field: string edition = 6;
    */
   edition: string;
-};
+}
 
 /**
  * Describes the message google.protobuf.Enum.
@@ -458,7 +458,7 @@ export declare type EnumValue = Message<"google.protobuf.EnumValue"> & {
    * @generated from field: repeated google.protobuf.Option options = 3;
    */
   options: Option[];
-};
+}
 
 /**
  * Describes the message google.protobuf.EnumValue.
@@ -496,7 +496,7 @@ export declare type Option = Message<"google.protobuf.Option"> & {
    * @generated from field: google.protobuf.Any value = 2;
    */
   value?: Any;
-};
+}
 
 /**
  * Describes the message google.protobuf.Option.

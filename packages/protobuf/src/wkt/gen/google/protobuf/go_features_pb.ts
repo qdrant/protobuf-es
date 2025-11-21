@@ -54,7 +54,7 @@ export type GoFeatures = Message<"pb.GoFeatures"> & {
    * @generated from field: optional pb.GoFeatures.StripEnumPrefix strip_enum_prefix = 3;
    */
   stripEnumPrefix: GoFeatures_StripEnumPrefix;
-};
+}
 
 /**
  * @generated from message pb.GoFeatures

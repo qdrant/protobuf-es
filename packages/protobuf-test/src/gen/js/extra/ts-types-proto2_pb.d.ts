@@ -37,7 +37,7 @@ export declare type TsTypeA = Message<"spec.TsTypeA"> & {
    * @generated from field: optional spec.TsTypeA child = 2;
    */
   child?: TsTypeA;
-};
+}
 
 /**
  * Describes the message spec.TsTypeA.
@@ -58,7 +58,7 @@ export declare type TsTypeB = Message<"spec.TsTypeB"> & {
    * @generated from field: optional spec.TsTypeB child = 2;
    */
   child?: TsTypeB;
-};
+}
 
 /**
  * Describes the message spec.TsTypeB.

@@ -50,7 +50,7 @@ export type TestEmbedOptimizedForSize = Message<"proto2_unittest.TestEmbedOptimi
    * @generated from field: repeated proto2_unittest.TestOptimizedForSize repeated_message = 2;
    */
   repeatedMessage: TestOptimizedForSize[];
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestEmbedOptimizedForSize.

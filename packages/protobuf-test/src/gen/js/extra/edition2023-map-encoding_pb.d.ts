@@ -43,7 +43,7 @@ export declare type Edition2023MapEncodingMessage = Message<"spec.Edition2023Map
    * @generated from field: map<int32, spec.Edition2023MapEncodingMessage.Child> message_map = 88;
    */
   messageMap: { [key: number]: Edition2023MapEncodingMessage_Child };
-};
+}
 
 /**
  * Describes the message spec.Edition2023MapEncodingMessage.
@@ -55,7 +55,7 @@ export declare const Edition2023MapEncodingMessageSchema: GenMessage<Edition2023
  * @generated from message spec.Edition2023MapEncodingMessage.Child
  */
 export declare type Edition2023MapEncodingMessage_Child = Message<"spec.Edition2023MapEncodingMessage.Child"> & {
-};
+}
 
 /**
  * Describes the message spec.Edition2023MapEncodingMessage.Child.

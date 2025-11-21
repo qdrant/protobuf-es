@@ -32,7 +32,7 @@ export declare type TestMessage = Message<"proto2_unittest_import_option.TestMes
    * @generated from field: int32 field1 = 1;
    */
   field1: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest_import_option.TestMessage.

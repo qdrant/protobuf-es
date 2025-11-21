@@ -61,7 +61,7 @@ export declare type TestOptimizedForSize = Message<"proto2_unittest.TestOptimize
     value: string;
     case: "stringField";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestOptimizedForSize.
@@ -87,7 +87,7 @@ export declare type TestRequiredOptimizedForSize = Message<"proto2_unittest.Test
    * @generated from field: required int32 x = 1;
    */
   x: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestRequiredOptimizedForSize.
@@ -103,7 +103,7 @@ export declare type TestOptionalOptimizedForSize = Message<"proto2_unittest.Test
    * @generated from field: optional proto2_unittest.TestRequiredOptimizedForSize o = 1;
    */
   o?: TestRequiredOptimizedForSize;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestOptionalOptimizedForSize.

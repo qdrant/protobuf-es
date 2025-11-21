@@ -94,7 +94,7 @@ export type Expr = Message<"google.type.Expr"> & {
    * @generated from field: string location = 4;
    */
   location: string;
-};
+}
 
 /**
  * Describes the message google.type.Expr.

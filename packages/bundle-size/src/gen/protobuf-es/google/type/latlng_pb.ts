@@ -49,7 +49,7 @@ export type LatLng = Message<"google.type.LatLng"> & {
    * @generated from field: double longitude = 2;
    */
   longitude: number;
-};
+}
 
 /**
  * Describes the message google.type.LatLng.

@@ -8,5 +8,6 @@ permissions:
   pull-requests: read
 jobs:
   approval:
+    if: false  # Disabled
     uses: bufbuild/base-workflows/.github/workflows/notify-approval-bypass.yaml@main
     secrets: inherit
