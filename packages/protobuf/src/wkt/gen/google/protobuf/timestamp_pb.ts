@@ -141,7 +141,7 @@ export type Timestamp = Message<"google.protobuf.Timestamp"> & {
    * @generated from field: int32 nanos = 2;
    */
   nanos: number;
-};
+}
 
 /**
  * A Timestamp represents a point in time independent of any time zone or local

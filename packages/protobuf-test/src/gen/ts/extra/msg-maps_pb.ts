@@ -99,7 +99,7 @@ export type MapsMessage = Message<"spec.MapsMessage"> & {
    * @generated from field: map<int64, spec.MapsEnum> int64_enu_field = 14;
    */
   int64EnuField: { [key: string]: MapsEnum };
-};
+}
 
 /**
  * Describes the message spec.MapsMessage.
@@ -116,7 +116,7 @@ export type MapsMessageBug1183 = Message<"spec.MapsMessageBug1183"> & {
    * @generated from field: map<string, int32> map = 1;
    */
   map: { [key: string]: number };
-};
+}
 
 /**
  * Describes the message spec.MapsMessageBug1183.

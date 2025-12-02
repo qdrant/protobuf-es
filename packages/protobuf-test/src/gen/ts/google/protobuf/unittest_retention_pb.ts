@@ -48,7 +48,7 @@ export type OptionsMessage = Message<"proto2_unittest.OptionsMessage"> & {
    * @generated from field: optional int32 source_retention_field = 3;
    */
   sourceRetentionField: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest.OptionsMessage.
@@ -61,7 +61,7 @@ export const OptionsMessageSchema: GenMessage<OptionsMessage> = /*@__PURE__*/
  * @generated from message proto2_unittest.Extendee
  */
 export type Extendee = Message<"proto2_unittest.Extendee"> & {
-};
+}
 
 /**
  * Describes the message proto2_unittest.Extendee.
@@ -89,7 +89,7 @@ export type TopLevelMessage = Message<"proto2_unittest.TopLevelMessage"> & {
     value: bigint;
     case: "i";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message proto2_unittest.TopLevelMessage.
@@ -102,7 +102,7 @@ export const TopLevelMessageSchema: GenMessage<TopLevelMessage> = /*@__PURE__*/
  * @generated from message proto2_unittest.TopLevelMessage.NestedMessage
  */
 export type TopLevelMessage_NestedMessage = Message<"proto2_unittest.TopLevelMessage.NestedMessage"> & {
-};
+}
 
 /**
  * Describes the message proto2_unittest.TopLevelMessage.NestedMessage.

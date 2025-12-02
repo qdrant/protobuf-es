@@ -48,7 +48,7 @@ export type LocalizedText = Message<"google.type.LocalizedText"> & {
    * @generated from field: string language_code = 2;
    */
   languageCode: string;
-};
+}
 
 /**
  * Describes the message google.type.LocalizedText.

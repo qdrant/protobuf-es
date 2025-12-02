@@ -472,7 +472,7 @@ export declare type Proto2Message = Message<"spec.Proto2Message"> & {
    * @generated from field: map<int32, google.protobuf.UInt32Value> map_int32_wrapped_uint32_field = 209;
    */
   mapInt32WrappedUint32Field: { [key: number]: UInt32Value };
-};
+}
 
 /**
  * Describes the message spec.Proto2Message.
@@ -488,7 +488,7 @@ export declare type Proto2Message_RequiredGroup = Message<"spec.Proto2Message.Re
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2Message.RequiredGroup.
@@ -504,7 +504,7 @@ export declare type Proto2Message_RequiredDefaultGroup = Message<"spec.Proto2Mes
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2Message.RequiredDefaultGroup.
@@ -520,7 +520,7 @@ export declare type Proto2Message_OptionalGroup = Message<"spec.Proto2Message.Op
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2Message.OptionalGroup.
@@ -536,7 +536,7 @@ export declare type Proto2Message_OptionalDefaultGroup = Message<"spec.Proto2Mes
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2Message.OptionalDefaultGroup.
@@ -552,7 +552,7 @@ export declare type Proto2Message_RepeatedGroup = Message<"spec.Proto2Message.Re
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2Message.RepeatedGroup.
@@ -568,7 +568,7 @@ export declare type Proto2Message_OneofGroup = Message<"spec.Proto2Message.Oneof
    * @generated from field: optional int32 int32_field = 1;
    */
   int32Field: number;
-};
+}
 
 /**
  * Describes the message spec.Proto2Message.OneofGroup.

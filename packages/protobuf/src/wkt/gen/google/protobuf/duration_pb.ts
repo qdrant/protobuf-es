@@ -111,7 +111,7 @@ export type Duration = Message<"google.protobuf.Duration"> & {
    * @generated from field: int32 nanos = 2;
    */
   nanos: number;
-};
+}
 
 /**
  * A Duration represents a signed, fixed-length span of time represented

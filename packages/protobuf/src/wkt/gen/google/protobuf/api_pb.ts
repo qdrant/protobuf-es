@@ -126,7 +126,7 @@ export type Api = Message<"google.protobuf.Api"> & {
    * @generated from field: string edition = 8;
    */
   edition: string;
-};
+}
 
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -306,7 +306,7 @@ export type Method = Message<"google.protobuf.Method"> & {
    * @deprecated
    */
   edition: string;
-};
+}
 
 /**
  * Method represents a method of an API interface.
@@ -488,7 +488,7 @@ export type Mixin = Message<"google.protobuf.Mixin"> & {
    * @generated from field: string root = 2;
    */
   root: string;
-};
+}
 
 /**
  * Declares an API Interface to be included in this interface. The including

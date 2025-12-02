@@ -71,7 +71,7 @@ export type Version = Message<"google.protobuf.compiler.Version"> & {
    * @generated from field: optional string suffix = 4;
    */
   suffix: string;
-};
+}
 
 /**
  * The version number of protocol compiler.
@@ -172,7 +172,7 @@ export type CodeGeneratorRequest = Message<"google.protobuf.compiler.CodeGenerat
    * @generated from field: optional google.protobuf.compiler.Version compiler_version = 3;
    */
   compilerVersion?: Version;
-};
+}
 
 /**
  * An encoded CodeGeneratorRequest is written to the plugin's stdin.
@@ -297,7 +297,7 @@ export type CodeGeneratorResponse = Message<"google.protobuf.compiler.CodeGenera
    * @generated from field: repeated google.protobuf.compiler.CodeGeneratorResponse.File file = 15;
    */
   file: CodeGeneratorResponse_File[];
-};
+}
 
 /**
  * The plugin writes an encoded CodeGeneratorResponse to stdout.
@@ -441,7 +441,7 @@ export type CodeGeneratorResponse_File = Message<"google.protobuf.compiler.CodeG
    * @generated from field: optional google.protobuf.GeneratedCodeInfo generated_code_info = 16;
    */
   generatedCodeInfo?: GeneratedCodeInfo;
-};
+}
 
 /**
  * Represents a single generated file.

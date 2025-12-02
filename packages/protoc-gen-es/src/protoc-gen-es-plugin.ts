@@ -20,29 +20,193 @@ import type {
   DescOneof,
   DescService,
 } from "@bufbuild/protobuf";
-import { parentTypes } from "@bufbuild/protobuf/reflect";
+import { getOption } from "@bufbuild/protobuf";
 import { embedFileDesc, pathInFileDesc } from "@bufbuild/protobuf/codegenv2";
+import { parentTypes } from "@bufbuild/protobuf/reflect";
 import { isWrapperDesc } from "@bufbuild/protobuf/wkt";
 import {
-  createEcmaScriptPlugin,
   type GeneratedFile,
   type Printable,
   type Schema,
   type Target,
+  createEcmaScriptPlugin,
 } from "@bufbuild/protoplugin";
+import { version } from "../package.json";
+import { parseCELExpression } from "./cel-parser.js";
+import { message as ext_message } from "./gen/minimal-validate_pb.js";
 import {
   fieldJsonType,
   fieldTypeScriptType,
   functionCall,
   messageGenType,
 } from "./util.js";
-import { version } from "../package.json";
+import { snakeToCamel } from "./util.js";
 import {
   isLegacyRequired,
   isProtovalidateDisabled,
   isProtovalidateRequired,
   messageNeedsCustomValidType,
 } from "./valid-types.js";
+
+/**
+ * Returns true if the message has buf.validate.message options with CEL expressions
+ */
+export function messageHasBufValidateOptions(message: DescMessage): boolean {
+  if (!ext_message) {
+    return false;
+  }
+  return getOption(message, ext_message) !== undefined;
+}
+
+/**
+ * Extracts read-only field names from buf.validate.message CEL expressions
+ */
+export function getReadOnlyFields(message: DescMessage): string[] {
+  try {
+    const messageRules = getOption(message, ext_message);
+    if (!messageRules?.cel || messageRules.cel.length === 0) {
+      return [];
+    }
+
+    // Combine all CEL expressions from the constraints
+    const allReadOnlyFields: string[] = [];
+    for (const constraint of messageRules.cel) {
+      if (constraint.expression) {
+        const result = parseCELExpression(constraint.expression);
+        allReadOnlyFields.push(...result.readOnlyFields);
+      }
+    }
+
+    // Remove duplicates and convert snake_case to camelCase
+    const uniqueFields = [...new Set(allReadOnlyFields)];
+    return uniqueFields.map((field) => {
+      // Convert snake_case to camelCase for TypeScript field names
+      return field.includes(".") ? field : snakeToCamel(field);
+    });
+  } catch {
+    // If there's any error parsing, return empty array to avoid breaking generation
+    return [];
+  }
+}
+
+/**
+ * Extracts literal field constraints from buf.validate.message CEL expressions
+ *
+ * @param message - The message descriptor to analyze
+ * @returns Record mapping field names to their required literal values
+ */
+function getLiteralFields(
+  message: DescMessage,
+): Record<string, string | number | boolean> {
+  try {
+    const messageRules = getOption(message, ext_message);
+    if (!messageRules?.cel || messageRules.cel.length === 0) {
+      return {};
+    }
+
+    // Combine all literal constraints from all CEL expressions
+    const allLiteralFields: Record<string, string | number | boolean> = {};
+
+    for (const constraint of messageRules.cel) {
+      if (constraint.expression) {
+        const result = parseCELExpression(constraint.expression);
+
+        // Merge literal fields
+        for (const [key, value] of Object.entries(result.literalFields)) {
+          allLiteralFields[key] = value;
+        }
+      }
+    }
+
+    return allLiteralFields;
+  } catch {
+    // If there's any error parsing, return empty object to avoid breaking generation
+    return {};
+  }
+}
+
+/**
+ * Extracts union groups from buf.validate.message CEL expressions
+ *
+ * @param message - The message descriptor to analyze
+ * @returns Array of union groups, each containing read-only fields and nested constraints
+ */
+function getUnionGroups(message: DescMessage): Array<{
+  readOnlyFields: string[];
+  literalFields: Record<string, string | number | boolean>;
+  nestedConstraints: Record<string, string[]>;
+}> {
+  try {
+    const messageRules = getOption(message, ext_message);
+    if (!messageRules?.cel || messageRules.cel.length === 0) {
+      return [];
+    }
+
+    const allUnionGroups: Array<{
+      readOnlyFields: string[];
+      literalFields: Record<string, string | number | boolean>;
+      nestedConstraints: Record<string, string[]>;
+    }> = [];
+
+    for (const constraint of messageRules.cel) {
+      if (constraint.expression) {
+        const result = parseCELExpression(constraint.expression);
+
+        // Add all union groups from this constraint
+        allUnionGroups.push(...result.unionGroups);
+      }
+    }
+
+    return allUnionGroups;
+  } catch {
+    // If there's any error parsing, return empty array to avoid breaking generation
+    return [];
+  }
+}
+
+/**
+ * Extracts nested read-only field constraints from buf.validate.message CEL expressions
+ *
+ * @param message - The message descriptor to analyze
+ * @returns Record mapping parent field names to arrays of child field names to omit
+ */
+function getNestedReadOnlyFields(
+  message: DescMessage,
+): Record<string, string[]> {
+  try {
+    const messageRules = getOption(message, ext_message);
+    if (!messageRules?.cel || messageRules.cel.length === 0) {
+      return {};
+    }
+
+    // Combine all nested constraints from all CEL expressions
+    const allNestedConstraints: Record<string, string[]> = {};
+
+    for (const constraint of messageRules.cel) {
+      if (constraint.expression) {
+        const result = parseCELExpression(constraint.expression);
+
+        // Merge nested constraints
+        for (const [key, fields] of Object.entries(result.nestedConstraints)) {
+          if (!allNestedConstraints[key]) {
+            allNestedConstraints[key] = [];
+          }
+          allNestedConstraints[key].push(...fields);
+        }
+      }
+    }
+
+    // Remove duplicates from each nested constraint array
+    for (const key of Object.keys(allNestedConstraints)) {
+      allNestedConstraints[key] = [...new Set(allNestedConstraints[key])];
+    }
+
+    return allNestedConstraints;
+  } catch {
+    // If there's any error parsing, return empty object to avoid breaking generation
+    return {};
+  }
+}
 
 export const protocGenEs = createEcmaScriptPlugin({
   name: "protoc-gen-es",
@@ -59,6 +223,7 @@ type Options = {
     legacyRequired: boolean;
     protovalidateRequired: boolean;
   };
+  celValidation: boolean;
 };
 
 function parseOptions(
@@ -72,6 +237,7 @@ function parseOptions(
     legacyRequired: false,
     protovalidateRequired: false,
   };
+  let celValidation = false;
   for (const { key, value } of options) {
     switch (key) {
       case "json_types":
@@ -94,11 +260,17 @@ function parseOptions(
           }
         }
         break;
+      case "cel_validation":
+        if (!["true", "1", "false", "0"].includes(value)) {
+          throw "please provide true or false";
+        }
+        celValidation = ["true", "1"].includes(value);
+        break;
       default:
         throw new Error();
     }
   }
-  return { jsonTypes, validTypes };
+  return { jsonTypes, validTypes, celValidation };
 }
 
 // This annotation informs bundlers that the succeeding function call is free of
@@ -125,13 +297,25 @@ function generateTs(schema: Schema<Options>) {
           if (schema.options.jsonTypes) {
             generateMessageJsonShape(f, desc, "ts");
           }
-          if (schema.options.validTypes.legacyRequired || schema.options.validTypes.protovalidateRequired) {
+          if (
+            schema.options.validTypes.legacyRequired ||
+            schema.options.validTypes.protovalidateRequired
+          ) {
             generateMessageValidShape(f, desc, schema.options.validTypes, "ts");
           }
           generateDescDoc(f, desc);
           const name = f.importSchema(desc).name;
-          f.print(f.export("const", name), ": ", messageGenType(desc, f, schema.options), " = ", pure);
-          const call = functionCall(f.runtime.codegen.messageDesc, [fileDesc, ...pathInFileDesc(desc)]);
+          f.print(
+            f.export("const", name),
+            ": ",
+            messageGenType(desc, f, schema.options),
+            " = ",
+            pure
+          );
+          const call = functionCall(f.runtime.codegen.messageDesc, [
+            fileDesc,
+            ...pathInFileDesc(desc),
+          ]);
           f.print("  ", call, ";");
           f.print();
           break;
@@ -147,11 +331,34 @@ function generateTs(schema: Schema<Options>) {
           const { GenEnum, enumDesc } = f.runtime.codegen;
           if (schema.options.jsonTypes) {
             const JsonType = f.importJson(desc);
-            f.print(f.export("const", name), ": ", GenEnum, "<", Shape, ", ", JsonType, ">", " = ", pure);
+            f.print(
+              f.export("const", name),
+              ": ",
+              GenEnum,
+              "<",
+              Shape,
+              ", ",
+              JsonType,
+              ">",
+              " = ",
+              pure
+            );
           } else {
-            f.print(f.export("const", name), ": ", GenEnum, "<", Shape, ">", " = ", pure);
+            f.print(
+              f.export("const", name),
+              ": ",
+              GenEnum,
+              "<",
+              Shape,
+              ">",
+              " = ",
+              pure
+            );
           }
-          const call = functionCall(enumDesc, [fileDesc, ...pathInFileDesc(desc)]);
+          const call = functionCall(enumDesc, [
+            fileDesc,
+            ...pathInFileDesc(desc),
+          ]);
           f.print("  ", call, ";");
           f.print();
           break;
@@ -161,9 +368,23 @@ function generateTs(schema: Schema<Options>) {
           const name = f.importSchema(desc).name;
           const E = f.importShape(desc.extendee);
           const V = fieldTypeScriptType(desc, f.runtime).typing;
-          const call = functionCall(extDesc, [fileDesc, ...pathInFileDesc(desc)]);
+          const call = functionCall(extDesc, [
+            fileDesc,
+            ...pathInFileDesc(desc),
+          ]);
           f.print(f.jsDoc(desc));
-          f.print(f.export("const", name), ": ", GenExtension, "<", E, ", ", V, ">", " = ", pure);
+          f.print(
+            f.export("const", name),
+            ": ",
+            GenExtension,
+            "<",
+            E,
+            ", ",
+            V,
+            ">",
+            " = ",
+            pure
+          );
           f.print("  ", call, ";");
           f.print();
           break;
@@ -171,9 +392,20 @@ function generateTs(schema: Schema<Options>) {
         case "service": {
           const { GenService, serviceDesc } = f.runtime.codegen;
           const name = f.importSchema(desc).name;
-          const call = functionCall(serviceDesc, [fileDesc, ...pathInFileDesc(desc)]);
+          const call = functionCall(serviceDesc, [
+            fileDesc,
+            ...pathInFileDesc(desc),
+          ]);
           f.print(f.jsDoc(desc));
-          f.print(f.export("const", name), ": ", GenService, "<", getServiceShapeExpr(f, desc), "> = ", pure);
+          f.print(
+            f.export("const", name),
+            ": ",
+            GenService,
+            "<",
+            getServiceShapeExpr(f, desc),
+            "> = ",
+            pure
+          );
           f.print("  ", call, ";");
           f.print();
           break;
@@ -199,7 +431,10 @@ function generateJs(schema: Schema<Options>) {
           const name = f.importSchema(desc).name;
           generateDescDoc(f, desc);
           const { messageDesc } = f.runtime.codegen;
-          const call = functionCall(messageDesc, [fileDesc, ...pathInFileDesc(desc)]);
+          const call = functionCall(messageDesc, [
+            fileDesc,
+            ...pathInFileDesc(desc),
+          ]);
           f.print(f.export("const", name), " = ", pure);
           f.print("  ", call, ";");
           f.print();
@@ -212,7 +447,10 @@ function generateJs(schema: Schema<Options>) {
             const name = f.importSchema(desc).name;
             f.print(f.export("const", name), " = ", pure);
             const { enumDesc } = f.runtime.codegen;
-            const call = functionCall(enumDesc, [fileDesc, ...pathInFileDesc(desc)]);
+            const call = functionCall(enumDesc, [
+              fileDesc,
+              ...pathInFileDesc(desc),
+            ]);
             f.print("  ", call, ";");
             f.print();
           }
@@ -232,7 +470,10 @@ function generateJs(schema: Schema<Options>) {
           const name = f.importSchema(desc).name;
           f.print(f.export("const", name), " = ", pure);
           const { extDesc } = f.runtime.codegen;
-          const call = functionCall(extDesc, [fileDesc, ...pathInFileDesc(desc)]);
+          const call = functionCall(extDesc, [
+            fileDesc,
+            ...pathInFileDesc(desc),
+          ]);
           f.print("  ", call, ";");
           f.print();
           break;
@@ -242,7 +483,10 @@ function generateJs(schema: Schema<Options>) {
           const name = f.importSchema(desc).name;
           f.print(f.export("const", name), " = ", pure);
           const { serviceDesc } = f.runtime.codegen;
-          const call = functionCall(serviceDesc, [fileDesc, ...pathInFileDesc(desc)]);
+          const call = functionCall(serviceDesc, [
+            fileDesc,
+            ...pathInFileDesc(desc),
+          ]);
           f.print("  ", call, ";");
           f.print();
           break;
@@ -269,12 +513,25 @@ function generateDts(schema: Schema<Options>) {
           if (schema.options.jsonTypes) {
             generateMessageJsonShape(f, desc, "dts");
           }
-          if (schema.options.validTypes.legacyRequired || schema.options.validTypes.protovalidateRequired) {
-            generateMessageValidShape(f, desc, schema.options.validTypes, "dts");
+          if (
+            schema.options.validTypes.legacyRequired ||
+            schema.options.validTypes.protovalidateRequired
+          ) {
+            generateMessageValidShape(
+              f,
+              desc,
+              schema.options.validTypes,
+              "dts"
+            );
           }
           const name = f.importSchema(desc).name;
           generateDescDoc(f, desc);
-          f.print(f.export("declare const", name), ": ", messageGenType(desc, f, schema.options), ";");
+          f.print(
+            f.export("declare const", name),
+            ": ",
+            messageGenType(desc, f, schema.options),
+            ";"
+          );
           f.print();
           break;
         }
@@ -289,9 +546,25 @@ function generateDts(schema: Schema<Options>) {
           const { GenEnum } = f.runtime.codegen;
           if (schema.options.jsonTypes) {
             const JsonType = f.importJson(desc);
-            f.print(f.export("declare const", name), ": ", GenEnum, "<", Shape, ", ", JsonType, ">;");
+            f.print(
+              f.export("declare const", name),
+              ": ",
+              GenEnum,
+              "<",
+              Shape,
+              ", ",
+              JsonType,
+              ">;"
+            );
           } else {
-            f.print(f.export("declare const", name), ": ", GenEnum, "<", Shape, ">;");
+            f.print(
+              f.export("declare const", name),
+              ": ",
+              GenEnum,
+              "<",
+              Shape,
+              ">;"
+            );
           }
           f.print();
           break;
@@ -302,7 +575,16 @@ function generateDts(schema: Schema<Options>) {
           const E = f.importShape(desc.extendee);
           const V = fieldTypeScriptType(desc, f.runtime).typing;
           f.print(f.jsDoc(desc));
-          f.print(f.export("declare const", name), ": ", GenExtension, "<", E, ", ", V, ">;");
+          f.print(
+            f.export("declare const", name),
+            ": ",
+            GenExtension,
+            "<",
+            E,
+            ", ",
+            V,
+            ">;"
+          );
           f.print();
           break;
         }
@@ -310,7 +592,14 @@ function generateDts(schema: Schema<Options>) {
           const { GenService } = f.runtime.codegen;
           const name = f.importSchema(desc).name;
           f.print(f.jsDoc(desc));
-          f.print(f.export("declare const", name), ": ", GenService, "<", getServiceShapeExpr(f, desc), ">;");
+          f.print(
+            f.export("declare const", name),
+            ": ",
+            GenService,
+            "<",
+            getServiceShapeExpr(f, desc),
+            ">;"
+          );
           f.print();
           break;
         }
@@ -355,9 +644,14 @@ function getFileDescCall(f: GeneratedFile, file: DescFile, schema: Schema) {
   // embed source retention options in generated code, we use FileDescriptorProto
   // messages from CodeGeneratorRequest.proto_file instead.
   const sourceFile = file.proto;
-  const runtimeFile = schema.proto.protoFile.find(f => f.name == sourceFile.name);
+  const runtimeFile = schema.proto.protoFile.find(
+    (f) => f.name == sourceFile.name
+  );
   const info = embedFileDesc(runtimeFile ?? sourceFile);
-  if (info.bootable && !f.runtime.create.from.startsWith("@bufbuild/protobuf")) {
+  if (
+    info.bootable &&
+    !f.runtime.create.from.startsWith("@bufbuild/protobuf")
+  ) {
     // google/protobuf/descriptor.proto is embedded as a plain object when
     // bootstrapping to avoid recursion
     return functionCall(f.runtime.codegen.boot, [JSON.stringify(info.boot())]);
@@ -368,16 +662,16 @@ function getFileDescCall(f: GeneratedFile, file: DescFile, schema: Schema) {
       kind: "es_desc_ref",
       desc: f,
     }));
-    return functionCall(fileDesc, [
-      f.string(info.base64()),
-      f.array(deps),
-    ]);
+    return functionCall(fileDesc, [f.string(info.base64()), f.array(deps)]);
   }
   return functionCall(fileDesc, [f.string(info.base64())]);
 }
 
 // biome-ignore format: want this to read well
-function getServiceShapeExpr(f: GeneratedFile, service: DescService): Printable {
+function getServiceShapeExpr(
+  f: GeneratedFile,
+  service: DescService
+): Printable {
   const p: Printable[] = ["{\n"];
   for (const method of service.methods) {
     p.push(f.jsDoc(method, "  "), "\n");
@@ -407,7 +701,11 @@ function generateEnumShape(f: GeneratedFile, enumeration: DescEnum) {
 }
 
 // biome-ignore format: want this to read well
-function generateEnumJsonShape(f: GeneratedFile, enumeration: DescEnum, target: Extract<Target, "ts" | "dts">) {
+function generateEnumJsonShape(
+  f: GeneratedFile,
+  enumeration: DescEnum,
+  target: Extract<Target, "ts" | "dts">
+) {
   f.print(f.jsDoc(enumeration));
   const declaration = target == "ts" ? "type" : "declare type";
   const values: Printable[] = [];
@@ -421,49 +719,264 @@ function generateEnumJsonShape(f: GeneratedFile, enumeration: DescEnum, target: 
       values.push(f.string(v.name));
     }
   }
-  f.print(f.export(declaration, f.importJson(enumeration).name), " = ", values, ";");
+  f.print(
+    f.export(declaration, f.importJson(enumeration).name),
+    " = ",
+    values,
+    ";"
+  );
   f.print();
 }
 
 // biome-ignore format: want this to read well
-function generateMessageShape(f: GeneratedFile, message: DescMessage, target: Extract<Target, "ts" | "dts">) {
+function generateMessageShape(
+  f: GeneratedFile,
+  message: DescMessage,
+  target: Extract<Target, "ts" | "dts">
+) {
   const { Message } = f.runtime;
   const declaration = target == "ts" ? "type" : "declare type";
   f.print(f.jsDoc(message));
-  f.print(f.export(declaration, f.importShape(message).name), " = ", Message, "<", f.string(message.typeName), "> & {");
-  for (const member of message.members) {
-    generateMessageShapeMember(f, member);
-    if (message.members.indexOf(member) < message.members.length - 1) {
-      f.print();
+
+  const nestedConstraints = getNestedReadOnlyFields(message);
+  const readOnlyFields = getReadOnlyFields(message);
+  const literalFields = getLiteralFields(message);
+  const unionGroups = getUnionGroups(message);
+
+  // If there are union groups, generate a union type
+  if (unionGroups.length > 0) {
+    f.print(
+      f.export(declaration, f.importShape(message).name),
+      " = ",
+      Message,
+      "<",
+      f.string(message.typeName),
+      "> & ("
+    );
+
+    // Generate each union branch
+    for (let i = 0; i < unionGroups.length; i++) {
+      const group = unionGroups[i];
+      if (i > 0) {
+        f.print(" | ");
+      }
+
+      f.print("{");
+
+      // 1. Generate normal fields
+      for (const member of message.members) {
+        // Skip members that are in the global readOnlyFields list (always omitted)
+        if (
+          member.kind === "field" &&
+          readOnlyFields.includes(member.localName)
+        ) {
+          continue;
+        }
+
+        // If member is in this group's readOnlyFields, it will be handled in step 2 as 'never'
+        if (
+          member.kind === "field" &&
+          group.readOnlyFields.includes(member.localName)
+        ) {
+          continue;
+        }
+
+        // Merge nested constraints
+        const mergedNestedConstraints = { ...nestedConstraints };
+        for (const [key, fields] of Object.entries(group.nestedConstraints)) {
+          if (!mergedNestedConstraints[key]) {
+            mergedNestedConstraints[key] = [];
+          }
+          mergedNestedConstraints[key].push(...fields);
+          mergedNestedConstraints[key] = [
+            ...new Set(mergedNestedConstraints[key]),
+          ];
+        }
+
+        generateMessageShapeMember(
+          f,
+          member,
+          undefined,
+          mergedNestedConstraints,
+          { ...literalFields, ...group.literalFields }
+        );
+        f.print();
+      }
+
+      // 2. Generate 'never' fields for this group's omitted fields
+      for (const fieldName of group.readOnlyFields) {
+        f.print("  ", fieldName, "?: never;");
+        f.print();
+      }
+
+      f.print("}");
     }
+    f.print(");");
+  } else {
+    // Standard case without union groups
+    f.print(
+      f.export(declaration, f.importShape(message).name),
+      " = ",
+      Message,
+      "<",
+      f.string(message.typeName),
+      "> & {"
+    );
+
+    for (const member of message.members) {
+      // Skip members that are in the readOnlyFields list
+      if (
+        member.kind === "field" &&
+        readOnlyFields.includes(member.localName)
+      ) {
+        continue;
+      }
+      generateMessageShapeMember(f, member, undefined, nestedConstraints, literalFields);
+      if (message.members.indexOf(member) < message.members.length - 1) {
+        f.print();
+      }
+    }
+    f.print("}");
   }
-  f.print("};");
   f.print();
 }
 
 // biome-ignore format: want this to read well
-function generateMessageValidShape(f: GeneratedFile, message: DescMessage, validTypes: Options["validTypes"], target: Extract<Target, "ts" | "dts">) {
+function generateMessageValidShape(
+  f: GeneratedFile,
+  message: DescMessage,
+  validTypes: Options["validTypes"],
+  target: Extract<Target, "ts" | "dts">
+) {
   const declaration = target == "ts" ? "type" : "declare type";
-  if (!messageNeedsCustomValidType(message, validTypes)) {
-    f.print(f.export(declaration, f.importValid(message).name), " = ", f.importShape(message), ";");
+  if (
+    !messageNeedsCustomValidType(message, validTypes) &&
+    !messageHasBufValidateOptions(message)
+  ) {
+    f.print(
+      f.export(declaration, f.importValid(message).name),
+      " = ",
+      f.importShape(message),
+      ";"
+    );
     f.print();
     return;
   }
-  f.print(f.jsDoc(message));
+
   const { Message } = f.runtime;
-  f.print(f.export(declaration, f.importValid(message).name), " = ", Message, "<", f.string(message.typeName), "> & {");
-  for (const member of message.members) {
-    generateMessageShapeMember(f, member, validTypes);
-    if (message.members.indexOf(member) < message.members.length - 1) {
-      f.print();
+  f.print(f.jsDoc(message));
+
+  const nestedConstraints = getNestedReadOnlyFields(message);
+  const readOnlyFields = getReadOnlyFields(message);
+  const literalFields = getLiteralFields(message);
+  const unionGroups = getUnionGroups(message);
+
+  // If there are union groups, generate a union type
+  if (unionGroups.length > 0) {
+    f.print(
+      f.export(declaration, f.importValid(message).name),
+      " = ",
+      Message,
+      "<",
+      f.string(message.typeName),
+      "> & ("
+    );
+
+    // Generate each union branch
+    for (let i = 0; i < unionGroups.length; i++) {
+      const group = unionGroups[i];
+      if (i > 0) {
+        f.print(" | ");
+      }
+
+      f.print("{");
+
+      // 1. Generate normal fields
+      for (const member of message.members) {
+        // Skip members that are in the global readOnlyFields list (always omitted)
+        if (
+          member.kind === "field" &&
+          readOnlyFields.includes(member.localName)
+        ) {
+          continue;
+        }
+
+        // If member is in this group's readOnlyFields, it will be handled in step 2 as 'never'
+        if (
+          member.kind === "field" &&
+          group.readOnlyFields.includes(member.localName)
+        ) {
+          continue;
+        }
+
+        // Merge nested constraints
+        const mergedNestedConstraints = { ...nestedConstraints };
+        for (const [key, fields] of Object.entries(group.nestedConstraints)) {
+          if (!mergedNestedConstraints[key]) {
+            mergedNestedConstraints[key] = [];
+          }
+          mergedNestedConstraints[key].push(...fields);
+          mergedNestedConstraints[key] = [
+            ...new Set(mergedNestedConstraints[key]),
+          ];
+        }
+
+        generateMessageShapeMember(
+          f,
+          member,
+          validTypes,
+          mergedNestedConstraints,
+          { ...literalFields, ...group.literalFields }
+        );
+        f.print();
+      }
+
+      // 2. Generate 'never' fields for this group's omitted fields
+      for (const fieldName of group.readOnlyFields) {
+        f.print("  ", fieldName, "?: never;");
+        f.print();
+      }
+
+      f.print("}");
     }
+    f.print(");");
+  } else {
+    // Standard case without union groups
+    f.print(
+      f.export(declaration, f.importValid(message).name),
+      " = ",
+      Message,
+      "<",
+      f.string(message.typeName),
+      "> & {"
+    );
+
+    for (const member of message.members) {
+      // Skip members that are in the readOnlyFields list
+      if (
+        member.kind === "field" &&
+        readOnlyFields.includes(member.localName)
+      ) {
+        continue;
+      }
+      generateMessageShapeMember(f, member, validTypes, nestedConstraints, literalFields);
+      if (message.members.indexOf(member) < message.members.length - 1) {
+        f.print();
+      }
+    }
+    f.print("}");
   }
-  f.print("};");
   f.print();
 }
 
 // biome-ignore format: want this to read well
-function generateMessageShapeMember(f: GeneratedFile, member: DescField | DescOneof, validTypes?: Options["validTypes"]) {
+function generateMessageShapeMember(
+  f: GeneratedFile,
+  member: DescField | DescOneof,
+  validTypes?: Options["validTypes"],
+  nestedConstraints?: Record<string, string[]>,
+  literalFields?: Record<string, string | number | boolean>
+) {
   switch (member.kind) {
     case "oneof":
       f.print(f.jsDoc(member, "  "));
@@ -473,7 +986,11 @@ function generateMessageShapeMember(f: GeneratedFile, member: DescField | DescOn
           f.print(`  } | {`);
         }
         f.print(f.jsDoc(field, "    "));
-        const { typing } = fieldTypeScriptType(field, f.runtime, validTypes && !isProtovalidateDisabled(field));
+        const { typing } = fieldTypeScriptType(
+          field,
+          f.runtime,
+          validTypes && !isProtovalidateDisabled(field)
+        );
         f.print(`    value: `, typing, `;`);
         f.print(`    case: "`, field.localName, `";`);
       }
@@ -481,13 +998,34 @@ function generateMessageShapeMember(f: GeneratedFile, member: DescField | DescOn
       break;
     case "field":
       f.print(f.jsDoc(member, "  "));
-      let { typing, optional } = fieldTypeScriptType(member, f.runtime, validTypes && !isProtovalidateDisabled(member));
+      let { typing, optional } = fieldTypeScriptType(
+        member,
+        f.runtime,
+        validTypes && !isProtovalidateDisabled(member)
+      );
       if (optional && validTypes) {
-        const isRequired = (validTypes.legacyRequired && isLegacyRequired(member)) || (validTypes.protovalidateRequired && isProtovalidateRequired(member));
+        const isRequired =
+          (validTypes.legacyRequired && isLegacyRequired(member)) ||
+          (validTypes.protovalidateRequired && isProtovalidateRequired(member));
         if (isRequired) {
           optional = false;
         }
       }
+
+      // Apply nested constraints
+      const fieldName = member.localName;
+      typing = applyNestedConstraints(typing, fieldName, nestedConstraints);
+
+      // Override with literal type if specified
+      if (literalFields && fieldName in literalFields) {
+        const literalValue = literalFields[fieldName];
+        if (typeof literalValue === "string") {
+          typing = f.string(literalValue);
+        } else {
+          typing = String(literalValue);
+        }
+      }
+
       if (optional) {
         f.print("  ", member.localName, "?: ", typing, ";");
       } else {
@@ -497,9 +1035,39 @@ function generateMessageShapeMember(f: GeneratedFile, member: DescField | DescOn
   }
 }
 
+/**
+ * Apply nested constraints to a field's type
+ *
+ * Wraps the field type with Omit<> to exclude child fields that have constraints
+ */
+function applyNestedConstraints(
+  typing: Printable,
+  fieldName: string,
+  nestedConstraints: Record<string, string[]> | undefined,
+): Printable {
+  if (!nestedConstraints) {
+    return typing;
+  }
+
+  const constraintsForField = nestedConstraints[fieldName];
+  if (constraintsForField?.length) {
+    // Apply Omit for nested fields
+    typing = ["Omit<", typing, ", '", constraintsForField.join("' | '"), "'>"];
+  }
+
+  return typing;
+}
+
 // biome-ignore format: want this to read well
-function generateMessageJsonShape(f: GeneratedFile, message: DescMessage, target: Extract<Target, "ts" | "dts">) {
-  const exp = f.export(target == "ts" ? "type" : "declare type", f.importJson(message).name);
+function generateMessageJsonShape(
+  f: GeneratedFile,
+  message: DescMessage,
+  target: Extract<Target, "ts" | "dts">
+) {
+  const exp = f.export(
+    target == "ts" ? "type" : "declare type",
+    f.importJson(message).name
+  );
   f.print(f.jsDoc(message));
   switch (message.typeName) {
     case "google.protobuf.Any":
@@ -538,9 +1106,11 @@ function generateMessageJsonShape(f: GeneratedFile, message: DescMessage, target
           let jsonName: Printable = field.jsonName;
           const startWithNumber = /^[0-9]/;
           const containsSpecialChar = /[^a-zA-Z0-9_$]/;
-          if (jsonName === ""
-            || startWithNumber.test(jsonName)
-            || containsSpecialChar.test(jsonName)) {
+          if (
+            jsonName === "" ||
+            startWithNumber.test(jsonName) ||
+            containsSpecialChar.test(jsonName)
+          ) {
             jsonName = f.string(jsonName);
           }
           f.print("  ", jsonName, "?: ", fieldJsonType(field), ";");

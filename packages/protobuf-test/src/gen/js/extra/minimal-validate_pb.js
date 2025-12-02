@@ -27,7 +27,7 @@ import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
  * Describes the file extra/minimal-validate.proto.
  */
 export const file_extra_minimal_validate = /*@__PURE__*/
-  fileDesc("ChxleHRyYS9taW5pbWFsLXZhbGlkYXRlLnByb3RvEgxidWYudmFsaWRhdGUiJAoMTWVzc2FnZVJ1bGVzEhQKCGRpc2FibGVkGAEgASgIQgIYASIeCgpPbmVvZlJ1bGVzEhAKCHJlcXVpcmVkGAEgASgIIqQBCgpGaWVsZFJ1bGVzEhAKCHJlcXVpcmVkGBkgASgIEiQKBmlnbm9yZRgbIAEoDjIULmJ1Zi52YWxpZGF0ZS5JZ25vcmUSLwoIcmVwZWF0ZWQYEiABKAsyGy5idWYudmFsaWRhdGUuUmVwZWF0ZWRSdWxlc0gAEiUKA21hcBgTIAEoCzIWLmJ1Zi52YWxpZGF0ZS5NYXBSdWxlc0gAQgYKBHR5cGUiOAoNUmVwZWF0ZWRSdWxlcxInCgVpdGVtcxgEIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzIjQKCE1hcFJ1bGVzEigKBnZhbHVlcxgFIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzKm4KBklnbm9yZRIWChJJR05PUkVfVU5TUEVDSUZJRUQQABIYChRJR05PUkVfSUZfWkVST19WQUxVRRABEh8KF0lHTk9SRV9JRl9ERUZBVUxUX1ZBTFVFEAIaAggBEhEKDUlHTk9SRV9BTFdBWVMQAzpWCgdtZXNzYWdlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIcJIAEoCzIaLmJ1Zi52YWxpZGF0ZS5NZXNzYWdlUnVsZXNSB21lc3NhZ2U6TgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIcJIAEoCzIYLmJ1Zi52YWxpZGF0ZS5PbmVvZlJ1bGVzUgVvbmVvZjpOCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYhwkgASgLMhguYnVmLnZhbGlkYXRlLkZpZWxkUnVsZXNSBWZpZWxk", [file_google_protobuf_descriptor]);
+  fileDesc("ChxleHRyYS9taW5pbWFsLXZhbGlkYXRlLnByb3RvEgxidWYudmFsaWRhdGUiSwoMTWVzc2FnZVJ1bGVzEhQKCGRpc2FibGVkGAEgASgIQgIYARIlCgNjZWwYAyADKAsyGC5idWYudmFsaWRhdGUuQ29uc3RyYWludCI9CgpDb25zdHJhaW50EgoKAmlkGAEgASgJEg8KB21lc3NhZ2UYAiABKAkSEgoKZXhwcmVzc2lvbhgDIAEoCSIeCgpPbmVvZlJ1bGVzEhAKCHJlcXVpcmVkGAEgASgIIqQBCgpGaWVsZFJ1bGVzEhAKCHJlcXVpcmVkGBkgASgIEiQKBmlnbm9yZRgbIAEoDjIULmJ1Zi52YWxpZGF0ZS5JZ25vcmUSLwoIcmVwZWF0ZWQYEiABKAsyGy5idWYudmFsaWRhdGUuUmVwZWF0ZWRSdWxlc0gAEiUKA21hcBgTIAEoCzIWLmJ1Zi52YWxpZGF0ZS5NYXBSdWxlc0gAQgYKBHR5cGUiOAoNUmVwZWF0ZWRSdWxlcxInCgVpdGVtcxgEIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzIjQKCE1hcFJ1bGVzEigKBnZhbHVlcxgFIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzKm4KBklnbm9yZRIWChJJR05PUkVfVU5TUEVDSUZJRUQQABIYChRJR05PUkVfSUZfWkVST19WQUxVRRABEh8KF0lHTk9SRV9JRl9ERUZBVUxUX1ZBTFVFEAIaAggBEhEKDUlHTk9SRV9BTFdBWVMQAzpWCgdtZXNzYWdlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIcJIAEoCzIaLmJ1Zi52YWxpZGF0ZS5NZXNzYWdlUnVsZXNSB21lc3NhZ2U6TgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIcJIAEoCzIYLmJ1Zi52YWxpZGF0ZS5PbmVvZlJ1bGVzUgVvbmVvZjpOCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYhwkgASgLMhguYnVmLnZhbGlkYXRlLkZpZWxkUnVsZXNSBWZpZWxk", [file_google_protobuf_descriptor]);
 
 /**
  * Describes the message buf.validate.MessageRules.
@@ -37,32 +37,39 @@ export const MessageRulesSchema = /*@__PURE__*/
   messageDesc(file_extra_minimal_validate, 0);
 
 /**
+ * Describes the message buf.validate.Constraint.
+ * Use `create(ConstraintSchema)` to create a new message.
+ */
+export const ConstraintSchema = /*@__PURE__*/
+  messageDesc(file_extra_minimal_validate, 1);
+
+/**
  * Describes the message buf.validate.OneofRules.
  * Use `create(OneofRulesSchema)` to create a new message.
  */
 export const OneofRulesSchema = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 1);
+  messageDesc(file_extra_minimal_validate, 2);
 
 /**
  * Describes the message buf.validate.FieldRules.
  * Use `create(FieldRulesSchema)` to create a new message.
  */
 export const FieldRulesSchema = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 2);
+  messageDesc(file_extra_minimal_validate, 3);
 
 /**
  * Describes the message buf.validate.RepeatedRules.
  * Use `create(RepeatedRulesSchema)` to create a new message.
  */
 export const RepeatedRulesSchema = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 3);
+  messageDesc(file_extra_minimal_validate, 4);
 
 /**
  * Describes the message buf.validate.MapRules.
  * Use `create(MapRulesSchema)` to create a new message.
  */
 export const MapRulesSchema = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 4);
+  messageDesc(file_extra_minimal_validate, 5);
 
 /**
  * Describes the enum buf.validate.Ignore.

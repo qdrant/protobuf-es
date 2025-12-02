@@ -51,7 +51,7 @@ export type CommonLanguageSettings = Message<"google.api.CommonLanguageSettings"
    * @generated from field: repeated google.api.ClientLibraryDestination destinations = 2;
    */
   destinations: ClientLibraryDestination[];
-};
+}
 
 /**
  * Describes the message google.api.CommonLanguageSettings.
@@ -145,7 +145,7 @@ export type ClientLibrarySettings = Message<"google.api.ClientLibrarySettings"> 
    * @generated from field: google.api.GoSettings go_settings = 28;
    */
   goSettings?: GoSettings;
-};
+}
 
 /**
  * Describes the message google.api.ClientLibrarySettings.
@@ -249,7 +249,7 @@ export type Publishing = Message<"google.api.Publishing"> & {
    * @generated from field: string rest_reference_documentation_uri = 111;
    */
   restReferenceDocumentationUri: string;
-};
+}
 
 /**
  * Describes the message google.api.Publishing.
@@ -307,7 +307,7 @@ export type JavaSettings = Message<"google.api.JavaSettings"> & {
    * @generated from field: google.api.CommonLanguageSettings common = 3;
    */
   common?: CommonLanguageSettings;
-};
+}
 
 /**
  * Describes the message google.api.JavaSettings.
@@ -328,7 +328,7 @@ export type CppSettings = Message<"google.api.CppSettings"> & {
    * @generated from field: google.api.CommonLanguageSettings common = 1;
    */
   common?: CommonLanguageSettings;
-};
+}
 
 /**
  * Describes the message google.api.CppSettings.
@@ -349,7 +349,7 @@ export type PhpSettings = Message<"google.api.PhpSettings"> & {
    * @generated from field: google.api.CommonLanguageSettings common = 1;
    */
   common?: CommonLanguageSettings;
-};
+}
 
 /**
  * Describes the message google.api.PhpSettings.
@@ -370,7 +370,7 @@ export type PythonSettings = Message<"google.api.PythonSettings"> & {
    * @generated from field: google.api.CommonLanguageSettings common = 1;
    */
   common?: CommonLanguageSettings;
-};
+}
 
 /**
  * Describes the message google.api.PythonSettings.
@@ -391,7 +391,7 @@ export type NodeSettings = Message<"google.api.NodeSettings"> & {
    * @generated from field: google.api.CommonLanguageSettings common = 1;
    */
   common?: CommonLanguageSettings;
-};
+}
 
 /**
  * Describes the message google.api.NodeSettings.
@@ -462,7 +462,7 @@ export type DotnetSettings = Message<"google.api.DotnetSettings"> & {
    * @generated from field: repeated string handwritten_signatures = 6;
    */
   handwrittenSignatures: string[];
-};
+}
 
 /**
  * Describes the message google.api.DotnetSettings.
@@ -483,7 +483,7 @@ export type RubySettings = Message<"google.api.RubySettings"> & {
    * @generated from field: google.api.CommonLanguageSettings common = 1;
    */
   common?: CommonLanguageSettings;
-};
+}
 
 /**
  * Describes the message google.api.RubySettings.
@@ -504,7 +504,7 @@ export type GoSettings = Message<"google.api.GoSettings"> & {
    * @generated from field: google.api.CommonLanguageSettings common = 1;
    */
   common?: CommonLanguageSettings;
-};
+}
 
 /**
  * Describes the message google.api.GoSettings.
@@ -566,7 +566,7 @@ export type MethodSettings = Message<"google.api.MethodSettings"> & {
    * @generated from field: repeated string auto_populated_fields = 3;
    */
   autoPopulatedFields: string[];
-};
+}
 
 /**
  * Describes the message google.api.MethodSettings.
@@ -617,7 +617,7 @@ export type MethodSettings_LongRunning = Message<"google.api.MethodSettings.Long
    * @generated from field: google.protobuf.Duration total_poll_timeout = 4;
    */
   totalPollTimeout?: Duration;
-};
+}
 
 /**
  * Describes the message google.api.MethodSettings.LongRunning.

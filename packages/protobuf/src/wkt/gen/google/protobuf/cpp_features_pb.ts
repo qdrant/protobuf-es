@@ -54,7 +54,7 @@ export type CppFeatures = Message<"pb.CppFeatures"> & {
    * @generated from field: optional bool enum_name_uses_string_view = 3;
    */
   enumNameUsesStringView: boolean;
-};
+}
 
 /**
  * @generated from message pb.CppFeatures

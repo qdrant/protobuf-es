@@ -1,0 +1,43 @@
+name: Publish to npm
+
+on:
+  push:
+    tags: ["releases/*"]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: protobuf-es/publish/${{ github.sha }}
+          restore-keys: protobuf-es/publish
+      - name: Extract version from tag
+        run: echo "VERSION=${GITHUB_REF#refs/tags/releases/}" >> $GITHUB_ENV
+      - run: npm ci
+      - run: npx turbo run build -F @qdrant/protoc-gen-es
+      - name: Update package.json version
+        run: node -e "const fs = require('fs'); const pkg = JSON.parse(fs.readFileSync('packages/protoc-gen-es/package.json')); pkg.version = process.env.VERSION; fs.writeFileSync('packages/protoc-gen-es/package.json', JSON.stringify(pkg, null, 2));"
+      - run: cd packages/protoc-gen-es && npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      - name: Publish Release Notes
+        uses: release-drafter/release-drafter@v6
+        with:
+          disable-autolabeler: true
+          commitish: ${{ github.ref }}
+          tag: releases/$VERSION
+          name: releases/$VERSION
+          publish: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

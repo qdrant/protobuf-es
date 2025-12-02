@@ -61,7 +61,7 @@ export type Proto3MessageForEdition2023 = Message<"spec.Proto3MessageForEdition2
    * @generated from field: repeated double unpacked_double_field = 10 [packed = false];
    */
   unpackedDoubleField: number[];
-};
+}
 
 /**
  * Describes the message spec.Proto3MessageForEdition2023.

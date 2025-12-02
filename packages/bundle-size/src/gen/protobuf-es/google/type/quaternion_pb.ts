@@ -114,7 +114,7 @@ export type Quaternion = Message<"google.type.Quaternion"> & {
    * @generated from field: double w = 4;
    */
   w: number;
-};
+}
 
 /**
  * Describes the message google.type.Quaternion.

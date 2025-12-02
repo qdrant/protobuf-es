@@ -823,7 +823,7 @@ export declare type TestAllTypesProto3 = Message<"protobuf_test_messages.edition
    * @generated from field: int32 Field_name18__ = 418;
    */
   FieldName18: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.proto3.TestAllTypesProto3.
@@ -844,7 +844,7 @@ export declare type TestAllTypesProto3_NestedMessage = Message<"protobuf_test_me
    * @generated from field: protobuf_test_messages.editions.proto3.TestAllTypesProto3 corecursive = 2;
    */
   corecursive?: TestAllTypesProto3;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.proto3.TestAllTypesProto3.NestedMessage.
@@ -932,7 +932,7 @@ export declare type ForeignMessage = Message<"protobuf_test_messages.editions.pr
    * @generated from field: int32 c = 1;
    */
   c: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.proto3.ForeignMessage.
@@ -944,7 +944,7 @@ export declare const ForeignMessageSchema: GenMessage<ForeignMessage>;
  * @generated from message protobuf_test_messages.editions.proto3.NullHypothesisProto3
  */
 export declare type NullHypothesisProto3 = Message<"protobuf_test_messages.editions.proto3.NullHypothesisProto3"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.proto3.NullHypothesisProto3.
@@ -956,7 +956,7 @@ export declare const NullHypothesisProto3Schema: GenMessage<NullHypothesisProto3
  * @generated from message protobuf_test_messages.editions.proto3.EnumOnlyProto3
  */
 export declare type EnumOnlyProto3 = Message<"protobuf_test_messages.editions.proto3.EnumOnlyProto3"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.proto3.EnumOnlyProto3.

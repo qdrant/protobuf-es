@@ -104,7 +104,7 @@ export type ScalarValuesMessage = Message<"spec.ScalarValuesMessage"> & {
    * @generated from field: sint64 sint64_field = 17;
    */
   sint64Field: bigint;
-};
+}
 
 /**
  * Describes the message spec.ScalarValuesMessage.
@@ -191,7 +191,7 @@ export type RepeatedScalarValuesMessage = Message<"spec.RepeatedScalarValuesMess
    * @generated from field: repeated sint64 sint64_field = 17;
    */
   sint64Field: bigint[];
-};
+}
 
 /**
  * Describes the message spec.RepeatedScalarValuesMessage.

@@ -37,7 +37,7 @@ export type SayRequest = Message<"connectrpc.eliza.v1.SayRequest"> & {
    * @generated from field: string sentence = 1;
    */
   sentence: string;
-};
+}
 
 /**
  * Describes the message connectrpc.eliza.v1.SayRequest.
@@ -56,7 +56,7 @@ export type SayResponse = Message<"connectrpc.eliza.v1.SayResponse"> & {
    * @generated from field: string sentence = 1;
    */
   sentence: string;
-};
+}
 
 /**
  * Describes the message connectrpc.eliza.v1.SayResponse.

@@ -91,7 +91,7 @@ export type Type = Message<"google.protobuf.Type"> & {
    * @generated from field: string edition = 7;
    */
   edition: string;
-};
+}
 
 /**
  * A protocol buffer message type.
@@ -243,7 +243,7 @@ export type Field = Message<"google.protobuf.Field"> & {
    * @generated from field: string default_value = 11;
    */
   defaultValue: string;
-};
+}
 
 /**
  * A single field of a message type.
@@ -589,7 +589,7 @@ export type Enum = Message<"google.protobuf.Enum"> & {
    * @generated from field: string edition = 6;
    */
   edition: string;
-};
+}
 
 /**
  * Enum type definition.
@@ -683,7 +683,7 @@ export type EnumValue = Message<"google.protobuf.EnumValue"> & {
    * @generated from field: repeated google.protobuf.Option options = 3;
    */
   options: Option[];
-};
+}
 
 /**
  * Enum value definition.
@@ -755,7 +755,7 @@ export type Option = Message<"google.protobuf.Option"> & {
    * @generated from field: google.protobuf.Any value = 2;
    */
   value?: Any;
-};
+}
 
 /**
  * A protocol buffer option, which can be attached to a message, field,

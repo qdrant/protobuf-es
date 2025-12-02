@@ -39,7 +39,7 @@ export type MessageFieldMessage = Message<"spec.MessageFieldMessage"> & {
    * @generated from field: repeated spec.MessageFieldMessage.TestMessage repeated_message_field = 2;
    */
   repeatedMessageField: MessageFieldMessage_TestMessage[];
-};
+}
 
 /**
  * Describes the message spec.MessageFieldMessage.
@@ -56,7 +56,7 @@ export type MessageFieldMessage_TestMessage = Message<"spec.MessageFieldMessage.
    * @generated from field: string name = 1;
    */
   name: string;
-};
+}
 
 /**
  * Describes the message spec.MessageFieldMessage.TestMessage.

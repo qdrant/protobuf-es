@@ -181,7 +181,7 @@ export type ResourceDescriptor = Message<"google.api.ResourceDescriptor"> & {
    * @generated from field: repeated google.api.ResourceDescriptor.Style style = 10;
    */
   style: ResourceDescriptor_Style[];
-};
+}
 
 /**
  * Describes the message google.api.ResourceDescriptor.
@@ -311,7 +311,7 @@ export type ResourceReference = Message<"google.api.ResourceReference"> & {
    * @generated from field: string child_type = 2;
    */
   childType: string;
-};
+}
 
 /**
  * Describes the message google.api.ResourceReference.
