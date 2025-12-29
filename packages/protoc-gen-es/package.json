@@ -1,6 +1,6 @@
 {
   "name": "@qdrant/protoc-gen-es",
-  "version": "2.10.1",
+  "version": "2.10.2",
   "license": "Apache-2.0",
   "description": "Protocol Buffers code generator for ECMAScript",
   "keywords": [
@@ -35,14 +35,14 @@
   "dependencies": {
     "@bufbuild/cel": "0.3.0",
     "@bufbuild/cel-spec": "0.3.0",
-    "@bufbuild/protobuf": "2.10.1",
-    "@bufbuild/protoplugin": "2.10.1"
+    "@bufbuild/protobuf": "2.10.2",
+    "@bufbuild/protoplugin": "2.10.2"
   },
   "devDependencies": {
     "upstream-protobuf": "*"
   },
   "peerDependencies": {
-    "@bufbuild/protobuf": "2.10.1"
+    "@bufbuild/protobuf": "2.10.2"
   },
   "peerDependenciesMeta": {
     "@bufbuild/protobuf": {
