@@ -57,7 +57,7 @@ export declare type User = Message<"example.User"> & {
    * @generated from field: map<string, string> projects = 6;
    */
   projects: { [key: string]: string };
-};
+}
 
 /**
  * Describes the message example.User.

@@ -65,7 +65,7 @@ export type Status = Message<"google.rpc.Status"> & {
    * @generated from field: repeated google.protobuf.Any details = 3;
    */
   details: Any[];
-};
+}
 
 /**
  * Describes the message google.rpc.Status.

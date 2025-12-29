@@ -183,7 +183,7 @@ export declare type VTypes = Message<"spec.VTypes"> & {
    * @generated from field: google.protobuf.Timestamp wkt = 22;
    */
   wkt?: Timestamp;
-};
+}
 
 /**
  * Describes the message spec.VTypes.
@@ -195,7 +195,7 @@ export declare const VTypesSchema: GenMessage<VTypes>;
  * @generated from message spec.VTypes.Other
  */
 export declare type VTypes_Other = Message<"spec.VTypes.Other"> & {
-};
+}
 
 /**
  * Describes the message spec.VTypes.Other.
@@ -216,7 +216,7 @@ export declare type VTypes2 = Message<"spec.VTypes2"> & {
    * @generated from field: spec.VTypes msg = 1;
    */
   msg?: VTypes;
-};
+}
 
 /**
  * Describes the message spec.VTypes2.

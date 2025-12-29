@@ -56,7 +56,7 @@ export type Explain = Message<"google.api.expr.v1alpha1.Explain"> & {
    * @generated from field: repeated google.api.expr.v1alpha1.Explain.ExprStep expr_steps = 2;
    */
   exprSteps: Explain_ExprStep[];
-};
+}
 
 /**
  * Describes the message google.api.expr.v1alpha1.Explain.
@@ -86,7 +86,7 @@ export type Explain_ExprStep = Message<"google.api.expr.v1alpha1.Explain.ExprSte
    * @generated from field: int32 value_index = 2;
    */
   valueIndex: number;
-};
+}
 
 /**
  * Describes the message google.api.expr.v1alpha1.Explain.ExprStep.

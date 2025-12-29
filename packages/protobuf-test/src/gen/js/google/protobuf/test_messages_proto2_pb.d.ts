@@ -751,7 +751,7 @@ export declare type TestAllTypesProto2 = Message<"protobuf_test_messages.proto2.
    * @generated from field: optional protobuf_test_messages.proto2.TestAllTypesProto2.MessageSetCorrect message_set_correct = 500;
    */
   messageSetCorrect?: TestAllTypesProto2_MessageSetCorrect;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.
@@ -772,7 +772,7 @@ export declare type TestAllTypesProto2_NestedMessage = Message<"protobuf_test_me
    * @generated from field: optional protobuf_test_messages.proto2.TestAllTypesProto2 corecursive = 2;
    */
   corecursive?: TestAllTypesProto2;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.NestedMessage.
@@ -795,7 +795,7 @@ export declare type TestAllTypesProto2_Data = Message<"protobuf_test_messages.pr
    * @generated from field: optional uint32 group_uint32 = 203;
    */
   groupUint32: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.Data.
@@ -816,7 +816,7 @@ export declare type TestAllTypesProto2_MultiWordGroupField = Message<"protobuf_t
    * @generated from field: optional uint32 group_uint32 = 206;
    */
   groupUint32: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.MultiWordGroupField.
@@ -830,7 +830,7 @@ export declare const TestAllTypesProto2_MultiWordGroupFieldSchema: GenMessage<Te
  * @generated from message protobuf_test_messages.proto2.TestAllTypesProto2.MessageSetCorrect
  */
 export declare type TestAllTypesProto2_MessageSetCorrect = Message<"protobuf_test_messages.proto2.TestAllTypesProto2.MessageSetCorrect"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.MessageSetCorrect.
@@ -846,7 +846,7 @@ export declare type TestAllTypesProto2_MessageSetCorrectExtension1 = Message<"pr
    * @generated from field: optional string str = 25;
    */
   str: string;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.MessageSetCorrectExtension1.
@@ -867,7 +867,7 @@ export declare type TestAllTypesProto2_MessageSetCorrectExtension2 = Message<"pr
    * @generated from field: optional int32 i = 9;
    */
   i: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.MessageSetCorrectExtension2.
@@ -900,7 +900,7 @@ export declare type TestAllTypesProto2_ExtensionWithOneof = Message<"protobuf_te
     value: number;
     case: "b";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllTypesProto2.ExtensionWithOneof.
@@ -953,7 +953,7 @@ export declare type ForeignMessageProto2 = Message<"protobuf_test_messages.proto
    * @generated from field: optional int32 c = 1;
    */
   c: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.ForeignMessageProto2.
@@ -974,7 +974,7 @@ export declare type GroupField = Message<"protobuf_test_messages.proto2.GroupFie
    * @generated from field: optional uint32 group_uint32 = 123;
    */
   groupUint32: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.GroupField.
@@ -1015,7 +1015,7 @@ export declare type UnknownToTestAllTypes = Message<"protobuf_test_messages.prot
    * @generated from field: repeated int32 repeated_int32 = 1011;
    */
   repeatedInt32: number[];
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.UnknownToTestAllTypes.
@@ -1031,7 +1031,7 @@ export declare type UnknownToTestAllTypes_OptionalGroup = Message<"protobuf_test
    * @generated from field: optional int32 a = 1;
    */
   a: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.UnknownToTestAllTypes.OptionalGroup.
@@ -1043,7 +1043,7 @@ export declare const UnknownToTestAllTypes_OptionalGroupSchema: GenMessage<Unkno
  * @generated from message protobuf_test_messages.proto2.NullHypothesisProto2
  */
 export declare type NullHypothesisProto2 = Message<"protobuf_test_messages.proto2.NullHypothesisProto2"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.NullHypothesisProto2.
@@ -1055,7 +1055,7 @@ export declare const NullHypothesisProto2Schema: GenMessage<NullHypothesisProto2
  * @generated from message protobuf_test_messages.proto2.EnumOnlyProto2
  */
 export declare type EnumOnlyProto2 = Message<"protobuf_test_messages.proto2.EnumOnlyProto2"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.EnumOnlyProto2.
@@ -1091,7 +1091,7 @@ export declare type OneStringProto2 = Message<"protobuf_test_messages.proto2.One
    * @generated from field: optional string data = 1;
    */
   data: string;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.OneStringProto2.
@@ -1117,7 +1117,7 @@ export declare type ProtoWithKeywords = Message<"protobuf_test_messages.proto2.P
    * @generated from field: repeated string requires = 3;
    */
   requires: string[];
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.ProtoWithKeywords.
@@ -1327,7 +1327,7 @@ export declare type TestAllRequiredTypesProto2 = Message<"protobuf_test_messages
    * @generated from field: required bytes default_bytes = 255 [default = "joshua"];
    */
   defaultBytes: Uint8Array;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllRequiredTypesProto2.
@@ -1353,7 +1353,7 @@ export declare type TestAllRequiredTypesProto2_NestedMessage = Message<"protobuf
    * @generated from field: optional protobuf_test_messages.proto2.TestAllRequiredTypesProto2 optional_corecursive = 3;
    */
   optionalCorecursive?: TestAllRequiredTypesProto2;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllRequiredTypesProto2.NestedMessage.
@@ -1376,7 +1376,7 @@ export declare type TestAllRequiredTypesProto2_Data = Message<"protobuf_test_mes
    * @generated from field: required uint32 group_uint32 = 203;
    */
   groupUint32: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllRequiredTypesProto2.Data.
@@ -1390,7 +1390,7 @@ export declare const TestAllRequiredTypesProto2_DataSchema: GenMessage<TestAllRe
  * @generated from message protobuf_test_messages.proto2.TestAllRequiredTypesProto2.MessageSetCorrect
  */
 export declare type TestAllRequiredTypesProto2_MessageSetCorrect = Message<"protobuf_test_messages.proto2.TestAllRequiredTypesProto2.MessageSetCorrect"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllRequiredTypesProto2.MessageSetCorrect.
@@ -1406,7 +1406,7 @@ export declare type TestAllRequiredTypesProto2_MessageSetCorrectExtension1 = Mes
    * @generated from field: required string str = 25;
    */
   str: string;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllRequiredTypesProto2.MessageSetCorrectExtension1.
@@ -1427,7 +1427,7 @@ export declare type TestAllRequiredTypesProto2_MessageSetCorrectExtension2 = Mes
    * @generated from field: required int32 i = 9;
    */
   i: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestAllRequiredTypesProto2.MessageSetCorrectExtension2.
@@ -1510,7 +1510,7 @@ export declare type TestLargeOneof = Message<"protobuf_test_messages.proto2.Test
     value: TestLargeOneof_A5;
     case: "a5";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestLargeOneof.
@@ -1522,7 +1522,7 @@ export declare const TestLargeOneofSchema: GenMessage<TestLargeOneof>;
  * @generated from message protobuf_test_messages.proto2.TestLargeOneof.A1
  */
 export declare type TestLargeOneof_A1 = Message<"protobuf_test_messages.proto2.TestLargeOneof.A1"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestLargeOneof.A1.
@@ -1534,7 +1534,7 @@ export declare const TestLargeOneof_A1Schema: GenMessage<TestLargeOneof_A1>;
  * @generated from message protobuf_test_messages.proto2.TestLargeOneof.A2
  */
 export declare type TestLargeOneof_A2 = Message<"protobuf_test_messages.proto2.TestLargeOneof.A2"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestLargeOneof.A2.
@@ -1546,7 +1546,7 @@ export declare const TestLargeOneof_A2Schema: GenMessage<TestLargeOneof_A2>;
  * @generated from message protobuf_test_messages.proto2.TestLargeOneof.A3
  */
 export declare type TestLargeOneof_A3 = Message<"protobuf_test_messages.proto2.TestLargeOneof.A3"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestLargeOneof.A3.
@@ -1558,7 +1558,7 @@ export declare const TestLargeOneof_A3Schema: GenMessage<TestLargeOneof_A3>;
  * @generated from message protobuf_test_messages.proto2.TestLargeOneof.A4
  */
 export declare type TestLargeOneof_A4 = Message<"protobuf_test_messages.proto2.TestLargeOneof.A4"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestLargeOneof.A4.
@@ -1570,7 +1570,7 @@ export declare const TestLargeOneof_A4Schema: GenMessage<TestLargeOneof_A4>;
  * @generated from message protobuf_test_messages.proto2.TestLargeOneof.A5
  */
 export declare type TestLargeOneof_A5 = Message<"protobuf_test_messages.proto2.TestLargeOneof.A5"> & {
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.proto2.TestLargeOneof.A5.

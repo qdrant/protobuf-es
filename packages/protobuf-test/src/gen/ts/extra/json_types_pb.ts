@@ -219,7 +219,7 @@ export type JsonTypesMessage = Message<"spec.JsonTypesMessage"> & {
    * bar\n"];
    */
   jsonNameEscape: boolean;
-};
+}
 
 /**
  * Describes the message spec.JsonTypesMessage.

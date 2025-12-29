@@ -140,7 +140,7 @@ export type TestProto3Optional = Message<"proto2_unittest.TestProto3Optional"> &
    * @generated from field: int64 singular_int64 = 23;
    */
   singularInt64: bigint;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestProto3Optional.
@@ -161,7 +161,7 @@ export type TestProto3Optional_NestedMessage = Message<"proto2_unittest.TestProt
    * @generated from field: optional int32 bb = 1;
    */
   bb?: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestProto3Optional.NestedMessage.
@@ -221,7 +221,7 @@ export type TestProto3OptionalMessage = Message<"proto2_unittest.TestProto3Optio
    * @generated from field: optional proto2_unittest.TestProto3OptionalMessage.NestedMessage optional_nested_message = 2;
    */
   optionalNestedMessage?: TestProto3OptionalMessage_NestedMessage;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestProto3OptionalMessage.
@@ -238,7 +238,7 @@ export type TestProto3OptionalMessage_NestedMessage = Message<"proto2_unittest.T
    * @generated from field: string s = 1;
    */
   s: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestProto3OptionalMessage.NestedMessage.
@@ -251,7 +251,7 @@ export const TestProto3OptionalMessage_NestedMessageSchema: GenMessage<TestProto
  * @generated from message proto2_unittest.Proto3OptionalExtensions
  */
 export type Proto3OptionalExtensions = Message<"proto2_unittest.Proto3OptionalExtensions"> & {
-};
+}
 
 /**
  * Describes the message proto2_unittest.Proto3OptionalExtensions.

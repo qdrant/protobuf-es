@@ -46,7 +46,7 @@ export type Fraction = Message<"google.type.Fraction"> & {
    * @generated from field: int64 denominator = 2;
    */
   denominator: bigint;
-};
+}
 
 /**
  * Describes the message google.type.Fraction.

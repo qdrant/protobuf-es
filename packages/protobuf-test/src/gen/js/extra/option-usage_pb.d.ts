@@ -43,7 +43,7 @@ export declare type MessageWithOptions = Message<"spec.MessageWithOptions"> & {
     value: number;
     case: "oneofField";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message spec.MessageWithOptions.

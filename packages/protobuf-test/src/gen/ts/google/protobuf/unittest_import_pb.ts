@@ -46,7 +46,7 @@ export type ImportMessage = Message<"proto2_unittest_import.ImportMessage"> & {
    * @generated from field: optional int32 d = 1;
    */
   d: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest_import.ImportMessage.

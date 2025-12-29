@@ -35,7 +35,7 @@ export declare type Proto2Extendee = Message<"proto2ext.Proto2Extendee"> & {
    * @generated from field: optional int32 own_field = 1;
    */
   ownField: number;
-};
+}
 
 /**
  * Describes the message proto2ext.Proto2Extendee.
@@ -53,7 +53,7 @@ export declare type Proto2ExtMessage = Message<"proto2ext.Proto2ExtMessage"> & {
    * @generated from field: optional string string_field = 1;
    */
   stringField: string;
-};
+}
 
 /**
  * Describes the message proto2ext.Proto2ExtMessage.
@@ -74,7 +74,7 @@ export declare type GroupExt = Message<"proto2ext.GroupExt"> & {
    * @generated from field: optional int32 b = 2;
    */
   b: number;
-};
+}
 
 /**
  * Describes the message proto2ext.GroupExt.
@@ -95,7 +95,7 @@ export declare type RepeatedGroupExt = Message<"proto2ext.RepeatedGroupExt"> & {
    * @generated from field: optional int32 b = 2;
    */
   b: number;
-};
+}
 
 /**
  * Describes the message proto2ext.RepeatedGroupExt.
@@ -109,7 +109,7 @@ export declare const RepeatedGroupExtSchema: GenMessage<RepeatedGroupExt>;
  * @generated from message proto2ext.Proto2ExtContainer
  */
 export declare type Proto2ExtContainer = Message<"proto2ext.Proto2ExtContainer"> & {
-};
+}
 
 /**
  * Describes the message proto2ext.Proto2ExtContainer.
@@ -121,7 +121,7 @@ export declare const Proto2ExtContainerSchema: GenMessage<Proto2ExtContainer>;
  * @generated from message proto2ext.Proto2ExtContainer.Child
  */
 export declare type Proto2ExtContainer_Child = Message<"proto2ext.Proto2ExtContainer.Child"> & {
-};
+}
 
 /**
  * Describes the message proto2ext.Proto2ExtContainer.Child.

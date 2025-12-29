@@ -32,7 +32,7 @@ export const file_google_protobuf_unittest_features: GenFile = /*@__PURE__*/
  * @generated from message pb.TestMessage
  */
 export type TestMessage = Message<"pb.TestMessage"> & {
-};
+}
 
 /**
  * Describes the message pb.TestMessage.
@@ -45,7 +45,7 @@ export const TestMessageSchema: GenMessage<TestMessage> = /*@__PURE__*/
  * @generated from message pb.TestMessage.Nested
  */
 export type TestMessage_Nested = Message<"pb.TestMessage.Nested"> & {
-};
+}
 
 /**
  * Describes the message pb.TestMessage.Nested.
@@ -188,7 +188,7 @@ export type TestFeatures = Message<"pb.TestFeatures"> & {
    * @generated from field: pb.ValueLifetimeFeature value_lifetime_feature = 20;
    */
   valueLifetimeFeature: ValueLifetimeFeature;
-};
+}
 
 /**
  * Describes the message pb.TestFeatures.

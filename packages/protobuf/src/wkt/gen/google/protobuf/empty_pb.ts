@@ -40,7 +40,7 @@ export const file_google_protobuf_empty: GenFile = /*@__PURE__*/
  * @generated from message google.protobuf.Empty
  */
 export type Empty = Message<"google.protobuf.Empty"> & {
-};
+}
 
 /**
  * A generic empty message that you can re-use to avoid defining duplicated

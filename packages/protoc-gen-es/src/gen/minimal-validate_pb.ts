@@ -22,7 +22,7 @@
 
 import type { GenEnum, GenExtension, GenFile, GenMessage } from "@bufbuild/protobuf/codegenv2";
 import { enumDesc, extDesc, fileDesc, messageDesc } from "@bufbuild/protobuf/codegenv2";
-import type { FieldOptions, OneofOptions } from "@bufbuild/protobuf/wkt";
+import type { FieldOptions, MessageOptions, OneofOptions } from "@bufbuild/protobuf/wkt";
 import { file_google_protobuf_descriptor } from "@bufbuild/protobuf/wkt";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -30,7 +30,59 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file minimal-validate.proto.
  */
 export const file_minimal_validate: GenFile = /*@__PURE__*/
-  fileDesc("ChZtaW5pbWFsLXZhbGlkYXRlLnByb3RvEgxidWYudmFsaWRhdGUiHgoKT25lb2ZSdWxlcxIQCghyZXF1aXJlZBgBIAEoCCKkAQoKRmllbGRSdWxlcxIQCghyZXF1aXJlZBgZIAEoCBIkCgZpZ25vcmUYGyABKA4yFC5idWYudmFsaWRhdGUuSWdub3JlEi8KCHJlcGVhdGVkGBIgASgLMhsuYnVmLnZhbGlkYXRlLlJlcGVhdGVkUnVsZXNIABIlCgNtYXAYEyABKAsyFi5idWYudmFsaWRhdGUuTWFwUnVsZXNIAEIGCgR0eXBlIjgKDVJlcGVhdGVkUnVsZXMSJwoFaXRlbXMYBCABKAsyGC5idWYudmFsaWRhdGUuRmllbGRSdWxlcyI0CghNYXBSdWxlcxIoCgZ2YWx1ZXMYBSABKAsyGC5idWYudmFsaWRhdGUuRmllbGRSdWxlcypNCgZJZ25vcmUSFgoSSUdOT1JFX1VOU1BFQ0lGSUVEEAASGAoUSUdOT1JFX0lGX1pFUk9fVkFMVUUQARIRCg1JR05PUkVfQUxXQVlTEAM6TgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIcJIAEoCzIYLmJ1Zi52YWxpZGF0ZS5PbmVvZlJ1bGVzUgVvbmVvZjpOCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYhwkgASgLMhguYnVmLnZhbGlkYXRlLkZpZWxkUnVsZXNSBWZpZWxk", [file_google_protobuf_descriptor]);
+  fileDesc("ChZtaW5pbWFsLXZhbGlkYXRlLnByb3RvEgxidWYudmFsaWRhdGUiSwoMTWVzc2FnZVJ1bGVzEhQKCGRpc2FibGVkGAEgASgIQgIYARIlCgNjZWwYAyADKAsyGC5idWYudmFsaWRhdGUuQ29uc3RyYWludCI9CgpDb25zdHJhaW50EgoKAmlkGAEgASgJEg8KB21lc3NhZ2UYAiABKAkSEgoKZXhwcmVzc2lvbhgDIAEoCSIeCgpPbmVvZlJ1bGVzEhAKCHJlcXVpcmVkGAEgASgIIqQBCgpGaWVsZFJ1bGVzEhAKCHJlcXVpcmVkGBkgASgIEiQKBmlnbm9yZRgbIAEoDjIULmJ1Zi52YWxpZGF0ZS5JZ25vcmUSLwoIcmVwZWF0ZWQYEiABKAsyGy5idWYudmFsaWRhdGUuUmVwZWF0ZWRSdWxlc0gAEiUKA21hcBgTIAEoCzIWLmJ1Zi52YWxpZGF0ZS5NYXBSdWxlc0gAQgYKBHR5cGUiOAoNUmVwZWF0ZWRSdWxlcxInCgVpdGVtcxgEIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzIjQKCE1hcFJ1bGVzEigKBnZhbHVlcxgFIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzKk0KBklnbm9yZRIWChJJR05PUkVfVU5TUEVDSUZJRUQQABIYChRJR05PUkVfSUZfWkVST19WQUxVRRABEhEKDUlHTk9SRV9BTFdBWVMQAzpWCgdtZXNzYWdlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIcJIAEoCzIaLmJ1Zi52YWxpZGF0ZS5NZXNzYWdlUnVsZXNSB21lc3NhZ2U6TgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIcJIAEoCzIYLmJ1Zi52YWxpZGF0ZS5PbmVvZlJ1bGVzUgVvbmVvZjpOCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYhwkgASgLMhguYnVmLnZhbGlkYXRlLkZpZWxkUnVsZXNSBWZpZWxk", [file_google_protobuf_descriptor]);
+
+/**
+ * @generated from message buf.validate.MessageRules
+ */
+export type MessageRules = Message<"buf.validate.MessageRules"> & {
+  /**
+   * @generated from field: optional bool disabled = 1 [deprecated = true];
+   * @deprecated
+   */
+  disabled: boolean;
+
+  /**
+   * CEL validation rules
+   *
+   * @generated from field: repeated buf.validate.Constraint cel = 3;
+   */
+  cel: Constraint[];
+}
+
+/**
+ * Describes the message buf.validate.MessageRules.
+ * Use `create(MessageRulesSchema)` to create a new message.
+ */
+export const MessageRulesSchema: GenMessage<MessageRules> = /*@__PURE__*/
+  messageDesc(file_minimal_validate, 0);
+
+/**
+ * @generated from message buf.validate.Constraint
+ */
+export type Constraint = Message<"buf.validate.Constraint"> & {
+  /**
+   * @generated from field: optional string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: optional string message = 2;
+   */
+  message: string;
+
+  /**
+   * @generated from field: optional string expression = 3;
+   */
+  expression: string;
+}
+
+/**
+ * Describes the message buf.validate.Constraint.
+ * Use `create(ConstraintSchema)` to create a new message.
+ */
+export const ConstraintSchema: GenMessage<Constraint> = /*@__PURE__*/
+  messageDesc(file_minimal_validate, 1);
 
 /**
  * @generated from message buf.validate.OneofRules
@@ -40,14 +92,14 @@ export type OneofRules = Message<"buf.validate.OneofRules"> & {
    * @generated from field: optional bool required = 1;
    */
   required: boolean;
-};
+}
 
 /**
  * Describes the message buf.validate.OneofRules.
  * Use `create(OneofRulesSchema)` to create a new message.
  */
 export const OneofRulesSchema: GenMessage<OneofRules> = /*@__PURE__*/
-  messageDesc(file_minimal_validate, 0);
+  messageDesc(file_minimal_validate, 2);
 
 /**
  * @generated from message buf.validate.FieldRules
@@ -79,14 +131,14 @@ export type FieldRules = Message<"buf.validate.FieldRules"> & {
     value: MapRules;
     case: "map";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message buf.validate.FieldRules.
  * Use `create(FieldRulesSchema)` to create a new message.
  */
 export const FieldRulesSchema: GenMessage<FieldRules> = /*@__PURE__*/
-  messageDesc(file_minimal_validate, 1);
+  messageDesc(file_minimal_validate, 3);
 
 /**
  * @generated from message buf.validate.RepeatedRules
@@ -96,14 +148,14 @@ export type RepeatedRules = Message<"buf.validate.RepeatedRules"> & {
    * @generated from field: optional buf.validate.FieldRules items = 4;
    */
   items?: FieldRules;
-};
+}
 
 /**
  * Describes the message buf.validate.RepeatedRules.
  * Use `create(RepeatedRulesSchema)` to create a new message.
  */
 export const RepeatedRulesSchema: GenMessage<RepeatedRules> = /*@__PURE__*/
-  messageDesc(file_minimal_validate, 2);
+  messageDesc(file_minimal_validate, 4);
 
 /**
  * @generated from message buf.validate.MapRules
@@ -113,14 +165,14 @@ export type MapRules = Message<"buf.validate.MapRules"> & {
    * @generated from field: optional buf.validate.FieldRules values = 5;
    */
   values?: FieldRules;
-};
+}
 
 /**
  * Describes the message buf.validate.MapRules.
  * Use `create(MapRulesSchema)` to create a new message.
  */
 export const MapRulesSchema: GenMessage<MapRules> = /*@__PURE__*/
-  messageDesc(file_minimal_validate, 3);
+  messageDesc(file_minimal_validate, 5);
 
 /**
  * @generated from enum buf.validate.Ignore
@@ -149,14 +201,20 @@ export const IgnoreSchema: GenEnum<Ignore> = /*@__PURE__*/
   enumDesc(file_minimal_validate, 0);
 
 /**
+ * @generated from extension: optional buf.validate.MessageRules message = 1159;
+ */
+export const message: GenExtension<MessageOptions, MessageRules> = /*@__PURE__*/
+  extDesc(file_minimal_validate, 0);
+
+/**
  * @generated from extension: optional buf.validate.OneofRules oneof = 1159;
  */
 export const oneof: GenExtension<OneofOptions, OneofRules> = /*@__PURE__*/
-  extDesc(file_minimal_validate, 0);
+  extDesc(file_minimal_validate, 1);
 
 /**
  * @generated from extension: optional buf.validate.FieldRules field = 1159;
  */
 export const field: GenExtension<FieldOptions, FieldRules> = /*@__PURE__*/
-  extDesc(file_minimal_validate, 1);
+  extDesc(file_minimal_validate, 2);
 

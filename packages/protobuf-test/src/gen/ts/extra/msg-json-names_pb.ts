@@ -59,7 +59,7 @@ export type JsonNamesMessage = Message<"spec.JsonNamesMessage"> & {
    * @generated from field: string d = 6 [json_name = "1d"];
    */
   d: string;
-};
+}
 
 /**
  * Describes the message spec.JsonNamesMessage.

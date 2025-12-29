@@ -182,7 +182,7 @@ export type PostalAddress = Message<"google.type.PostalAddress"> & {
    * @generated from field: string organization = 11;
    */
   organization: string;
-};
+}
 
 /**
  * Describes the message google.type.PostalAddress.

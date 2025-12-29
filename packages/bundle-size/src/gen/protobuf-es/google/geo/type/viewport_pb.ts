@@ -81,7 +81,7 @@ export type Viewport = Message<"google.geo.type.Viewport"> & {
    * @generated from field: google.type.LatLng high = 2;
    */
   high?: LatLng;
-};
+}
 
 /**
  * Describes the message google.geo.type.Viewport.

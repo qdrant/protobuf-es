@@ -42,7 +42,7 @@ export type FieldInfo = Message<"google.api.FieldInfo"> & {
    * @generated from field: google.api.FieldInfo.Format format = 1;
    */
   format: FieldInfo_Format;
-};
+}
 
 /**
  * Describes the message google.api.FieldInfo.

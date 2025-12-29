@@ -43,7 +43,7 @@ export type TestMessageSetContainer = Message<"proto2_unittest.TestMessageSetCon
    * @generated from field: optional proto2_wireformat_unittest.TestMessageSet message_set = 1;
    */
   messageSet?: TestMessageSet;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestMessageSetContainer.
@@ -70,7 +70,7 @@ export type NestedTestMessageSetContainer = Message<"proto2_unittest.NestedTestM
    * @generated from field: optional proto2_unittest.NestedTestMessageSetContainer lazy_child = 3;
    */
   lazyChild?: NestedTestMessageSetContainer;
-};
+}
 
 /**
  * Describes the message proto2_unittest.NestedTestMessageSetContainer.
@@ -97,7 +97,7 @@ export type NestedTestInt = Message<"proto2_unittest.NestedTestInt"> & {
    * @generated from field: optional proto2_unittest.NestedTestInt child = 2;
    */
   child?: NestedTestInt;
-};
+}
 
 /**
  * Describes the message proto2_unittest.NestedTestInt.
@@ -124,7 +124,7 @@ export type TestMessageSetExtension1 = Message<"proto2_unittest.TestMessageSetEx
    * @generated from field: optional string test_aliasing = 17;
    */
   testAliasing: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestMessageSetExtension1.
@@ -147,7 +147,7 @@ export type TestMessageSetExtension2 = Message<"proto2_unittest.TestMessageSetEx
    * @generated from field: optional string str = 25;
    */
   str: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestMessageSetExtension2.
@@ -175,7 +175,7 @@ export type TestMessageSetExtension3 = Message<"proto2_unittest.TestMessageSetEx
    * @generated from field: required int32 required_int = 36;
    */
   requiredInt: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestMessageSetExtension3.
@@ -200,7 +200,7 @@ export type RawMessageSet = Message<"proto2_unittest.RawMessageSet"> & {
    * @generated from field: repeated proto2_unittest.RawMessageSet.Item item = 1;
    */
   item: RawMessageSet_Item[];
-};
+}
 
 /**
  * Describes the message proto2_unittest.RawMessageSet.
@@ -222,7 +222,7 @@ export type RawMessageSet_Item = Message<"proto2_unittest.RawMessageSet.Item"> &
    * @generated from field: required bytes message = 3;
    */
   message: Uint8Array;
-};
+}
 
 /**
  * Describes the message proto2_unittest.RawMessageSet.Item.

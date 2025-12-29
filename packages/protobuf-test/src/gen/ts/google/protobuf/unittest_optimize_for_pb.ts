@@ -64,7 +64,7 @@ export type TestOptimizedForSize = Message<"proto2_unittest.TestOptimizedForSize
     value: string;
     case: "stringField";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestOptimizedForSize.
@@ -93,7 +93,7 @@ export type TestRequiredOptimizedForSize = Message<"proto2_unittest.TestRequired
    * @generated from field: required int32 x = 1;
    */
   x: number;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestRequiredOptimizedForSize.
@@ -110,7 +110,7 @@ export type TestOptionalOptimizedForSize = Message<"proto2_unittest.TestOptional
    * @generated from field: optional proto2_unittest.TestRequiredOptimizedForSize o = 1;
    */
   o?: TestRequiredOptimizedForSize;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestOptionalOptimizedForSize.

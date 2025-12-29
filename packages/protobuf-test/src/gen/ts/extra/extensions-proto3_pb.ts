@@ -38,7 +38,7 @@ export type Proto3ExtMessage = Message<"proto3ext.Proto3ExtMessage"> & {
    * @generated from field: string string_field = 1;
    */
   stringField: string;
-};
+}
 
 /**
  * Describes the message proto3ext.Proto3ExtMessage.

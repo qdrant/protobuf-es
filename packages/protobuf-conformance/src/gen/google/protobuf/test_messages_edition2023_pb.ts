@@ -35,7 +35,7 @@ export type ComplexMessage = Message<"protobuf_test_messages.editions.ComplexMes
    * @generated from field: int32 d = 1;
    */
   d: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.ComplexMessage.
@@ -576,7 +576,7 @@ export type TestAllTypesEdition2023 = Message<"protobuf_test_messages.editions.T
    * @generated from field: protobuf_test_messages.editions.TestAllTypesEdition2023.GroupLikeType delimited_field = 202;
    */
   delimitedField?: TestAllTypesEdition2023_GroupLikeType;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.TestAllTypesEdition2023.
@@ -598,7 +598,7 @@ export type TestAllTypesEdition2023_NestedMessage = Message<"protobuf_test_messa
    * @generated from field: protobuf_test_messages.editions.TestAllTypesEdition2023 corecursive = 2 [features.message_encoding = LENGTH_PREFIXED];
    */
   corecursive?: TestAllTypesEdition2023;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.TestAllTypesEdition2023.NestedMessage.
@@ -622,7 +622,7 @@ export type TestAllTypesEdition2023_GroupLikeType = Message<"protobuf_test_messa
    * @generated from field: uint32 group_uint32 = 203;
    */
   groupUint32: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.TestAllTypesEdition2023.GroupLikeType.
@@ -672,7 +672,7 @@ export type ForeignMessageEdition2023 = Message<"protobuf_test_messages.editions
    * @generated from field: int32 c = 1;
    */
   c: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.ForeignMessageEdition2023.
@@ -689,7 +689,7 @@ export type GroupLikeType = Message<"protobuf_test_messages.editions.GroupLikeTy
    * @generated from field: int32 c = 1;
    */
   c: number;
-};
+}
 
 /**
  * Describes the message protobuf_test_messages.editions.GroupLikeType.

@@ -36,7 +36,7 @@ export type TestInvalidFeatures = Message<"pb.TestInvalidFeatures"> & {
    * @generated from field: repeated int32 repeated_feature = 1;
    */
   repeatedFeature: number[];
-};
+}
 
 /**
  * Describes the message pb.TestInvalidFeatures.

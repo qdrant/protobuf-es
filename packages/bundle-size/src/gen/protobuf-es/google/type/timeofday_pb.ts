@@ -64,7 +64,7 @@ export type TimeOfDay = Message<"google.type.TimeOfDay"> & {
    * @generated from field: int32 nanos = 4;
    */
   nanos: number;
-};
+}
 
 /**
  * Describes the message google.type.TimeOfDay.

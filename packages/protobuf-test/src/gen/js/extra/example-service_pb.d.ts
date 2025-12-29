@@ -38,7 +38,7 @@ export declare type CreateUserRequest = Message<"example.CreateUserRequest"> & {
    * @generated from field: string last_name = 2;
    */
   lastName: string;
-};
+}
 
 /**
  * Describes the message example.CreateUserRequest.
@@ -54,7 +54,7 @@ export declare type CreateUserResponse = Message<"example.CreateUserResponse"> &
    * @generated from field: example.User user = 1;
    */
   user?: User;
-};
+}
 
 /**
  * Describes the message example.CreateUserResponse.

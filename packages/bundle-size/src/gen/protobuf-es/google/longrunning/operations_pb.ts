@@ -98,7 +98,7 @@ export type Operation = Message<"google.longrunning.Operation"> & {
     value: Any;
     case: "response";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message google.longrunning.Operation.
@@ -119,7 +119,7 @@ export type GetOperationRequest = Message<"google.longrunning.GetOperationReques
    * @generated from field: string name = 1;
    */
   name: string;
-};
+}
 
 /**
  * Describes the message google.longrunning.GetOperationRequest.
@@ -161,7 +161,7 @@ export type ListOperationsRequest = Message<"google.longrunning.ListOperationsRe
    * @generated from field: string page_token = 3;
    */
   pageToken: string;
-};
+}
 
 /**
  * Describes the message google.longrunning.ListOperationsRequest.
@@ -189,7 +189,7 @@ export type ListOperationsResponse = Message<"google.longrunning.ListOperationsR
    * @generated from field: string next_page_token = 2;
    */
   nextPageToken: string;
-};
+}
 
 /**
  * Describes the message google.longrunning.ListOperationsResponse.
@@ -210,7 +210,7 @@ export type CancelOperationRequest = Message<"google.longrunning.CancelOperation
    * @generated from field: string name = 1;
    */
   name: string;
-};
+}
 
 /**
  * Describes the message google.longrunning.CancelOperationRequest.
@@ -231,7 +231,7 @@ export type DeleteOperationRequest = Message<"google.longrunning.DeleteOperation
    * @generated from field: string name = 1;
    */
   name: string;
-};
+}
 
 /**
  * Describes the message google.longrunning.DeleteOperationRequest.
@@ -261,7 +261,7 @@ export type WaitOperationRequest = Message<"google.longrunning.WaitOperationRequ
    * @generated from field: google.protobuf.Duration timeout = 2;
    */
   timeout?: Duration;
-};
+}
 
 /**
  * Describes the message google.longrunning.WaitOperationRequest.
@@ -312,7 +312,7 @@ export type OperationInfo = Message<"google.longrunning.OperationInfo"> & {
    * @generated from field: string metadata_type = 2;
    */
   metadataType: string;
-};
+}
 
 /**
  * Describes the message google.longrunning.OperationInfo.

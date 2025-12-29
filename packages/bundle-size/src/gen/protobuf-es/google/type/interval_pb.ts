@@ -58,7 +58,7 @@ export type Interval = Message<"google.type.Interval"> & {
    * @generated from field: google.protobuf.Timestamp end_time = 2;
    */
   endTime?: Timestamp;
-};
+}
 
 /**
  * Describes the message google.type.Interval.

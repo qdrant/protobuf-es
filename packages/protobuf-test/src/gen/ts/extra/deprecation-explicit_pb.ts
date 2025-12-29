@@ -39,7 +39,7 @@ export type DeprecatedMessage = Message<"spec.DeprecatedMessage"> & {
    * @generated from field: string field = 1;
    */
   field: string;
-};
+}
 
 /**
  * Describes the message spec.DeprecatedMessage.
@@ -69,7 +69,7 @@ export type DeprecatedFieldMessage = Message<"spec.DeprecatedFieldMessage"> & {
    * @generated from field: string current_field = 2;
    */
   currentField: string;
-};
+}
 
 /**
  * Describes the message spec.DeprecatedFieldMessage.

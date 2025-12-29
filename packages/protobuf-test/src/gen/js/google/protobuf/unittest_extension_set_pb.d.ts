@@ -36,7 +36,7 @@ export declare const file_google_protobuf_unittest_extension_set: GenFile;
  * @generated from message proto2_unittest.TestExtensionSet
  */
 export declare type TestExtensionSet = Message<"proto2_unittest.TestExtensionSet"> & {
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestExtensionSet.
@@ -52,7 +52,7 @@ export declare type TestExtensionSetContainer = Message<"proto2_unittest.TestExt
    * @generated from field: optional proto2_unittest.TestExtensionSet extension = 1;
    */
   extension?: TestExtensionSet;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestExtensionSetContainer.

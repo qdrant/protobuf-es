@@ -48,7 +48,7 @@ export type Struct = Message<"google.protobuf.Struct"> & {
    * @generated from field: map<string, google.protobuf.Value> fields = 1;
    */
   fields: { [key: string]: Value };
-};
+}
 
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -136,7 +136,7 @@ export type Value = Message<"google.protobuf.Value"> & {
     value: ListValue;
     case: "listValue";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * `Value` represents a dynamically typed value which can be either
@@ -171,7 +171,7 @@ export type ListValue = Message<"google.protobuf.ListValue"> & {
    * @generated from field: repeated google.protobuf.Value values = 1;
    */
   values: Value[];
-};
+}
 
 /**
  * `ListValue` is a wrapper around a repeated field of values.

@@ -237,7 +237,7 @@ export type FieldMask = Message<"google.protobuf.FieldMask"> & {
    * @generated from field: repeated string paths = 1;
    */
   paths: string[];
-};
+}
 
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:

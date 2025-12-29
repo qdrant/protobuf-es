@@ -40,15 +40,86 @@ export declare type MessageRules = Message<"buf.validate.MessageRules"> & {
    * @deprecated
    */
   disabled: boolean;
-};
 
-export declare type MessageRulesValid = MessageRules;
+  /**
+   * CEL validation rules
+   *
+   * @generated from field: repeated buf.validate.Constraint cel = 3;
+   */
+  cel: Constraint[];
+}
+
+/**
+ * @generated from message buf.validate.MessageRules
+ */
+export declare type MessageRulesValid = Message<"buf.validate.MessageRules"> & {
+  /**
+   * removed in https://github.com/bufbuild/protovalidate/pull/394
+   *
+   * @generated from field: optional bool disabled = 1 [deprecated = true];
+   * @deprecated
+   */
+  disabled: boolean;
+
+  /**
+   * CEL validation rules
+   *
+   * @generated from field: repeated buf.validate.Constraint cel = 3;
+   */
+  cel: ConstraintValid[];
+}
 
 /**
  * Describes the message buf.validate.MessageRules.
  * Use `create(MessageRulesSchema)` to create a new message.
  */
 export declare const MessageRulesSchema: GenMessage<MessageRules, {validType: MessageRulesValid}>;
+
+/**
+ * @generated from message buf.validate.Constraint
+ */
+export declare type Constraint = Message<"buf.validate.Constraint"> & {
+  /**
+   * @generated from field: optional string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: optional string message = 2;
+   */
+  message: string;
+
+  /**
+   * @generated from field: optional string expression = 3;
+   */
+  expression: string;
+}
+
+/**
+ * @generated from message buf.validate.Constraint
+ */
+export declare type ConstraintValid = Message<"buf.validate.Constraint"> & {
+  /**
+   * @generated from field: optional string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: optional string message = 2;
+   */
+  message: string;
+
+  /**
+   * @generated from field: optional string expression = 3;
+   */
+  expression: string;
+}
+
+/**
+ * Describes the message buf.validate.Constraint.
+ * Use `create(ConstraintSchema)` to create a new message.
+ */
+export declare const ConstraintSchema: GenMessage<Constraint, {validType: ConstraintValid}>;
 
 /**
  * @generated from message buf.validate.OneofRules
@@ -58,9 +129,17 @@ export declare type OneofRules = Message<"buf.validate.OneofRules"> & {
    * @generated from field: optional bool required = 1;
    */
   required: boolean;
-};
+}
 
-export declare type OneofRulesValid = OneofRules;
+/**
+ * @generated from message buf.validate.OneofRules
+ */
+export declare type OneofRulesValid = Message<"buf.validate.OneofRules"> & {
+  /**
+   * @generated from field: optional bool required = 1;
+   */
+  required: boolean;
+}
 
 /**
  * Describes the message buf.validate.OneofRules.
@@ -98,9 +177,39 @@ export declare type FieldRules = Message<"buf.validate.FieldRules"> & {
     value: MapRules;
     case: "map";
   } | { case: undefined; value?: undefined };
-};
+}
 
-export declare type FieldRulesValid = FieldRules;
+/**
+ * @generated from message buf.validate.FieldRules
+ */
+export declare type FieldRulesValid = Message<"buf.validate.FieldRules"> & {
+  /**
+   * @generated from field: optional bool required = 25;
+   */
+  required: boolean;
+
+  /**
+   * @generated from field: optional buf.validate.Ignore ignore = 27;
+   */
+  ignore: Ignore;
+
+  /**
+   * @generated from oneof buf.validate.FieldRules.type
+   */
+  type: {
+    /**
+     * @generated from field: buf.validate.RepeatedRules repeated = 18;
+     */
+    value: RepeatedRulesValid;
+    case: "repeated";
+  } | {
+    /**
+     * @generated from field: buf.validate.MapRules map = 19;
+     */
+    value: MapRulesValid;
+    case: "map";
+  } | { case: undefined; value?: undefined };
+}
 
 /**
  * Describes the message buf.validate.FieldRules.
@@ -116,9 +225,17 @@ export declare type RepeatedRules = Message<"buf.validate.RepeatedRules"> & {
    * @generated from field: optional buf.validate.FieldRules items = 4;
    */
   items?: FieldRules;
-};
+}
 
-export declare type RepeatedRulesValid = RepeatedRules;
+/**
+ * @generated from message buf.validate.RepeatedRules
+ */
+export declare type RepeatedRulesValid = Message<"buf.validate.RepeatedRules"> & {
+  /**
+   * @generated from field: optional buf.validate.FieldRules items = 4;
+   */
+  items?: FieldRulesValid;
+}
 
 /**
  * Describes the message buf.validate.RepeatedRules.
@@ -134,9 +251,17 @@ export declare type MapRules = Message<"buf.validate.MapRules"> & {
    * @generated from field: optional buf.validate.FieldRules values = 5;
    */
   values?: FieldRules;
-};
+}
 
-export declare type MapRulesValid = MapRules;
+/**
+ * @generated from message buf.validate.MapRules
+ */
+export declare type MapRulesValid = Message<"buf.validate.MapRules"> & {
+  /**
+   * @generated from field: optional buf.validate.FieldRules values = 5;
+   */
+  values?: FieldRulesValid;
+}
 
 /**
  * Describes the message buf.validate.MapRules.

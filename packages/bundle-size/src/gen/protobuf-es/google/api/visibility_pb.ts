@@ -64,7 +64,7 @@ export type Visibility = Message<"google.api.Visibility"> & {
    * @generated from field: repeated google.api.VisibilityRule rules = 1;
    */
   rules: VisibilityRule[];
-};
+}
 
 /**
  * Describes the message google.api.Visibility.
@@ -110,7 +110,7 @@ export type VisibilityRule = Message<"google.api.VisibilityRule"> & {
    * @generated from field: string restriction = 2;
    */
   restriction: string;
-};
+}
 
 /**
  * Describes the message google.api.VisibilityRule.

@@ -103,7 +103,7 @@ export type Decimal = Message<"google.type.Decimal"> & {
    * @generated from field: string value = 1;
    */
   value: string;
-};
+}
 
 /**
  * Describes the message google.type.Decimal.

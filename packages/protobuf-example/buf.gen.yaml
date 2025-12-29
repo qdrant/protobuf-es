@@ -5,7 +5,7 @@ inputs:
 # Deletes the directories specified in the `out` field for all plugins before running code generation.
 clean: true
 plugins:
-  # The local plugin is installed with `npm install @bufbuild/protoc-gen-es`.
+  # The local plugin is installed with `npm install @qdrant/protoc-gen-es`.
   - local: protoc-gen-es
     opt: target=ts
     out: src/gen

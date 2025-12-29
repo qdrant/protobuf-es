@@ -250,7 +250,7 @@ export type PerfMessage = Message<"perf.v1.PerfMessage"> & {
    * @generated from field: uint32 id = 40;
    */
   id: number;
-};
+}
 
 /**
  * Describes the message perf.v1.PerfMessage.

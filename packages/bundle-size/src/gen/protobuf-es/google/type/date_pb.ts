@@ -68,7 +68,7 @@ export type Date = Message<"google.type.Date"> & {
    * @generated from field: int32 day = 3;
    */
   day: number;
-};
+}
 
 /**
  * Describes the message google.type.Date.

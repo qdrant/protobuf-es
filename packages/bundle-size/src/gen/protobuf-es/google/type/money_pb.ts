@@ -58,7 +58,7 @@ export type Money = Message<"google.type.Money"> & {
    * @generated from field: int32 nanos = 3;
    */
   nanos: number;
-};
+}
 
 /**
  * Describes the message google.type.Money.

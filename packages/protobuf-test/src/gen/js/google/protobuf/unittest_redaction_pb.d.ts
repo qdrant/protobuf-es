@@ -37,7 +37,7 @@ export declare type TestRedactedNestMessage = Message<"proto2_unittest.TestRedac
    * @generated from field: string foo = 1;
    */
   foo: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestRedactedNestMessage.
@@ -53,7 +53,7 @@ export declare type TestRepeatedRedactedNestMessage = Message<"proto2_unittest.T
    * @generated from field: string bar = 1;
    */
   bar: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestRepeatedRedactedNestMessage.
@@ -69,7 +69,7 @@ export declare type TestMessageEnum = Message<"proto2_unittest.TestMessageEnum">
    * @generated from field: repeated proto2_unittest.MetaAnnotatedEnum redactable_enum = 1;
    */
   redactableEnum: MetaAnnotatedEnum[];
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestMessageEnum.
@@ -95,7 +95,7 @@ export declare type TestNestedMessageEnum = Message<"proto2_unittest.TestNestedM
    * @generated from field: string redacted_string = 3;
    */
   redactedString: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestNestedMessageEnum.
@@ -157,7 +157,7 @@ export declare type TestRedactedMessage = Message<"proto2_unittest.TestRedactedM
    * @generated from field: string test_redacted_message_enum = 24;
    */
   testRedactedMessageEnum: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestRedactedMessage.

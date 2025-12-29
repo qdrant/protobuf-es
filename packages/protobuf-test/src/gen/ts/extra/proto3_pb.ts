@@ -360,7 +360,7 @@ export type Proto3Message = Message<"spec.Proto3Message"> & {
    * @generated from field: map<int32, google.protobuf.Struct> map_int32_struct_field = 218;
    */
   mapInt32StructField: { [key: number]: JsonObject };
-};
+}
 
 /**
  * Describes the message spec.Proto3Message.

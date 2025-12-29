@@ -54,7 +54,7 @@ export type Http = Message<"google.api.Http"> & {
    * @generated from field: bool fully_decode_reserved_expansion = 2;
    */
   fullyDecodeReservedExpansion: boolean;
-};
+}
 
 /**
  * Describes the message google.api.Http.
@@ -443,7 +443,7 @@ export type HttpRule = Message<"google.api.HttpRule"> & {
    * @generated from field: repeated google.api.HttpRule additional_bindings = 11;
    */
   additionalBindings: HttpRule[];
-};
+}
 
 /**
  * Describes the message google.api.HttpRule.
@@ -471,7 +471,7 @@ export type CustomHttpPattern = Message<"google.api.CustomHttpPattern"> & {
    * @generated from field: string path = 2;
    */
   path: string;
-};
+}
 
 /**
  * Describes the message google.api.CustomHttpPattern.

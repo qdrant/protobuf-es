@@ -30,7 +30,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file extra/minimal-validate.proto.
  */
 export const file_extra_minimal_validate: GenFile = /*@__PURE__*/
-  fileDesc("ChxleHRyYS9taW5pbWFsLXZhbGlkYXRlLnByb3RvEgxidWYudmFsaWRhdGUiJAoMTWVzc2FnZVJ1bGVzEhQKCGRpc2FibGVkGAEgASgIQgIYASIeCgpPbmVvZlJ1bGVzEhAKCHJlcXVpcmVkGAEgASgIIqQBCgpGaWVsZFJ1bGVzEhAKCHJlcXVpcmVkGBkgASgIEiQKBmlnbm9yZRgbIAEoDjIULmJ1Zi52YWxpZGF0ZS5JZ25vcmUSLwoIcmVwZWF0ZWQYEiABKAsyGy5idWYudmFsaWRhdGUuUmVwZWF0ZWRSdWxlc0gAEiUKA21hcBgTIAEoCzIWLmJ1Zi52YWxpZGF0ZS5NYXBSdWxlc0gAQgYKBHR5cGUiOAoNUmVwZWF0ZWRSdWxlcxInCgVpdGVtcxgEIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzIjQKCE1hcFJ1bGVzEigKBnZhbHVlcxgFIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzKm4KBklnbm9yZRIWChJJR05PUkVfVU5TUEVDSUZJRUQQABIYChRJR05PUkVfSUZfWkVST19WQUxVRRABEh8KF0lHTk9SRV9JRl9ERUZBVUxUX1ZBTFVFEAIaAggBEhEKDUlHTk9SRV9BTFdBWVMQAzpWCgdtZXNzYWdlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIcJIAEoCzIaLmJ1Zi52YWxpZGF0ZS5NZXNzYWdlUnVsZXNSB21lc3NhZ2U6TgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIcJIAEoCzIYLmJ1Zi52YWxpZGF0ZS5PbmVvZlJ1bGVzUgVvbmVvZjpOCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYhwkgASgLMhguYnVmLnZhbGlkYXRlLkZpZWxkUnVsZXNSBWZpZWxk", [file_google_protobuf_descriptor]);
+  fileDesc("ChxleHRyYS9taW5pbWFsLXZhbGlkYXRlLnByb3RvEgxidWYudmFsaWRhdGUiSwoMTWVzc2FnZVJ1bGVzEhQKCGRpc2FibGVkGAEgASgIQgIYARIlCgNjZWwYAyADKAsyGC5idWYudmFsaWRhdGUuQ29uc3RyYWludCI9CgpDb25zdHJhaW50EgoKAmlkGAEgASgJEg8KB21lc3NhZ2UYAiABKAkSEgoKZXhwcmVzc2lvbhgDIAEoCSIeCgpPbmVvZlJ1bGVzEhAKCHJlcXVpcmVkGAEgASgIIqQBCgpGaWVsZFJ1bGVzEhAKCHJlcXVpcmVkGBkgASgIEiQKBmlnbm9yZRgbIAEoDjIULmJ1Zi52YWxpZGF0ZS5JZ25vcmUSLwoIcmVwZWF0ZWQYEiABKAsyGy5idWYudmFsaWRhdGUuUmVwZWF0ZWRSdWxlc0gAEiUKA21hcBgTIAEoCzIWLmJ1Zi52YWxpZGF0ZS5NYXBSdWxlc0gAQgYKBHR5cGUiOAoNUmVwZWF0ZWRSdWxlcxInCgVpdGVtcxgEIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzIjQKCE1hcFJ1bGVzEigKBnZhbHVlcxgFIAEoCzIYLmJ1Zi52YWxpZGF0ZS5GaWVsZFJ1bGVzKm4KBklnbm9yZRIWChJJR05PUkVfVU5TUEVDSUZJRUQQABIYChRJR05PUkVfSUZfWkVST19WQUxVRRABEh8KF0lHTk9SRV9JRl9ERUZBVUxUX1ZBTFVFEAIaAggBEhEKDUlHTk9SRV9BTFdBWVMQAzpWCgdtZXNzYWdlEh8uZ29vZ2xlLnByb3RvYnVmLk1lc3NhZ2VPcHRpb25zGIcJIAEoCzIaLmJ1Zi52YWxpZGF0ZS5NZXNzYWdlUnVsZXNSB21lc3NhZ2U6TgoFb25lb2YSHS5nb29nbGUucHJvdG9idWYuT25lb2ZPcHRpb25zGIcJIAEoCzIYLmJ1Zi52YWxpZGF0ZS5PbmVvZlJ1bGVzUgVvbmVvZjpOCgVmaWVsZBIdLmdvb2dsZS5wcm90b2J1Zi5GaWVsZE9wdGlvbnMYhwkgASgLMhguYnVmLnZhbGlkYXRlLkZpZWxkUnVsZXNSBWZpZWxk", [file_google_protobuf_descriptor]);
 
 /**
  * @generated from message buf.validate.MessageRules
@@ -43,9 +43,34 @@ export type MessageRules = Message<"buf.validate.MessageRules"> & {
    * @deprecated
    */
   disabled: boolean;
-};
 
-export type MessageRulesValid = MessageRules;
+  /**
+   * CEL validation rules
+   *
+   * @generated from field: repeated buf.validate.Constraint cel = 3;
+   */
+  cel: Constraint[];
+}
+
+/**
+ * @generated from message buf.validate.MessageRules
+ */
+export type MessageRulesValid = Message<"buf.validate.MessageRules"> & {
+  /**
+   * removed in https://github.com/bufbuild/protovalidate/pull/394
+   *
+   * @generated from field: optional bool disabled = 1 [deprecated = true];
+   * @deprecated
+   */
+  disabled: boolean;
+
+  /**
+   * CEL validation rules
+   *
+   * @generated from field: repeated buf.validate.Constraint cel = 3;
+   */
+  cel: ConstraintValid[];
+}
 
 /**
  * Describes the message buf.validate.MessageRules.
@@ -55,6 +80,53 @@ export const MessageRulesSchema: GenMessage<MessageRules, {validType: MessageRul
   messageDesc(file_extra_minimal_validate, 0);
 
 /**
+ * @generated from message buf.validate.Constraint
+ */
+export type Constraint = Message<"buf.validate.Constraint"> & {
+  /**
+   * @generated from field: optional string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: optional string message = 2;
+   */
+  message: string;
+
+  /**
+   * @generated from field: optional string expression = 3;
+   */
+  expression: string;
+}
+
+/**
+ * @generated from message buf.validate.Constraint
+ */
+export type ConstraintValid = Message<"buf.validate.Constraint"> & {
+  /**
+   * @generated from field: optional string id = 1;
+   */
+  id: string;
+
+  /**
+   * @generated from field: optional string message = 2;
+   */
+  message: string;
+
+  /**
+   * @generated from field: optional string expression = 3;
+   */
+  expression: string;
+}
+
+/**
+ * Describes the message buf.validate.Constraint.
+ * Use `create(ConstraintSchema)` to create a new message.
+ */
+export const ConstraintSchema: GenMessage<Constraint, {validType: ConstraintValid}> = /*@__PURE__*/
+  messageDesc(file_extra_minimal_validate, 1);
+
+/**
  * @generated from message buf.validate.OneofRules
  */
 export type OneofRules = Message<"buf.validate.OneofRules"> & {
@@ -62,16 +134,24 @@ export type OneofRules = Message<"buf.validate.OneofRules"> & {
    * @generated from field: optional bool required = 1;
    */
   required: boolean;
-};
+}
 
-export type OneofRulesValid = OneofRules;
+/**
+ * @generated from message buf.validate.OneofRules
+ */
+export type OneofRulesValid = Message<"buf.validate.OneofRules"> & {
+  /**
+   * @generated from field: optional bool required = 1;
+   */
+  required: boolean;
+}
 
 /**
  * Describes the message buf.validate.OneofRules.
  * Use `create(OneofRulesSchema)` to create a new message.
  */
 export const OneofRulesSchema: GenMessage<OneofRules, {validType: OneofRulesValid}> = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 1);
+  messageDesc(file_extra_minimal_validate, 2);
 
 /**
  * @generated from message buf.validate.FieldRules
@@ -103,16 +183,46 @@ export type FieldRules = Message<"buf.validate.FieldRules"> & {
     value: MapRules;
     case: "map";
   } | { case: undefined; value?: undefined };
-};
+}
 
-export type FieldRulesValid = FieldRules;
+/**
+ * @generated from message buf.validate.FieldRules
+ */
+export type FieldRulesValid = Message<"buf.validate.FieldRules"> & {
+  /**
+   * @generated from field: optional bool required = 25;
+   */
+  required: boolean;
+
+  /**
+   * @generated from field: optional buf.validate.Ignore ignore = 27;
+   */
+  ignore: Ignore;
+
+  /**
+   * @generated from oneof buf.validate.FieldRules.type
+   */
+  type: {
+    /**
+     * @generated from field: buf.validate.RepeatedRules repeated = 18;
+     */
+    value: RepeatedRulesValid;
+    case: "repeated";
+  } | {
+    /**
+     * @generated from field: buf.validate.MapRules map = 19;
+     */
+    value: MapRulesValid;
+    case: "map";
+  } | { case: undefined; value?: undefined };
+}
 
 /**
  * Describes the message buf.validate.FieldRules.
  * Use `create(FieldRulesSchema)` to create a new message.
  */
 export const FieldRulesSchema: GenMessage<FieldRules, {validType: FieldRulesValid}> = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 2);
+  messageDesc(file_extra_minimal_validate, 3);
 
 /**
  * @generated from message buf.validate.RepeatedRules
@@ -122,16 +232,24 @@ export type RepeatedRules = Message<"buf.validate.RepeatedRules"> & {
    * @generated from field: optional buf.validate.FieldRules items = 4;
    */
   items?: FieldRules;
-};
+}
 
-export type RepeatedRulesValid = RepeatedRules;
+/**
+ * @generated from message buf.validate.RepeatedRules
+ */
+export type RepeatedRulesValid = Message<"buf.validate.RepeatedRules"> & {
+  /**
+   * @generated from field: optional buf.validate.FieldRules items = 4;
+   */
+  items?: FieldRulesValid;
+}
 
 /**
  * Describes the message buf.validate.RepeatedRules.
  * Use `create(RepeatedRulesSchema)` to create a new message.
  */
 export const RepeatedRulesSchema: GenMessage<RepeatedRules, {validType: RepeatedRulesValid}> = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 3);
+  messageDesc(file_extra_minimal_validate, 4);
 
 /**
  * @generated from message buf.validate.MapRules
@@ -141,16 +259,24 @@ export type MapRules = Message<"buf.validate.MapRules"> & {
    * @generated from field: optional buf.validate.FieldRules values = 5;
    */
   values?: FieldRules;
-};
+}
 
-export type MapRulesValid = MapRules;
+/**
+ * @generated from message buf.validate.MapRules
+ */
+export type MapRulesValid = Message<"buf.validate.MapRules"> & {
+  /**
+   * @generated from field: optional buf.validate.FieldRules values = 5;
+   */
+  values?: FieldRulesValid;
+}
 
 /**
  * Describes the message buf.validate.MapRules.
  * Use `create(MapRulesSchema)` to create a new message.
  */
 export const MapRulesSchema: GenMessage<MapRules, {validType: MapRulesValid}> = /*@__PURE__*/
-  messageDesc(file_extra_minimal_validate, 4);
+  messageDesc(file_extra_minimal_validate, 5);
 
 /**
  * @generated from enum buf.validate.Ignore

@@ -40,7 +40,7 @@ export type User = Message$1<"spec.User"> & {
    * @generated from field: example.User u = 1;
    */
   u?: User$1;
-};
+}
 
 /**
  * Describes the message spec.User.
@@ -53,7 +53,7 @@ export const UserSchema: GenMessage<User> = /*@__PURE__*/
  * @generated from message spec.ReservedPropertyNames
  */
 export type ReservedPropertyNames = Message$1<"spec.ReservedPropertyNames"> & {
-};
+}
 
 /**
  * Describes the message spec.ReservedPropertyNames.
@@ -93,7 +93,7 @@ export type ReservedPropertyNames_BuiltIn = Message$1<"spec.ReservedPropertyName
    * @generated from field: string value_of = 5;
    */
   valueOf$: string;
-};
+}
 
 /**
  * Describes the message spec.ReservedPropertyNames.BuiltIn.
@@ -168,7 +168,7 @@ export type ReservedPropertyNames_Runtime = Message$1<"spec.ReservedPropertyName
    * @generated from field: string to_json_string = 14;
    */
   toJsonString: string;
-};
+}
 
 /**
  * Describes the message spec.ReservedPropertyNames.Runtime.
@@ -209,7 +209,7 @@ export type ReservedPropertyNames_OneofBultIn = Message$1<"spec.ReservedProperty
     value: string;
     case: "valueOf";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message spec.ReservedPropertyNames.OneofBultIn.
@@ -280,7 +280,7 @@ export type ReservedPropertyNames_OneofRuntime = Message$1<"spec.ReservedPropert
     value: string;
     case: "toJsonString";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message spec.ReservedPropertyNames.OneofRuntime.
@@ -413,7 +413,7 @@ export const ReservedPropertyNames_EnumRuntimeSchema: GenEnum<ReservedPropertyNa
  * @generated from message spec.interface
  */
 export type interface$ = Message$1<"spec.interface"> & {
-};
+}
 
 /**
  * Describes the message spec.interface.
@@ -428,7 +428,7 @@ export const interfaceSchema: GenMessage<interface$> = /*@__PURE__*/
  * @generated from message spec.function
  */
 export type function$ = Message$1<"spec.function"> & {
-};
+}
 
 /**
  * Describes the message spec.function.
@@ -443,7 +443,7 @@ export const functionSchema: GenMessage<function$> = /*@__PURE__*/
  * @generated from message spec.instanceof
  */
 export type instanceof$ = Message$1<"spec.instanceof"> & {
-};
+}
 
 /**
  * Describes the message spec.instanceof.
@@ -458,7 +458,7 @@ export const instanceofSchema: GenMessage<instanceof$> = /*@__PURE__*/
  * @generated from message spec.switch
  */
 export type switch$ = Message$1<"spec.switch"> & {
-};
+}
 
 /**
  * Describes the message spec.switch.
@@ -473,7 +473,7 @@ export const switchSchema: GenMessage<switch$> = /*@__PURE__*/
  * @generated from message spec.case
  */
 export type case$ = Message$1<"spec.case"> & {
-};
+}
 
 /**
  * Describes the message spec.case.
@@ -488,7 +488,7 @@ export const caseSchema: GenMessage<case$> = /*@__PURE__*/
  * @generated from message spec.return
  */
 export type return$ = Message$1<"spec.return"> & {
-};
+}
 
 /**
  * Describes the message spec.return.
@@ -503,7 +503,7 @@ export const returnSchema: GenMessage<return$> = /*@__PURE__*/
  * @generated from message spec.Message
  */
 export type Message = Message$1<"spec.Message"> & {
-};
+}
 
 /**
  * Describes the message spec.Message.
@@ -518,7 +518,7 @@ export const MessageSchema: GenMessage<Message> = /*@__PURE__*/
  * @generated from message spec.PartialMessage
  */
 export type PartialMessage = Message$1<"spec.PartialMessage"> & {
-};
+}
 
 /**
  * Describes the message spec.PartialMessage.
@@ -533,7 +533,7 @@ export const PartialMessageSchema: GenMessage<PartialMessage> = /*@__PURE__*/
  * @generated from message spec.PlainMessage
  */
 export type PlainMessage = Message$1<"spec.PlainMessage"> & {
-};
+}
 
 /**
  * Describes the message spec.PlainMessage.
@@ -559,7 +559,7 @@ export type Error = Message$1<"spec.Error"> & {
    * @generated from field: string message = 2;
    */
   message: string;
-};
+}
 
 /**
  * Describes the message spec.Error.
@@ -574,7 +574,7 @@ export const ErrorSchema: GenMessage<Error> = /*@__PURE__*/
  * @generated from message spec.Object
  */
 export type Object$ = Message$1<"spec.Object"> & {
-};
+}
 
 /**
  * Describes the message spec.Object.
@@ -587,7 +587,7 @@ export const ObjectSchema: GenMessage<Object$> = /*@__PURE__*/
  * @generated from message spec.object
  */
 export type object$ = Message$1<"spec.object"> & {
-};
+}
 
 /**
  * Describes the message spec.object.
@@ -602,7 +602,7 @@ export const objectSchema: GenMessage<object$> = /*@__PURE__*/
  * @generated from message spec.array
  */
 export type array = Message$1<"spec.array"> & {
-};
+}
 
 /**
  * Describes the message spec.array.
@@ -617,7 +617,7 @@ export const arraySchema: GenMessage<array> = /*@__PURE__*/
  * @generated from message spec.string
  */
 export type string$ = Message$1<"spec.string"> & {
-};
+}
 
 /**
  * Describes the message spec.string.
@@ -632,7 +632,7 @@ export const stringSchema: GenMessage<string$> = /*@__PURE__*/
  * @generated from message spec.number
  */
 export type number$ = Message$1<"spec.number"> & {
-};
+}
 
 /**
  * Describes the message spec.number.
@@ -647,7 +647,7 @@ export const numberSchema: GenMessage<number$> = /*@__PURE__*/
  * @generated from message spec.boolean
  */
 export type boolean$ = Message$1<"spec.boolean"> & {
-};
+}
 
 /**
  * Describes the message spec.boolean.
@@ -662,7 +662,7 @@ export const booleanSchema: GenMessage<boolean$> = /*@__PURE__*/
  * @generated from message spec.bigint
  */
 export type bigint$ = Message$1<"spec.bigint"> & {
-};
+}
 
 /**
  * Describes the message spec.bigint.
@@ -677,7 +677,7 @@ export const bigintSchema: GenMessage<bigint$> = /*@__PURE__*/
  * @generated from message spec.Uint8Array
  */
 export type Uint8Array$ = Message$1<"spec.Uint8Array"> & {
-};
+}
 
 /**
  * Describes the message spec.Uint8Array.
@@ -692,7 +692,7 @@ export const Uint8ArraySchema: GenMessage<Uint8Array$> = /*@__PURE__*/
  * @generated from message spec.Array
  */
 export type Array = Message$1<"spec.Array"> & {
-};
+}
 
 /**
  * Describes the message spec.Array.
@@ -707,7 +707,7 @@ export const ArraySchema: GenMessage<Array> = /*@__PURE__*/
  * @generated from message spec.String
  */
 export type String = Message$1<"spec.String"> & {
-};
+}
 
 /**
  * Describes the message spec.String.
@@ -722,7 +722,7 @@ export const StringSchema: GenMessage<String> = /*@__PURE__*/
  * @generated from message spec.Number
  */
 export type Number = Message$1<"spec.Number"> & {
-};
+}
 
 /**
  * Describes the message spec.Number.
@@ -737,7 +737,7 @@ export const NumberSchema: GenMessage<Number> = /*@__PURE__*/
  * @generated from message spec.Boolean
  */
 export type Boolean = Message$1<"spec.Boolean"> & {
-};
+}
 
 /**
  * Describes the message spec.Boolean.
@@ -752,7 +752,7 @@ export const BooleanSchema: GenMessage<Boolean> = /*@__PURE__*/
  * @generated from message spec.BigInt
  */
 export type BigInt = Message$1<"spec.BigInt"> & {
-};
+}
 
 /**
  * Describes the message spec.BigInt.
@@ -765,7 +765,7 @@ export const BigIntSchema: GenMessage<BigInt> = /*@__PURE__*/
  * @generated from message spec.ClashParent
  */
 export type ClashParent = Message$1<"spec.ClashParent"> & {
-};
+}
 
 /**
  * Describes the message spec.ClashParent.
@@ -780,7 +780,7 @@ export const ClashParentSchema: GenMessage<ClashParent> = /*@__PURE__*/
  * @generated from message spec.ClashParent.ClashChild
  */
 export type ClashParent_ClashChild = Message$1<"spec.ClashParent.ClashChild"> & {
-};
+}
 
 /**
  * Describes the message spec.ClashParent.ClashChild.
@@ -795,7 +795,7 @@ export const ClashParent_ClashChildSchema: GenMessage<ClashParent_ClashChild> = 
  * @generated from message spec.ClashParent_ClashChild
  */
 export type ClashParent_ClashChild$ = Message$1<"spec.ClashParent_ClashChild"> & {
-};
+}
 
 /**
  * Describes the message spec.ClashParent_ClashChild.
@@ -810,7 +810,7 @@ export const ClashParent_ClashChildSchema$: GenMessage<ClashParent_ClashChild$> 
  * @generated from message spec.EnumDescClashWithMessageShapeDesc
  */
 export type EnumDescClashWithMessageShapeDesc = Message$1<"spec.EnumDescClashWithMessageShapeDesc"> & {
-};
+}
 
 /**
  * Describes the message spec.EnumDescClashWithMessageShapeDesc.
@@ -823,7 +823,7 @@ export const EnumDescClashWithMessageShapeDescSchema: GenMessage<EnumDescClashWi
  * @generated from message spec.EnumShapeClashWithMessageDesc
  */
 export type EnumShapeClashWithMessageDesc = Message$1<"spec.EnumShapeClashWithMessageDesc"> & {
-};
+}
 
 /**
  * Describes the message spec.EnumShapeClashWithMessageDesc.
@@ -877,7 +877,7 @@ export type NoClashFields = Message$1<"spec.NoClashFields"> & {
    * @generated from field: string return = 6;
    */
   return: string;
-};
+}
 
 /**
  * Describes the message spec.NoClashFields.
@@ -942,7 +942,7 @@ export type NoClashOneof = Message$1<"spec.NoClashOneof"> & {
     value: string;
     case: "return";
   } | { case: undefined; value?: undefined };
-};
+}
 
 /**
  * Describes the message spec.NoClashOneof.
@@ -959,7 +959,7 @@ export type NoClashOneofADT = Message$1<"spec.NoClashOneofADT"> & {
    * @generated from field: spec.NoClashOneofADT.M m = 1;
    */
   m?: NoClashOneofADT_M;
-};
+}
 
 /**
  * Describes the message spec.NoClashOneofADT.
@@ -981,7 +981,7 @@ export type NoClashOneofADT_M = Message$1<"spec.NoClashOneofADT.M"> & {
    * @generated from field: optional string value = 2;
    */
   value?: string;
-};
+}
 
 /**
  * Describes the message spec.NoClashOneofADT.M.
@@ -996,7 +996,7 @@ export const NoClashOneofADT_MSchema: GenMessage<NoClashOneofADT_M> = /*@__PURE_
  * @generated from message spec.NoClashEnumWrap
  */
 export type NoClashEnumWrap = Message$1<"spec.NoClashEnumWrap"> & {
-};
+}
 
 /**
  * Describes the message spec.NoClashEnumWrap.

@@ -5038,7 +5038,7 @@ export declare type TestEnormousDescriptor = Message<"proto2_unittest.TestEnormo
    * @generated from field: optional string long_field_name_is_looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong_1000 = 1000 [default = "long default value is also loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong"];
    */
   longFieldNameIsLooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong1000: string;
-};
+}
 
 /**
  * Describes the message proto2_unittest.TestEnormousDescriptor.
